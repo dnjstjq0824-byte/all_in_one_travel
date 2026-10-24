@@ -59,13 +59,17 @@
   <div class="btn-group">
     <a href="/apk/app-release.apk" class="btn btn-primary" download>
       <span>⬇️ Download Android APK</span>
-      <small style="opacity: 0.8; font-size: 0.75rem;">(v1.0.0)</small>
+      <small style="opacity: 0.8; font-size: 0.75rem;">(50.3 MB)</small>
     </a>
-    <a href="/web/" class="btn btn-secondary" target="_blank">
+    <a href="/apk/app-release.aab" class="btn btn-secondary" download>
+      <span>📦 Google Play AAB Bundle</span>
+      <small style="opacity: 0.8; font-size: 0.75rem;">(49.1 MB)</small>
+    </a>
+    <a href="/web/" class="btn btn-web" target="_blank">
       <span>🌐 Launch Web App</span>
     </a>
     <a href="#ios-guide" class="btn btn-web">
-      <span>🍎 iOS Deployment Guide</span>
+      <span>🍎 iOS Guide</span>
     </a>
   </div>
 </header>
@@ -131,6 +135,47 @@
         <tr><td><strong>Berlin</strong></td><td>Germany</td><td><span class="tag-b">LEVEL B</span></td><td>✓ Full</td><td>✓ Yes</td><td>Timetable Only</td><td>VBB / BVG Berlin</td></tr>
         <tr><td><strong>Dubai</strong></td><td>UAE</td><td><span class="tag-c">LEVEL C</span></td><td>✓ Schematic</td><td>—</td><td>—</td><td>RTA Dubai Open Data</td></tr>
         <tr><td><strong>São Paulo</strong></td><td>Brazil</td><td><span class="tag-d">LEVEL D</span></td><td>—</td><td>—</td><td>—</td><td>OpenStreetMap Contributors</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-bottom: 40px;">
+    <h3>🛡️ Artifact Integrity & Checksums (Article 29 Verification)</h3>
+    <p style="color: var(--text-muted); margin-bottom: 14px;">Cryptographic verification hashes for PO audit and release certification.</p>
+    <table class="coverage-table">
+      <thead>
+        <tr>
+          <th>Artifact</th>
+          <th>Target</th>
+          <th>Size</th>
+          <th>SHA-256 Checksum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Android APK</strong></td>
+          <td>Direct Sideload / Devices</td>
+          <td>52,749,960 B (50.3 MB)</td>
+          <td><code style="font-size: 0.75rem; background: #F1F5F9; padding: 2px 6px; border-radius: 4px;">E1F02FC4A656A4EE2F82609E719A99B5E79D279076646CDD4D7282DF9B026D2F</code></td>
+        </tr>
+        <tr>
+          <td><strong>Google Play AAB</strong></td>
+          <td>Play Store Console</td>
+          <td>51,471,246 B (49.1 MB)</td>
+          <td><code style="font-size: 0.75rem; background: #F1F5F9; padding: 2px 6px; border-radius: 4px;">ABEB2F022362D5BDE508649BFB2F0C50E2DD56E564CAFAED1AE17607CB8E3EE5</code></td>
+        </tr>
+        <tr>
+          <td><strong>Go Server Binary</strong></td>
+          <td>REST Backend / Windows</td>
+          <td>11,116,544 B (10.6 MB)</td>
+          <td><code style="font-size: 0.75rem; background: #F1F5F9; padding: 2px 6px; border-radius: 4px;">B2BD4AAB573AE8AF444111D9BA0C905F48E08FA6B79B8F2471A49B652645AD54</code></td>
+        </tr>
+        <tr>
+          <td><strong>Web Distribution</strong></td>
+          <td>Wasm/CanvasKit Bundle</td>
+          <td>Release Ready</td>
+          <td><code style="font-size: 0.75rem; background: #F1F5F9; padding: 2px 6px; border-radius: 4px;">Flutter 3.47 / Dart 3.13 CanvasKit HTML5 SPA</code></td>
+        </tr>
       </tbody>
     </table>
   </div>
