@@ -1,0 +1,29 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Flutter / Dart
+.dart_tool/
+.packages
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/build/
+frontend/.dart_tool/
+
+# Android
+frontend/android/.gradle/
+frontend/android/local.properties
+frontend/android/gradle/
+**/build/
+*.iml
+.idea/
+
+# Binaries & Logs
+*.log
+backend/bin/
+!scripts/*.go
+!release/apk/*.apk
+!release/apk/*.aab
+!release/portal/*

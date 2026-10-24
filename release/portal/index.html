@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOBAL TRAVEL ESSENTIAL APP — Booking Network Co., Ltd</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --accent-light: #38BDF8;
+      --surface: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --border: #E2E8F0;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --green: #10B981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--surface); color: var(--text); line-height: 1.6; }
+    header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: white; padding: 60px 20px; text-align: center; }
+    .badge { display: inline-block; background: rgba(56, 189, 248, 0.15); color: var(--accent-light); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; border: 1px solid rgba(56, 189, 248, 0.3); }
+    h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+    .subtitle { font-size: 1.25rem; color: #94A3B8; max-width: 700px; margin: 0 auto 32px; }
+    .btn-group { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 12px; font-weight: 600; text-decoration: none; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-secondary { background: white; color: var(--primary); }
+    .btn-web { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.25); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 50px; }
+    .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .card h3 { font-size: 1.25rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .features-list { list-style: none; }
+    .features-list li { margin-bottom: 12px; padding-left: 28px; position: relative; font-size: 0.95rem; color: #334155; }
+    .features-list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: bold; }
+    .coverage-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
+    .coverage-table th, .coverage-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    .coverage-table th { background: #F1F5F9; font-weight: 600; }
+    .tag-a { background: #DCFCE7; color: #166534; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; }
+    .tag-b { background: #DBEAFE; color: #1E40AF; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; }
+    .tag-c { background: #FEF3C7; color: #92400E; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; }
+    .tag-d { background: #F3E8FF; color: #6B21A8; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; }
+    footer { background: white; border-top: 1px solid var(--border); padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    .legal-links { margin-top: 12px; display: flex; justify-content: center; gap: 20px; }
+    .legal-links a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">BN-GLOBAL-TRAVEL-APP-001 • PRODUCTION RELEASE</div>
+  <h1>GLOBAL TRAVEL ESSENTIAL</h1>
+  <p class="subtitle">One App. One Map. Metro, Bus, Live Arrivals, Weather, Curated Landmarks, Verified Reviews, and Trip Planner.</p>
+  <div class="btn-group">
+    <a href="/apk/app-release.apk" class="btn btn-primary" download>
+      <span>⬇️ Download Android APK</span>
+      <small style="opacity: 0.8; font-size: 0.75rem;">(v1.0.0)</small>
+    </a>
+    <a href="/web/" class="btn btn-secondary" target="_blank">
+      <span>🌐 Launch Web App</span>
+    </a>
+    <a href="#ios-guide" class="btn btn-web">
+      <span>🍎 iOS Deployment Guide</span>
+    </a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <h3>🚇 Global Subway Network</h3>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">Dual-view rendering with complete transit topology.</p>
+      <ul class="features-list">
+        <li><strong>Schematic Diagram View:</strong> Interactive, pinch-to-zoom vectorized lines with transfer hubs.</li>
+        <li><strong>Geographic Map View:</strong> Station nodes plotted on true GIS coordinates.</li>
+        <li><strong>Station Details:</strong> Multilingual names, code, operating lines, first/last trains, elevator & wheelchair accessibility, exit landmarks.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🚌 Real-time Bus & Multimodal</h3>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">Seamless journey planning from hotel door to landmark.</p>
+      <ul class="features-list">
+        <li><strong>Multimodal Engine:</strong> Walk ➔ Metro ➔ Bus ➔ Walk unified instructions.</li>
+        <li><strong>Real-time Arrival States:</strong> Distinct badges for LIVE (GPS), SCHEDULED, and ESTIMATED.</li>
+        <li><strong>Preference Engine:</strong> Fastest, Minimum Transfers, Least Walking, or Accessible route filters.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🏛️ Destination & Verified Reviews</h3>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">Direct linkage between attractions, transit, and weather.</p>
+      <ul class="features-list">
+        <li><strong>Article 12 Compliance:</strong> Landmark details display exact nearest metro exit and bus stop.</li>
+        <li><strong>Destination Weather:</strong> Real-time temperature & forecast for every attraction.</li>
+        <li><strong>Verified Visit Reviews:</strong> Authentic tips, spam prevention, and rating breakdown.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 40px;">
+    <h3>🌍 Global Coverage Registry (Article 15 & 23)</h3>
+    <p style="color: var(--text-muted); margin-bottom: 14px;">Strict governance ensures transparent disclosure of actual data availability.</p>
+    <table class="coverage-table">
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Country</th>
+          <th>Level</th>
+          <th>Metro Map</th>
+          <th>Bus Routes</th>
+          <th>Realtime Arrivals</th>
+          <th>Official Provider</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Seoul</strong></td><td>South Korea</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live GTFS-RT</td><td>Seoul TOPIS / Korail / Seoul Metro</td></tr>
+        <tr><td><strong>Tokyo</strong></td><td>Japan</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live ODPT</td><td>Tokyo Metro / Toei Transportation</td></tr>
+        <tr><td><strong>London</strong></td><td>United Kingdom</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live TfL</td><td>Transport for London (TfL Open Data)</td></tr>
+        <tr><td><strong>Paris</strong></td><td>France</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live RATP</td><td>Île-de-France Mobilités / RATP</td></tr>
+        <tr><td><strong>New York</strong></td><td>United States</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live MTA</td><td>MTA Open Data</td></tr>
+        <tr><td><strong>Singapore</strong></td><td>Singapore</td><td><span class="tag-a">LEVEL A</span></td><td>✓ Full</td><td>✓ Yes</td><td>✓ Live LTA</td><td>Land Transport Authority (LTA DataMall)</td></tr>
+        <tr><td><strong>Osaka</strong></td><td>Japan</td><td><span class="tag-b">LEVEL B</span></td><td>✓ Full</td><td>✓ Yes</td><td>Timetable Only</td><td>Osaka Metro & JR West GTFS</td></tr>
+        <tr><td><strong>Hong Kong</strong></td><td>Hong Kong</td><td><span class="tag-b">LEVEL B</span></td><td>✓ Full</td><td>✓ Yes</td><td>Timetable Only</td><td>MTR & KMB Data</td></tr>
+        <tr><td><strong>Taipei</strong></td><td>Taiwan</td><td><span class="tag-b">LEVEL B</span></td><td>✓ Full</td><td>✓ Yes</td><td>Timetable Only</td><td>Taipei Metro (MRT)</td></tr>
+        <tr><td><strong>Berlin</strong></td><td>Germany</td><td><span class="tag-b">LEVEL B</span></td><td>✓ Full</td><td>✓ Yes</td><td>Timetable Only</td><td>VBB / BVG Berlin</td></tr>
+        <tr><td><strong>Dubai</strong></td><td>UAE</td><td><span class="tag-c">LEVEL C</span></td><td>✓ Schematic</td><td>—</td><td>—</td><td>RTA Dubai Open Data</td></tr>
+        <tr><td><strong>São Paulo</strong></td><td>Brazil</td><td><span class="tag-d">LEVEL D</span></td><td>—</td><td>—</td><td>—</td><td>OpenStreetMap Contributors</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" id="ios-guide" style="margin-bottom: 40px;">
+    <h3>🍎 iOS Build & Distribution Notice (Article 29)</h3>
+    <p style="color: var(--text-muted); margin-bottom: 12px;">In accordance with Article 29 of the Master Development Order:</p>
+    <p style="font-size: 0.95rem; margin-bottom: 10px;">The Flutter iOS project is structured in <code>frontend/ios/</code> with Swift Runner and complete entitlements. Per Apple developer licensing and platform policies, signing an iOS IPA requires an active Apple Developer Team ID and macOS Xcode signing environment.</p>
+    <p style="font-size: 0.95rem;">The project is 100% prepared for automated CI TestFlight compilation using the provided Git repository structure.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Booking Network Co., Ltd. All rights reserved.</p>
+  <p style="font-size: 0.8rem; margin-top: 6px;">Powered by Go 1.27 High-Performance API • Flutter 3.47 Multiplatform • Open-Meteo • OpenStreetMap</p>
+  <div class="legal-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Licensing & Attribution</a>
+  </div>
+</footer>
+
+</body>
+</html>
