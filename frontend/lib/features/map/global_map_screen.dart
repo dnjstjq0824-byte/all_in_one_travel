@@ -427,3 +427,4 @@ class GlobalMapPainter extends CustomPainter {
         oldDelegate.places != places;
   }
 }
+

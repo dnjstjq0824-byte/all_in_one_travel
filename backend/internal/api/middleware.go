@@ -37,3 +37,4 @@ func MiddlewareChain(next http.Handler) http.Handler {
 		log.Printf("[%s] %s %s - %v", r.Method, r.URL.Path, r.RemoteAddr, time.Since(start))
 	})
 }
+

@@ -376,3 +376,4 @@ func (s *ServiceContainer) AddItineraryItem(tripID string, dayNumber int, item m
 func (s *ServiceContainer) GetOfflinePackages() []model.OfflinePackage {
 	return s.Store.OfflinePackages
 }
+

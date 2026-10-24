@@ -179,3 +179,4 @@ class AppLocale {
     return _localizedValues[lang]?[key] ?? _localizedValues['en']?[key] ?? key;
   }
 }
+

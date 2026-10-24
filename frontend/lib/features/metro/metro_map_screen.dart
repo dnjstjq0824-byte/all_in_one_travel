@@ -354,3 +354,4 @@ class MetroCanvasPainter extends CustomPainter {
         oldDelegate.lines != lines;
   }
 }
+

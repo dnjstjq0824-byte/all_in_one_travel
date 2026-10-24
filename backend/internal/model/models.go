@@ -351,3 +351,4 @@ type OfflinePackage struct {
 	LastUpdated  time.Time `json:"last_updated"`
 	Attribution  string    `json:"attribution"`
 }
+

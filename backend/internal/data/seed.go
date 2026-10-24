@@ -1144,3 +1144,4 @@ func (s *SeedStore) initOfflinePackages() {
 		{CityID: "newyork", CityName: "New York", Version: "2026.10.1", SizeBytes: 19500000, SizeMB: 18.6, Contents: []string{"MTA Subway (Full System)", "Manhattan Bus Network", "130 Landmarks", "Subway Map"}, LastUpdated: now.Add(-24 * time.Hour), Attribution: "MTA Open Data"},
 	}
 }
+

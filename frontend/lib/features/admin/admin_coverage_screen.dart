@@ -232,3 +232,4 @@ class _AdminCoverageScreenState extends State<AdminCoverageScreen> {
     );
   }
 }
+

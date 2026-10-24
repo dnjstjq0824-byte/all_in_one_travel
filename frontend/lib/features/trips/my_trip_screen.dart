@@ -480,3 +480,4 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
     );
   }
 }
+

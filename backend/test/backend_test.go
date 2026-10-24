@@ -259,3 +259,4 @@ func TestTripItineraryWorkflow(t *testing.T) {
 		t.Errorf("expected items in day 1")
 	}
 }
+
