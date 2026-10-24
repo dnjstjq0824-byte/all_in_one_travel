@@ -1,7 +1,23 @@
 # 🌍 GLOBAL TRAVEL ESSENTIAL APP
-> **Directive ID:** `BN-GLOBAL-TRAVEL-APP-001` (PO Master Development Directive)  
-> **Platform:** Flutter 3.47 (Android, iOS, Web) + Go 1.27 High-Performance API  
-> **Release Status:** Production Ready (v1.0.0)
+> **Directive ID:** `BN-GLOBAL-TRAVEL-APP-001` & `BN-GLOBAL-TRAVEL-APP-002` (PO Master Development Directives)  
+> **Platform:** Flutter 3.47 (PC Web, Mobile Web, Android APK/AAB, iOS PWA) + Go 1.27 High-Performance API  
+> **Release Status:** Production Ready (v1.0.0 Commercial Edition)  
+> **Public HTTPS Service:** [https://yang-propose-deviation-soonest.trycloudflare.com](https://yang-propose-deviation-soonest.trycloudflare.com)
+
+---
+
+## 🌐 Public Live Production URLs (Article 2 & 18)
+
+| Endpoint | Live HTTPS URL | Description |
+|---|---|---|
+| **Main Portal** | [https://yang-propose-deviation-soonest.trycloudflare.com/](https://yang-propose-deviation-soonest.trycloudflare.com/) | Public Service Landing & 18-City Governance Dashboard |
+| **Web Application** | [https://yang-propose-deviation-soonest.trycloudflare.com/web/](https://yang-propose-deviation-soonest.trycloudflare.com/web/) | Responsive PC & Mobile Web App (CanvasKit Wasm SPA) |
+| **Download Center** | [https://yang-propose-deviation-soonest.trycloudflare.com/download](https://yang-propose-deviation-soonest.trycloudflare.com/download) | Android APK & iOS Safari Add-to-Home PWA Guides |
+| **Direct APK Download** | [https://yang-propose-deviation-soonest.trycloudflare.com/download/android](https://yang-propose-deviation-soonest.trycloudflare.com/download/android) | Release APK Direct Sideload Download (50.6 MB) |
+| **API Health Status** | [https://yang-propose-deviation-soonest.trycloudflare.com/api/v1/health](https://yang-propose-deviation-soonest.trycloudflare.com/api/v1/health) | Backend Liveness & Readiness Diagnostic (`{"cities":18,...}`) |
+| **Privacy Policy** | [https://yang-propose-deviation-soonest.trycloudflare.com/privacy](https://yang-propose-deviation-soonest.trycloudflare.com/privacy) | PIPA & GDPR Compliant Privacy Policy |
+| **Terms of Service** | [https://yang-propose-deviation-soonest.trycloudflare.com/terms](https://yang-propose-deviation-soonest.trycloudflare.com/terms) | Open Data (ODbL, CC-BY 4.0) Attributions & Legal Terms |
+| **Customer Support** | [https://yang-propose-deviation-soonest.trycloudflare.com/support](https://yang-propose-deviation-soonest.trycloudflare.com/support) | Operations FAQ & Customer Support Center |
 
 ---
 
@@ -71,8 +87,8 @@ In strict adherence to Article 0, 15, and 31, **unverified cities are never fals
 
 | Artifact | Target | Size | SHA-256 Checksum |
 |---|---|---|---|
-| **Android Release APK** | Android Sideload / Devices | 52,749,960 Bytes (50.3 MB) | `E1F02FC4A656A4EE2F82609E719A99B5E79D279076646CDD4D7282DF9B026D2F` |
-| **Google Play AAB** | Google Play Console Store | 51,471,246 Bytes (49.1 MB) | `ABEB2F022362D5BDE508649BFB2F0C50E2DD56E564CAFAED1AE17607CB8E3EE5` |
+| **Android Release APK** | Android Sideload / Devices | 53,028,604 Bytes (50.6 MB) | `53CB528D0A0F0F8F39A607D3FB345682DA4906ED8B60A4966E09073FA726A391` |
+| **Google Play AAB** | Google Play Console Store | 51,647,119 Bytes (49.3 MB) | `6077CD8389495A2F6C3146A82C5B15CC5CD48EE40C93D095B5D92103CB0C1B2C` |
 | **Go Server Binary** | Windows x64 Native API | 11,116,544 Bytes (10.6 MB) | `B2BD4AAB573AE8AF444111D9BA0C905F48E08FA6B79B8F2471A49B652645AD54` |
 | **Web Distribution** | CanvasKit HTML5 SPA | Production Bundle | `Flutter 3.47 Release Service Worker SPA` |
 
@@ -161,6 +177,11 @@ all-on-one_travel_app/
 ---
 
 ## 📜 Documentation & Reports
+- [BN-002 PC & Mobile Master Implementation Report](docs/BN_GLOBAL_TRAVEL_PC_MOBILE_IMPLEMENTATION_REPORT.md)
+- [BN-002 Responsive UI Viewport Test Report](docs/BN_GLOBAL_TRAVEL_RESPONSIVE_UI_TEST.md)
+- [BN-002 Live API Integration Test Report](docs/BN_GLOBAL_TRAVEL_API_INTEGRATION_TEST.md)
+- [BN-002 Deployment & Infrastructure Runbook](docs/BN_GLOBAL_TRAVEL_DEPLOYMENT_RUNBOOK.md)
+- [BN-002 Release Gate Verification Checklist](docs/BN_GLOBAL_TRAVEL_RELEASE_VERIFICATION.md)
 - [Article 32 Final Verification Report](docs/ARTICLE_32_FINAL_VERIFICATION_REPORT.md)
 - [Phase 0: Competitive Audit & Legal Licensing Matrix](docs/PHASE0_COMPETITIVE_AUDIT_AND_LICENSING.md)
 

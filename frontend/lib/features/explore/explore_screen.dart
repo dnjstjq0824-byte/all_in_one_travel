@@ -136,7 +136,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
           const SizedBox(height: 8),
 
-          // Place Cards List
+          // Place Cards List (Responsive Grid for Tablet/Desktop, List for Mobile)
           Expanded(
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
@@ -151,12 +151,27 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           ],
                         ),
                       )
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(16),
-                        itemCount: _places.length,
-                        itemBuilder: (ctx, index) {
-                          final place = _places[index];
-                          return _buildPlaceCard(place);
+                    : LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth >= 800) {
+                            final crossAxisCount = constraints.maxWidth >= 1200 ? 3 : 2;
+                            return GridView.builder(
+                              padding: const EdgeInsets.all(16),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                childAspectRatio: 0.95,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                              ),
+                              itemCount: _places.length,
+                              itemBuilder: (ctx, index) => _buildPlaceCard(_places[index]),
+                            );
+                          }
+                          return ListView.builder(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: _places.length,
+                            itemBuilder: (ctx, index) => _buildPlaceCard(_places[index]),
+                          );
                         },
                       ),
           ),

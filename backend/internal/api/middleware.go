@@ -3,6 +3,7 @@ package api
 import (
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -17,8 +18,17 @@ func MiddlewareChain(next http.Handler) http.Handler {
 
 		// Security headers
 		w.Header().Set("X-Content-Type-Options", "nosniff")
-		w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("X-Frame-Options", "SAMEORIGIN")
 		w.Header().Set("X-XSS-Protection", "1; mode=block")
+		w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+		w.Header().Set("Referrer-Policy", "strict-origin-when-cross-origin")
+
+		// Cache policy for static vs dynamic
+		if r.URL.Path == "/" || r.URL.Path == "/index.html" || r.URL.Path == "/web/" || r.URL.Path == "/web/index.html" {
+			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+		} else if strings.Contains(r.URL.Path, ".") {
+			w.Header().Set("Cache-Control", "public, max-age=86400")
+		}
 
 		if r.Method == http.MethodOptions {
 			w.WriteHeader(http.StatusOK)

@@ -5,8 +5,21 @@ import 'package:http/http.dart' as http;
 import '../models/travel_models.dart';
 
 class TravelApiClient {
+  static String? customBaseUrl;
+
   static String get baseUrl {
-    if (kIsWeb) return 'http://localhost:8080/api/v1';
+    if (customBaseUrl != null && customBaseUrl!.isNotEmpty) {
+      return customBaseUrl!;
+    }
+    const envBaseUrl = String.fromEnvironment('API_BASE_URL');
+    if (envBaseUrl.isNotEmpty) {
+      return envBaseUrl;
+    }
+    if (kIsWeb) {
+      // In web, dynamically resolve from current window origin
+      final origin = Uri.base.origin;
+      return '$origin/api/v1';
+    }
     if (Platform.isAndroid) {
       return 'http://10.0.2.2:8080/api/v1';
     }

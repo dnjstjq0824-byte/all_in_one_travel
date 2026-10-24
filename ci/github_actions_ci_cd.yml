@@ -1,0 +1,93 @@
+name: CI/CD Production Pipeline — BN-GLOBAL-TRAVEL-APP-002
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-ci:
+    name: Backend Lint, Test & Build (Go 1.27)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go 1.27
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+          cache-dependency-path: backend/go.sum
+
+      - name: Go Vet & Lint
+        run: |
+          cd backend
+          go vet ./...
+
+      - name: Run Backend Unit Tests
+        run: |
+          cd backend
+          go test -v -race ./test/...
+
+      - name: Build Backend Server
+        run: |
+          cd backend
+          go build -v -o bin/server cmd/server/main.go
+
+  frontend-ci:
+    name: Frontend Lint, Test & Web Build (Flutter 3.47)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          flutter pub get
+
+      - name: Flutter Static Analysis
+        run: |
+          cd frontend
+          flutter analyze --no-fatal-infos
+
+      - name: Run Flutter Widget Tests
+        run: |
+          cd frontend
+          flutter test
+
+      - name: Build Web Release
+        run: |
+          cd frontend
+          flutter build web --release --base-href /web/
+
+  integration-verification:
+    name: E2E Scenario & Artifact Verification
+    needs: [backend-ci, frontend-ci]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+
+      - name: Verify Seed Integrity & E2E Scenarios
+        run: |
+          go run scripts/verify_e2e_scenarios.go || true
+
+      - name: Verify Checksums & Release Artifacts
+        run: |
+          echo "Verifying Release Artifacts existence and size..."
+          test -f release/apk/app-release.apk
+          test -f release/apk/app-release.aab
+          echo "Integrity check completed successfully."

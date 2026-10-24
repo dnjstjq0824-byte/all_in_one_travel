@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppLocale {
   static final ValueNotifier<String> currentLanguage = ValueNotifier<String>('ko');
 
+  static void setLanguage(String lang) {
+    currentLanguage.value = lang;
+  }
+
   static final Map<String, Map<String, String>> _localizedValues = {
     'ko': {
       'app_title': 'GLOBAL TRAVEL ESSENTIAL',

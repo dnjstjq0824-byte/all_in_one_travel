@@ -3,6 +3,8 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -56,6 +58,28 @@ func (h *APIHandler) RegisterRoutes(mux *http.ServeMux) {
 	// Offline Packages
 	mux.HandleFunc("GET /api/v1/offline/packages", h.handleGetOfflinePackages)
 
+	// Article 2 Mandatory URL Routes
+	mux.HandleFunc("GET /download/android", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Disposition", "attachment; filename=\"app-release.apk\"")
+		w.Header().Set("Content-Type", "application/vnd.android.package-archive")
+		http.ServeFile(w, r, "release/apk/app-release.apk")
+	})
+	mux.HandleFunc("GET /download", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "release/portal/download.html")
+	})
+	mux.HandleFunc("GET /download/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "release/portal/download.html")
+	})
+	mux.HandleFunc("GET /privacy", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "release/portal/privacy.html")
+	})
+	mux.HandleFunc("GET /terms", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "release/portal/terms.html")
+	})
+	mux.HandleFunc("GET /support", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "release/portal/support.html")
+	})
+
 	// Static Web Portal & Release Artifacts
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" || r.URL.Path == "/index.html" {
@@ -66,8 +90,19 @@ func (h *APIHandler) RegisterRoutes(mux *http.ServeMux) {
 			http.StripPrefix("/apk/", http.FileServer(http.Dir("release/apk"))).ServeHTTP(w, r)
 			return
 		}
-		if strings.HasPrefix(r.URL.Path, "/web/") {
-			http.StripPrefix("/web/", http.FileServer(http.Dir("release/web"))).ServeHTTP(w, r)
+		if strings.HasPrefix(r.URL.Path, "/web/") || r.URL.Path == "/web" {
+			subPath := strings.TrimPrefix(r.URL.Path, "/web")
+			if subPath == "" || subPath == "/" {
+				http.ServeFile(w, r, "release/web/index.html")
+				return
+			}
+			targetFile := filepath.Join("release/web", filepath.Clean(subPath))
+			if fi, err := os.Stat(targetFile); err == nil && !fi.IsDir() {
+				http.ServeFile(w, r, targetFile)
+				return
+			}
+			// SPA fallback
+			http.ServeFile(w, r, "release/web/index.html")
 			return
 		}
 		http.ServeFile(w, r, "release/portal/index.html")

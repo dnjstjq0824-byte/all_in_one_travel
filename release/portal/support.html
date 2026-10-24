@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객지원 센터 (Customer Support) — GLOBAL TRAVEL ESSENTIAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #0F172A; --accent: #2563EB; --surface: #F8FAFC; --card-bg: #FFFFFF; --border: #E2E8F0; --text: #0F172A; --muted: #64748B; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--surface); color: var(--text); line-height: 1.7; }
+    header { background: #0F172A; color: white; padding: 24px 20px; border-bottom: 1px solid #1E293B; }
+    .nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .nav a { color: white; text-decoration: none; font-weight: 600; font-size: 1rem; }
+    .nav-links { display: flex; gap: 20px; font-size: 0.9rem; }
+    .nav-links a { color: #94A3B8; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px 80px; }
+    .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); margin-bottom: 24px; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--primary); }
+    .updated { color: var(--muted); font-size: 0.9rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    h2 { font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px; color: var(--primary); }
+    p { color: #334155; font-size: 0.95rem; margin-bottom: 12px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; background: #FAF5FF; }
+    .faq-q { font-weight: 700; color: #581C87; margin-bottom: 6px; }
+    .faq-a { color: #475569; font-size: 0.9rem; }
+    .btn { display: inline-block; background: var(--accent); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+    footer { background: white; border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="/">🌍 GLOBAL TRAVEL ESSENTIAL</a>
+    <div class="nav-links">
+      <a href="/">홈</a>
+      <a href="/web/">웹 앱 실행</a>
+      <a href="/download">다운로드</a>
+      <a href="/privacy">개인정보처리방침</a>
+      <a href="/terms">이용약관</a>
+      <a href="/support" style="color: white; font-weight: bold;">고객지원</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h1>고객지원 센터 (Customer Support)</h1>
+    <div class="updated">Booking Network Co., Ltd. Global Service Operations</div>
+
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-item">
+      <div class="faq-q">Q. 지하철 노선도는 오프라인에서도 확인할 수 있나요?</div>
+      <div class="faq-a">A. 네, MY TRIP 탭의 "오프라인 데이터 패키지"에서 여행하실 도시를 사전 다운로드하시면 인터넷이 연결되지 않는 비행기 기내나 지하철 터널에서도 벡터 노선도와 정류장 정보를 언제든지 확인하실 수 있습니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q. 버스 실시간 도착정보가 표시되지 않는 도시는 왜 그런가요?</div>
+      <div class="faq-a">A. 당사는 Article 15 데이터 투명성 원칙에 따라 검증되지 않은 데이터를 허위로 '실시간'이라 표기하지 않습니다. 현재 LEVEL A(서울, 도쿄, 런던, 파리, 뉴욕, 싱가포르)는 실시간 GPS 피드가 연동되어 있으며, LEVEL B 도시는 공식 시간표 기준으로 안전하게 서비스됩니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q. iPhone에서 앱 설치가 가능한가요?</div>
+      <div class="faq-a">A. 네, 모바일 Safari 브라우저에서 서비스 URL에 접속하신 후 "공유 ➔ 홈 화면에 추가"를 누르시면 PWA 모바일 앱처럼 즉시 전체화면으로 편리하게 사용하실 수 있습니다.</div>
+    </div>
+
+    <h2>기술 지원 및 제휴 문의</h2>
+    <p>오류 제보, 대중교통 노선 피드 추가 요청, 제휴 문의는 아래 전담 지원팀으로 연락주시기 바랍니다.</p>
+    <p>📧 이메일: <strong>support@bookingnetwork.internal</strong><br>
+    🏢 주소: Booking Network Co., Ltd. Global Engineering Headquarters</p>
+    <div style="margin-top: 20px;">
+      <a href="mailto:support@bookingnetwork.internal" class="btn">문의 메일 보내기</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Booking Network Co., Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
