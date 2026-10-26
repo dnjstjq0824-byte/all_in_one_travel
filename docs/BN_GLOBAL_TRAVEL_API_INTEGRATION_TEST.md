@@ -1,7 +1,7 @@
-# 🔌🌐 BN-GLOBAL-TRAVEL-API-INTEGRATION-TEST
+﻿# 🔌🌐 BN-GLOBAL-TRAVEL-API-INTEGRATION-TEST
 ## 백엔드 REST API 및 클라이언트 통합 실측 검증 보고서
 **Project ID:** `BN-GLOBAL-TRAVEL-APP-002`  
-**Target Domain:** `https://yang-propose-deviation-soonest.trycloudflare.com`  
+**Target Domain:** `https://symantec-common-endif-verde.trycloudflare.com`  
 **Protocol:** HTTPS / TLS 1.3 / QUIC HTTP/3  
 **Status:** **100% VERIFIED PASS**
 
@@ -41,7 +41,7 @@ static String get baseUrl {
 
 ## 2. 실서비스 API 엔드포인트 실측 응답 증적 (E2E Verification)
 
-모든 엔드포인트는 실제 가동 중인 공용 HTTPS 엔드포인트(`https://yang-propose-deviation-soonest.trycloudflare.com`)를 대상으로 2026-10-24 22:31(KST)에 실측되었습니다.
+모든 엔드포인트는 실제 가동 중인 공용 HTTPS 엔드포인트(`https://symantec-common-endif-verde.trycloudflare.com`)를 대상으로 2026-10-24 22:31(KST)에 실측되었습니다.
 
 | 엔드포인트 | 메서드 | 파라미터 / 바디 | 응답 코드 | 응답 시간 | 검증 내용 | 결과 |
 |---|:---:|---|:---:|:---:|---|:---:|
@@ -83,3 +83,4 @@ Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With
 - **MIME 스니핑 방지:** `nosniff`를 통해 바이너리 오작동 차단.
 - **클릭재킹 방지:** `X-Frame-Options: SAMEORIGIN`을 통해 허가되지 않은 외부 iframe 임베딩 방지.
 - **CORS:** 모든 플랫폼 클라이언트(Flutter Web, 모바일 앱, 외부 브라우저)와의 원활한 비동기 REST 통신 지원.
+

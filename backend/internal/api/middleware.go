@@ -1,11 +1,22 @@
 package api
 
 import (
+	"compress/gzip"
+	"io"
 	"log"
 	"net/http"
 	"strings"
 	"time"
 )
+
+type gzipResponseWriter struct {
+	io.Writer
+	http.ResponseWriter
+}
+
+func (w gzipResponseWriter) Write(b []byte) (int, error) {
+	return w.Writer.Write(b)
+}
 
 func MiddlewareChain(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -42,7 +53,22 @@ func MiddlewareChain(next http.Handler) http.Handler {
 			}
 		}()
 
-		next.ServeHTTP(w, r)
+		// Transparent GZIP Compression for text, js, wasm, json, html (excluding apk/aab downloads)
+		shouldGzip := strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") &&
+			!strings.HasPrefix(r.URL.Path, "/download/android") &&
+			!strings.HasPrefix(r.URL.Path, "/apk/") &&
+			!strings.HasSuffix(r.URL.Path, ".apk") &&
+			!strings.HasSuffix(r.URL.Path, ".aab")
+
+		if shouldGzip {
+			w.Header().Set("Content-Encoding", "gzip")
+			gz := gzip.NewWriter(w)
+			defer gz.Close()
+			gzw := gzipResponseWriter{Writer: gz, ResponseWriter: w}
+			next.ServeHTTP(gzw, r)
+		} else {
+			next.ServeHTTP(w, r)
+		}
 
 		log.Printf("[%s] %s %s - %v", r.Method, r.URL.Path, r.RemoteAddr, time.Since(start))
 	})

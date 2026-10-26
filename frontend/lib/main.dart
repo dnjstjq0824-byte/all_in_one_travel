@@ -201,7 +201,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
                 decoration: BoxDecoration(
                   color: AppTheme.primaryDark,
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4, offset: const Offset(0, 2)),
+                    BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4, offset: const Offset(0, 2)),
                   ],
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -234,7 +234,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.12),
+                        color: Colors.white.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: DropdownButtonHideUnderline(
@@ -264,7 +264,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.08),
+                          color: Colors.white.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: Colors.white24),
                         ),
@@ -419,9 +419,9 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 3),
               decoration: BoxDecoration(
-                color: isSel ? AppTheme.accent.withOpacity(0.08) : Colors.transparent,
+                color: isSel ? AppTheme.accent.withValues(alpha: 0.08) : Colors.transparent,
                 borderRadius: BorderRadius.circular(10),
-                border: isSel ? Border.all(color: AppTheme.accent.withOpacity(0.2)) : null,
+                border: isSel ? Border.all(color: AppTheme.accent.withValues(alpha: 0.2)) : null,
               ),
               child: ListTile(
                 dense: true,

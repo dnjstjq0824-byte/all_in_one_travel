@@ -100,7 +100,7 @@ class _MetroMapScreenState extends State<MetroMapScreen> {
                         ),
                         selected: isSel,
                         selectedColor: c,
-                        backgroundColor: c.withOpacity(0.15),
+                        backgroundColor: c.withValues(alpha: 0.15),
                         checkmarkColor: Colors.white,
                         onSelected: (val) {
                           setState(() {
@@ -239,7 +239,7 @@ class MetroCanvasPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // Draw background grid
     final gridPaint = Paint()
-      ..color = Colors.grey.withOpacity(0.08)
+      ..color = Colors.grey.withValues(alpha: 0.08)
       ..strokeWidth = 1.0;
 
     for (double x = 0; x < size.width; x += 40) {
@@ -292,7 +292,7 @@ class MetroCanvasPainter extends CustomPainter {
       // Transfer outer halo
       if (isTransfer) {
         final haloPaint = Paint()
-          ..color = Colors.black.withOpacity(0.12)
+          ..color = Colors.black.withValues(alpha: 0.12)
           ..style = PaintingStyle.fill;
         canvas.drawCircle(pos, 12, haloPaint);
       }
@@ -316,7 +316,7 @@ class MetroCanvasPainter extends CustomPainter {
           color: isSel ? Colors.black : Colors.black87,
           fontSize: isTransfer ? 11 : 10,
           fontWeight: isTransfer ? FontWeight.bold : FontWeight.w500,
-          backgroundColor: Colors.white.withOpacity(0.85),
+          backgroundColor: Colors.white.withValues(alpha: 0.85),
         ),
       );
       final textPainter = TextPainter(

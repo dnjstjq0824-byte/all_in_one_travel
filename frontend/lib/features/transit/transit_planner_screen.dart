@@ -159,9 +159,12 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
       appBar: AppBar(
         title: Text('${widget.currentCity.name} ${AppLocale.tr('tab_transit')}'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1100),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
             // Search Input Box
             Container(
               padding: const EdgeInsets.all(16),
@@ -317,8 +320,10 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
           ],
         ),
       ),
-    );
-  }
+    ),
+    ),
+  );
+}
 
   Widget _buildPrefChip(String key, String label) {
     final isSel = _preference == key;
@@ -400,7 +405,7 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
         children: [
           CircleAvatar(
             radius: 14,
-            backgroundColor: color.withOpacity(0.15),
+            backgroundColor: color.withValues(alpha: 0.15),
             child: Icon(icon, size: 16, color: color),
           ),
           const SizedBox(width: 10),
@@ -432,7 +437,7 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: AppTheme.accent.withOpacity(0.12),
+          backgroundColor: AppTheme.accent.withValues(alpha: 0.12),
           child: Text(arr.routeNumber, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.accent, fontSize: 13)),
         ),
         title: Text('Towards ${arr.destination}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
@@ -444,7 +449,7 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
             Text('${arr.minutesAway} min', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: statusColor)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(color: statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(4)),
+              decoration: BoxDecoration(color: statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(4)),
               child: Text(arr.status, style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: statusColor)),
             ),
           ],

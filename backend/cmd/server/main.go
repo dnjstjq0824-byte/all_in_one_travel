@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -17,7 +18,13 @@ import (
 )
 
 func main() {
-	port := flag.Int("port", 8080, "HTTP server port")
+	defaultPort := 8080
+	if envPort := os.Getenv("PORT"); envPort != "" {
+		if p, err := strconv.Atoi(envPort); err == nil && p > 0 {
+			defaultPort = p
+		}
+	}
+	port := flag.Int("port", defaultPort, "HTTP server port")
 	flag.Parse()
 
 	log.Println("==================================================================")

@@ -405,7 +405,7 @@ class GlobalMapPainter extends CustomPainter {
           color: Colors.black87,
           fontSize: isSel ? 11 : 9,
           fontWeight: isSel ? FontWeight.bold : FontWeight.w500,
-          backgroundColor: Colors.white.withOpacity(0.9),
+          backgroundColor: Colors.white.withValues(alpha: 0.9),
         ),
       );
       final tp = TextPainter(text: span, textDirection: TextDirection.ltr)..layout();

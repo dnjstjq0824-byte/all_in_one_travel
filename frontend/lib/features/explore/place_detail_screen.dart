@@ -107,7 +107,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                 ),
                 const SizedBox(height: 10),
                 DropdownButtonFormField<String>(
-                  value: travelType,
+                  initialValue: travelType,
                   decoration: const InputDecoration(labelText: 'Travel Type', border: OutlineInputBorder()),
                   items: ['Solo', 'Couple', 'Family', 'Friends'].map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
                   onChanged: (v) => setDlgState(() => travelType = v ?? 'Solo'),
@@ -124,6 +124,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
               style: ElevatedButton.styleFrom(backgroundColor: AppTheme.accent),
               onPressed: () async {
                 if (contentCtrl.text.trim().isEmpty) return;
+                final messenger = ScaffoldMessenger.of(context);
                 Navigator.pop(ctx);
                 final newRev = Review(
                   id: '',
@@ -140,11 +141,12 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                   language: 'en',
                 );
                 final created = await TravelApiClient.submitReview(widget.place.id, newRev);
-                if (created != null && mounted) {
+                if (!mounted) return;
+                if (created != null) {
                   setState(() {
                     _reviews.insert(0, created);
                   });
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  messenger.showSnackBar(
                     const SnackBar(content: Text('Review submitted! Thank you for sharing.')),
                   );
                 }
@@ -194,7 +196,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                        colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
                       ),
                     ),
                   ),
@@ -243,7 +245,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
 
                   // ARTICLE 12: Complete Transit Connection Card
                   Card(
-                    color: Colors.blue.shade50.withOpacity(0.5),
+                    color: Colors.blue.shade50.withValues(alpha: 0.5),
                     child: Padding(
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
@@ -349,7 +351,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 10, offset: const Offset(0, -2))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 10, offset: const Offset(0, -2))],
         ),
         child: Row(
           children: [

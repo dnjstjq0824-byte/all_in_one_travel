@@ -159,7 +159,7 @@ class _AdminCoverageScreenState extends State<AdminCoverageScreen> {
                 Text('${city.name} (${city.countryCode})', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(color: badgeColor.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
+                  decoration: BoxDecoration(color: badgeColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
                   child: Text(city.coverageLevel, style: TextStyle(color: badgeColor, fontWeight: FontWeight.bold, fontSize: 11)),
                 ),
               ],

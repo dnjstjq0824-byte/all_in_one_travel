@@ -204,10 +204,13 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+          : Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                   // Active Trip Header Card
                   if (_activeTrip != null) ...[
                     Padding(
@@ -224,7 +227,7 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(6)),
+                                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(6)),
                                     child: Text(_activeTrip!.cityName, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
                                   ),
                                   Text(
@@ -257,7 +260,7 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: _activeTrip!.days.length,
-                          separatorBuilder: (_, __) => const SizedBox(width: 8),
+                          separatorBuilder: (_, _) => const SizedBox(width: 8),
                           itemBuilder: (ctx, i) {
                             final isSel = _selectedDayIndex == i;
                             return ChoiceChip(
@@ -376,6 +379,8 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
                 ],
               ),
             ),
+          ),
+        ),
     );
   }
 
@@ -393,7 +398,7 @@ class _MyTripScreenState extends State<MyTripScreen> with SingleTickerProviderSt
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: AppTheme.accent.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
+                    decoration: BoxDecoration(color: AppTheme.accent.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
                     child: Text(item.timeScheduled, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.accent)),
                   ),
                   const SizedBox(height: 6),

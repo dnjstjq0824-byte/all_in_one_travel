@@ -20,7 +20,7 @@ type VerificationResult struct {
 }
 
 func main() {
-	baseURL := "https://yang-propose-deviation-soonest.trycloudflare.com"
+	baseURL := "https://symantec-common-endif-verde.trycloudflare.com"
 	if len(os.Args) > 1 {
 		baseURL = os.Args[1]
 	}

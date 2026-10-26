@@ -9,9 +9,7 @@ import 'package:global_travel_app/features/trips/my_trip_screen.dart';
 
 class _FakeHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context);
-  }
+  String findProxyFromEnvironment(Uri url, Map<String, String>? environment) => '';
 }
 
 void main() {
