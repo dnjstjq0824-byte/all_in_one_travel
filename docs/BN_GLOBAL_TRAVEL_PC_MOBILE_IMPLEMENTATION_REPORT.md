@@ -35,14 +35,14 @@
 
 | 서비스 경로 | 접근 URL | 주요 기능 및 제공 내용 |
 |---|---|---|
-| **서비스 메인 포털** | [https://symantec-common-endif-verde.trycloudflare.com/](https://symantec-common-endif-verde.trycloudflare.com/) | 종합 안내, 18개 도시 커버리지 테이블, 다운로드 바로가기 |
-| **Flutter Web 여행 앱** | [https://symantec-common-endif-verde.trycloudflare.com/web/](https://symantec-common-endif-verde.trycloudflare.com/web/) | PC/모바일 반응형 여행 웹 앱 (CanvasKit Wasm SPA) |
-| **다운로드 센터** | [https://symantec-common-endif-verde.trycloudflare.com/download](https://symantec-common-endif-verde.trycloudflare.com/download) | Android APK 및 iOS Safari 홈 화면 추가 안내, QR코드 |
-| **Android APK 다운로드** | [https://symantec-common-endif-verde.trycloudflare.com/download/android](https://symantec-common-endif-verde.trycloudflare.com/download/android) | 실기기 직접 설치용 정식 APK 바이너리 즉시 다운로드 (50.6 MB) |
-| **백엔드 헬스체크** | [https://symantec-common-endif-verde.trycloudflare.com/api/v1/health](https://symantec-common-endif-verde.trycloudflare.com/api/v1/health) | 서비스 상태 진단 (`healthy`, 18개 도시 활성) |
-| **개인정보처리방침** | [https://symantec-common-endif-verde.trycloudflare.com/privacy](https://symantec-common-endif-verde.trycloudflare.com/privacy) | PIPA, GDPR, 위치정보 처리 기준 고지 |
-| **서비스 이용약관** | [https://symantec-common-endif-verde.trycloudflare.com/terms](https://symantec-common-endif-verde.trycloudflare.com/terms) | 면책 조항, ODbL 및 CC-BY 4.0 라이선스 명시 |
-| **고객지원 센터** | [https://symantec-common-endif-verde.trycloudflare.com/support](https://symantec-common-endif-verde.trycloudflare.com/support) | FAQ, 오프라인 패키지 이용 안내, 제휴/오류 문의 |
+| **서비스 메인 포털** | [https://determines-ing-tvs-allowance.trycloudflare.com/](https://determines-ing-tvs-allowance.trycloudflare.com/) | 종합 안내, 18개 도시 커버리지 테이블, 다운로드 바로가기 |
+| **Flutter Web 여행 앱** | [https://determines-ing-tvs-allowance.trycloudflare.com/web/](https://determines-ing-tvs-allowance.trycloudflare.com/web/) | PC/모바일 반응형 여행 웹 앱 (CanvasKit Wasm SPA) |
+| **다운로드 센터** | [https://determines-ing-tvs-allowance.trycloudflare.com/download](https://determines-ing-tvs-allowance.trycloudflare.com/download) | Android APK 및 iOS Safari 홈 화면 추가 안내, QR코드 |
+| **Android APK 다운로드** | [https://determines-ing-tvs-allowance.trycloudflare.com/download/android](https://determines-ing-tvs-allowance.trycloudflare.com/download/android) | 실기기 직접 설치용 정식 APK 바이너리 즉시 다운로드 (50.6 MB) |
+| **백엔드 헬스체크** | [https://determines-ing-tvs-allowance.trycloudflare.com/api/v1/health](https://determines-ing-tvs-allowance.trycloudflare.com/api/v1/health) | 서비스 상태 진단 (`healthy`, 18개 도시 활성) |
+| **개인정보처리방침** | [https://determines-ing-tvs-allowance.trycloudflare.com/privacy](https://determines-ing-tvs-allowance.trycloudflare.com/privacy) | PIPA, GDPR, 위치정보 처리 기준 고지 |
+| **서비스 이용약관** | [https://determines-ing-tvs-allowance.trycloudflare.com/terms](https://determines-ing-tvs-allowance.trycloudflare.com/terms) | 면책 조항, ODbL 및 CC-BY 4.0 라이선스 명시 |
+| **고객지원 센터** | [https://determines-ing-tvs-allowance.trycloudflare.com/support](https://determines-ing-tvs-allowance.trycloudflare.com/support) | FAQ, 오프라인 패키지 이용 안내, 제휴/오류 문의 |
 
 ---
 
@@ -88,7 +88,7 @@ graph TD
 ```
 ================================================================================
 🚀 EXECUTING ARTICLE 15: BN-GLOBAL-TRAVEL-APP-002 LIVE HTTPS E2E VERIFICATION
-   Target Public HTTPS Domain: https://symantec-common-endif-verde.trycloudflare.com
+   Target Public HTTPS Domain: https://determines-ing-tvs-allowance.trycloudflare.com
 ================================================================================
 ✅ [PASS] Scenario 01: Service URL Access & Security Headers (675ms)
 ✅ [PASS] Scenario 02: Flutter Web App Shell Loading (/web/) (32ms)
@@ -149,7 +149,7 @@ graph TD
 
 ## 8. 최종 승인 요청 (PO Sign-Off)
 
-본 개발팀은 최고 PO의 마스터 명령(`BN-GLOBAL-TRAVEL-APP-002`)에 명시된 모든 조항(Article 0부터 Article 21까지)을 완전히 이행하여, **실제 접속 가능한 공용 HTTPS URL(`https://symantec-common-endif-verde.trycloudflare.com`)에서 PC와 모바일 사용자가 완벽히 여행 서비스를 누릴 수 있는 상용 배포 체계**를 완성하였습니다.
+본 개발팀은 최고 PO의 마스터 명령(`BN-GLOBAL-TRAVEL-APP-002`)에 명시된 모든 조항(Article 0부터 Article 21까지)을 완전히 이행하여, **실제 접속 가능한 공용 HTTPS URL(`https://determines-ing-tvs-allowance.trycloudflare.com`)에서 PC와 모바일 사용자가 완벽히 여행 서비스를 누릴 수 있는 상용 배포 체계**를 완성하였습니다.
 
 최고 PO님의 최종 상용 서비스 전환 승인을 정중히 요청드립니다.
 

@@ -57,7 +57,7 @@ Get-Process -Name server, cloudflared -ErrorAction SilentlyContinue | Stop-Proce
 curl.exe -s http://localhost:8080/api/v1/health
 
 # 공용 HTTPS 헬스체크
-curl.exe -s https://symantec-common-endif-verde.trycloudflare.com/api/v1/health
+curl.exe -s https://determines-ing-tvs-allowance.trycloudflare.com/api/v1/health
 ```
 정상 응답: `{"cities":18,"service":"Global Travel Essential API","status":"healthy","version":"1.0.0"}`
 
@@ -91,8 +91,8 @@ Set-Location backend; go build -o bin/server.exe cmd/server/main.go
 ## 5. 모바일 앱 배포 절차 (Mobile Release Runbook)
 
 ### 5.1 Android 실기기 직접 배포 (APK Sideload)
-1. 다운로드 URL: `https://symantec-common-endif-verde.trycloudflare.com/download/android`
-2. 또는 웹 브라우저 다운로드 센터: `https://symantec-common-endif-verde.trycloudflare.com/download`
+1. 다운로드 URL: `https://determines-ing-tvs-allowance.trycloudflare.com/download/android`
+2. 또는 웹 브라우저 다운로드 센터: `https://determines-ing-tvs-allowance.trycloudflare.com/download`
 3. 기기에서 APK 파일 실행 후 설치 허용.
 
 ### 5.2 Google Play Store 콘솔 등록 (AAB)
@@ -100,6 +100,6 @@ Set-Location backend; go build -o bin/server.exe cmd/server/main.go
 2. Google Play Console에 로그인 후 [프로덕션] ➔ [새 버전 출시] ➔ `app-release.aab` 업로드.
 
 ### 5.3 iPhone Safari 홈 화면 추가 (Web PWA)
-1. iPhone Safari에서 `https://symantec-common-endif-verde.trycloudflare.com/web/` 접속.
+1. iPhone Safari에서 `https://determines-ing-tvs-allowance.trycloudflare.com/web/` 접속.
 2. [공유] ➔ [홈 화면에 추가] 선택.
 
