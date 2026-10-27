@@ -4,11 +4,12 @@
   "private": true,
   "description": "Booking Network Global Travel Essential Application",
   "scripts": {
-    "build": "echo 'Static assets ready in public/'",
+    "prepare-assets": "node scripts/prepare_deploy.js",
+    "build": "node scripts/prepare_deploy.js",
+    "predeploy": "node scripts/prepare_deploy.js",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "wrangler": "^4.152.0"
   }
 }
-
