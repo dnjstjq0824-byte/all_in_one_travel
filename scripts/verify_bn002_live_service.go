@@ -20,7 +20,7 @@ type VerificationResult struct {
 }
 
 func main() {
-	baseURL := "https://determines-ing-tvs-allowance.trycloudflare.com"
+	baseURL := "https://shade-corporate-johnston-belongs.trycloudflare.com"
 	if len(os.Args) > 1 {
 		baseURL = os.Args[1]
 	}
