@@ -1,4 +1,4 @@
-﻿# 🛠️🚀 BN-GLOBAL-TRAVEL-DEPLOYMENT-RUNBOOK
+# 🛠️🚀 BN-GLOBAL-TRAVEL-DEPLOYMENT-RUNBOOK
 ## 상용 운영 인프라 배포 및 장애 복구 운영 가이드북
 **Project ID:** `BN-GLOBAL-TRAVEL-APP-002`  
 **Client:** Booking Network Co., Ltd.  
@@ -15,7 +15,7 @@
 graph LR
     Client["User Device<br>(PC / Mac / Android / iPhone)"] -->|HTTPS (Port 443)<br>TLS 1.3 / QUIC| CF["Cloudflare Edge Global CDN<br>(TLS Termination & HSTS)"]
     CF -->|Secure Quick Tunnel| LocalDaemon["Cloudflare Tunnel Daemon<br>(cloudflared.exe)"]
-    LocalDaemon -->|HTTP / Localhost:8080| GoServer["Go 1.27 High-Performance Server<br>(server.exe)"]
+    LocalDaemon -->|HTTP / Localhost:8090| GoServer["Go 1.27 High-Performance Server<br>(server.exe)"]
     GoServer --> Web["Flutter Web SPA (/web/)"]
     GoServer --> API["REST API Gateway (/api/v1/)"]
     GoServer --> APK["Android APK Storage (/download/android)"]
@@ -30,15 +30,15 @@ graph LR
 # 1. 작업 디렉토리 이동
 Set-Location "c:\Users\dnjst\Desktop\project\all-on-one_travel_app"
 
-# 2. 백엔드 바이너리 백그라운드 기동 (포트 8080)
-Start-Process -FilePath "backend\bin\server.exe" -ArgumentList "-port 8080" -WindowStyle Hidden
+# 2. 백엔드 바이너리 백그라운드 기동 (포트 8090 격리)
+Start-Process -FilePath "backend\bin\server.exe" -ArgumentList "-port 8090" -WindowStyle Hidden
 ```
 
 ### 2.2 공용 HTTPS 터널 기동 (Cloudflare Tunnel)
 ```powershell
 # 공식 설치된 cloudflared 데몬 기동
 Start-Process -FilePath "C:\Program Files (x86)\cloudflared\cloudflared.exe" `
-  -ArgumentList "tunnel --url http://localhost:8080" -WindowStyle Hidden
+  -ArgumentList "tunnel --url http://localhost:8090" -WindowStyle Hidden
 ```
 
 ### 2.3 서비스 종료 (Graceful Shutdown)
@@ -102,4 +102,25 @@ Set-Location backend; go build -o bin/server.exe cmd/server/main.go
 ### 5.3 iPhone Safari 홈 화면 추가 (Web PWA)
 1. iPhone Safari에서 `https://determines-ing-tvs-allowance.trycloudflare.com/web/` 접속.
 2. [공유] ➔ [홈 화면에 추가] 선택.
+
+---
+
+## 6. Cloudflare Pages & Workers 직접 배포 (Zero-Config Pipeline)
+
+프로젝트 루트에 `wrangler.toml`, `wrangler.jsonc`, `package.json`, `worker.js`, `public/` 디렉터리가 구성되어 있어 Cloudflare CI/CD 및 CLI에서 단일 명령어로 즉시 전 세계 배포가 가능합니다.
+
+### 6.1 Wrangler CLI 배포 명령어
+```bash
+# Cloudflare Pages / Workers 전체 배포 (정적 포털 + Flutter Web + Edge Proxy)
+npx wrangler deploy
+```
+
+### 6.2 Cloudflare Pages 대시보드 빌드 설정 (Git 연동 시)
+- **Framework preset:** `None`
+- **Build command:** `npm run build` (또는 `echo "Ready"`)
+- **Build output directory:** `public`
+- **Deploy command:** `npx wrangler deploy`
+- **Environment variables:**
+  - `BACKEND_URL`: `https://determines-ing-tvs-allowance.trycloudflare.com`
+
 

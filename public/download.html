@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>앱 다운로드 및 설치 센터 — GLOBAL TRAVEL ESSENTIAL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #0F172A; --accent: #2563EB; --accent-hover: #1D4ED8; --surface: #F8FAFC; --card-bg: #FFFFFF; --border: #E2E8F0; --text: #0F172A; --muted: #64748B; --green: #10B981; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--surface); color: var(--text); line-height: 1.6; }
+    header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: white; padding: 30px 20px; border-bottom: 1px solid #334155; }
+    .nav { max-width: 1050px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .nav a { color: white; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 20px; font-size: 0.9rem; }
+    .nav-links a { color: #94A3B8; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .container { max-width: 1050px; margin: 40px auto; padding: 0 20px 80px; }
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
+    .hero p { color: var(--muted); font-size: 1.1rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); padding: 32px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); }
+    .card h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .badge-official { background: #DCFCE7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1rem; width: 100%; transition: background 0.2s; }
+    .btn-primary { background: var(--accent); color: white; margin-top: 20px; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: #F1F5F9; color: var(--primary); margin-top: 20px; border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #E2E8F0; }
+    .meta-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.88rem; }
+    .meta-table td { padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .meta-table td:first-child { color: var(--muted); width: 120px; }
+    .meta-table td:last-child { font-weight: 600; word-break: break-all; }
+    .code-box { background: #F8FAFC; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-family: monospace; font-size: 0.8rem; word-break: break-all; color: #334155; }
+    .steps { margin-top: 16px; padding-left: 20px; font-size: 0.92rem; color: #334155; }
+    .steps li { margin-bottom: 8px; }
+    .qr-box { text-align: center; margin-top: 20px; padding: 16px; background: #F8FAFC; border-radius: 12px; border: 1px solid var(--border); }
+    footer { background: white; border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="/">🌍 GLOBAL TRAVEL ESSENTIAL</a>
+    <div class="nav-links">
+      <a href="/">홈</a>
+      <a href="/web/">웹 앱 실행</a>
+      <a href="/download" style="color: white; font-weight: bold;">다운로드</a>
+      <a href="/privacy">개인정보처리방침</a>
+      <a href="/terms">이용약관</a>
+      <a href="/support">고객지원</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="hero">
+    <h1>공식 앱 다운로드 및 설치 센터</h1>
+    <p>Android 스마트폰, 태블릿, iPhone Safari, PC 데스크톱 어디서든 자유롭게 이용하세요.</p>
+  </div>
+
+  <div class="grid">
+    <!-- Android APK Card -->
+    <div class="card">
+      <h2>🤖 Android 실기기 설치 (APK) <span class="badge-official">공식 배포본</span></h2>
+      <p style="color: var(--muted); font-size: 0.9rem;">Android 7.0 (API 24) 이상 모든 스마트폰에서 바로 설치 가능한 릴리스 바이너리입니다.</p>
+
+      <table class="meta-table">
+        <tr><td>버전</td><td>1.0.0 (Release)</td></tr>
+        <tr><td>빌드 일자</td><td>2026-10-24</td></tr>
+        <tr><td>파일 크기</td><td>53,028,604 Bytes (50.6 MB)</td></tr>
+        <tr><td>패키지명</td><td>com.bookingnetwork.travelapp.global_travel_app</td></tr>
+        <tr><td>SHA-256</td><td><div class="code-box">53CB528D0A0F0F8F39A607D3FB345682DA4906ED8B60A4966E09073FA726A391</div></td></tr>
+      </table>
+
+      <a href="/download/android" class="btn btn-primary" download>
+        <span>⬇️ Android APK 직접 다운로드</span>
+      </a>
+
+      <div class="qr-box">
+        <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">📱 모바일 카메라로 스캔하여 다운로드</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=http%3A%2F%2Flocalhost%3A8080%2Fdownload%2Fandroid" alt="Download QR" style="border-radius: 8px; border: 1px solid var(--border);" width="140" height="140">
+      </div>
+
+      <h3 style="font-size: 1rem; margin-top: 20px;">설치 및 업데이트 안내:</h3>
+      <ol class="steps">
+        <li>위 다운로드 버튼을 눌러 <code>app-release.apk</code> 파일을 다운로드합니다.</li>
+        <li>다운로드된 파일을 탭하고 <strong>"출처를 알 수 없는 앱 설치 허용"</strong>을 승인합니다.</li>
+        <li>설치 완료 후 앱을 실행하면 즉시 18개 도시 지하철·버스·날씨 서비스를 이용할 수 있습니다.</li>
+        <li>ADB 명령어로 PC에서 설치: <code>adb install -r app-release.apk</code></li>
+      </ol>
+    </div>
+
+    <!-- Web & iOS Card -->
+    <div class="card">
+      <h2>🌐 크롬·사파리 웹 & iPhone (PWA) <span class="badge-official" style="background:#DBEAFE;color:#1E40AF;">무설치 즉시 사용</span></h2>
+      <p style="color: var(--muted); font-size: 0.9rem;">별도 파일 설치 없이 웹 브라우저에서 동일한 모든 여행 기능을 이용할 수 있습니다.</p>
+
+      <table class="meta-table">
+        <tr><td>기술 스택</td><td>Flutter 3.47 / CanvasKit WebAssembly</td></tr>
+        <tr><td>지원 브라우저</td><td>Chrome, Safari, Edge, Firefox</td></tr>
+        <tr><td>오프라인 지원</td><td>PWA Service Worker 캐싱</td></tr>
+        <tr><td>iOS 지원</td><td>iPhone Safari 홈 화면 추가 완벽 지원</td></tr>
+      </table>
+
+      <a href="/web/" class="btn btn-secondary" target="_blank">
+        <span>🚀 웹 여행 앱 바로 실행하기</span>
+      </a>
+
+      <h3 style="font-size: 1rem; margin-top: 24px;">🍎 iPhone & iPad 홈 화면 추가 방법:</h3>
+      <ol class="steps">
+        <li>Safari 브라우저에서 <a href="/web/" target="_blank" style="color: var(--accent);">/web/</a> 주소로 접속합니다.</li>
+        <li>하단 툴바의 <strong>공유(Share)</strong> 아이콘을 탭합니다.</li>
+        <li>메뉴에서 <strong>"홈 화면에 추가 (Add to Home Screen)"</strong>를 선택합니다.</li>
+        <li>홈 화면에 생성된 아이콘을 누르면 앱스토어 앱과 동일하게 전체화면으로 실행됩니다.</li>
+      </ol>
+
+      <h3 style="font-size: 1rem; margin-top: 24px;">📦 개발자 및 스토어 콘솔 등록용:</h3>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">Google Play Console 제출용 AAB(App Bundle) 패키지:</p>
+      <div class="code-box">app-release.aab (49.3 MB)<br>SHA-256: 6077CD8389495A2F6C3146A82C5B15CC5CD48EE40C93D095B5D92103CB0C1B2C</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Booking Network Co., Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

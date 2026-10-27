@@ -1,0 +1,7 @@
+/download /download.html 200
+/download/ /download.html 200
+/privacy /privacy.html 200
+/terms /terms.html 200
+/support /support.html 200
+/download/android https://raw.githubusercontent.com/dnjstjq0824-byte/all_in_one_travel/main/release/apk/app-release.apk 302
+/web/* /web/index.html 200

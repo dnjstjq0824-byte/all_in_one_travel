@@ -1,0 +1,13 @@
+{
+  "name": "all-in-one-travel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Booking Network Global Travel Essential Application",
+  "scripts": {
+    "build": "echo 'Static assets ready in public/'",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  }
+}

@@ -1,0 +1,17 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With
+
+/web/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/web/*.js
+  Cache-Control: public, max-age=86400
+
+/web/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
