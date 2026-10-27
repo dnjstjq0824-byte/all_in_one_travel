@@ -27,3 +27,6 @@ backend/bin/
 !release/apk/*.apk
 !release/apk/*.aab
 !release/portal/*
+
+# Cloudflare Wrangler
+.wrangler/
