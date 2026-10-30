@@ -1,4 +1,4 @@
-# 🌍 [BOOKING NETWORK CO., LTD]
+﻿# 🌍 [BOOKING NETWORK CO., LTD]
 # 21개 글로벌 레퍼런스 서비스 심층 전수조사 및 필수 구현 기능 분석 보고서
 ## GLOBAL ALL-IN-ONE TRAVEL ESSENTIAL APPLICATION
 ### 전 세계 지하철·버스·날씨·관광지·후기·길찾기·여행 일정 통합 플랫폼 개발 명령
@@ -362,7 +362,7 @@ gantt
 
 본 21개 글로벌 벤치마크 전수조사를 통해 확인된 시장의 가장 큰 문제점은 **"교통, 관광, 일정, 날씨의 파편화"**였습니다.
 
-Booking Network Co., Ltd.의 **GLOBAL TRAVEL ESSENTIAL APP**은 이미 이 4대 핵심 축을 단일 데이터 모델과 반응형 화면으로 통합 구현하여 상용 배포(`https://shade-corporate-johnston-belongs.trycloudflare.com`)를 완료하였습니다.
+Booking Network Co., Ltd.의 **GLOBAL TRAVEL ESSENTIAL APP**은 이미 이 4대 핵심 축을 단일 데이터 모델과 반응형 화면으로 통합 구현하여 상용 배포(`https://italiano-integrate-pac-mediterranean.trycloudflare.com`)를 완료하였습니다.
 
 위 갭 분석을 바탕으로 도출된 **P1 고도화 항목(일정별 날씨 매핑, 환승 최적 객차 번호 안내, 혼잡도 차트)**을 순차적으로 제품에 반영하여 글로벌 1위 여행 플랫폼으로 완성할 수 있도록 PO님의 검토 및 승인을 요청드립니다.
 

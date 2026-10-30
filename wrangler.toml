@@ -10,4 +10,4 @@ html_handling = "auto-trailing-slash"
 not_found_handling = "none"
 
 [vars]
-BACKEND_URL = "https://shade-corporate-johnston-belongs.trycloudflare.com"
+BACKEND_URL = "https://italiano-integrate-pac-mediterranean.trycloudflare.com"

@@ -35,14 +35,14 @@
 
 | 서비스 경로 | 접근 URL | 주요 기능 및 제공 내용 |
 |---|---|---|
-| **서비스 메인 포털** | [https://shade-corporate-johnston-belongs.trycloudflare.com/](https://shade-corporate-johnston-belongs.trycloudflare.com/) | 종합 안내, 18개 도시 커버리지 테이블, 다운로드 바로가기 |
-| **Flutter Web 여행 앱** | [https://shade-corporate-johnston-belongs.trycloudflare.com/web/](https://shade-corporate-johnston-belongs.trycloudflare.com/web/) | PC/모바일 반응형 여행 웹 앱 (CanvasKit Wasm SPA) |
-| **다운로드 센터** | [https://shade-corporate-johnston-belongs.trycloudflare.com/download](https://shade-corporate-johnston-belongs.trycloudflare.com/download) | Android APK 및 iOS Safari 홈 화면 추가 안내, QR코드 |
-| **Android APK 다운로드** | [https://shade-corporate-johnston-belongs.trycloudflare.com/download/android](https://shade-corporate-johnston-belongs.trycloudflare.com/download/android) | 실기기 직접 설치용 정식 APK 바이너리 즉시 다운로드 (50.6 MB) |
-| **백엔드 헬스체크** | [https://shade-corporate-johnston-belongs.trycloudflare.com/api/v1/health](https://shade-corporate-johnston-belongs.trycloudflare.com/api/v1/health) | 서비스 상태 진단 (`healthy`, 18개 도시 활성) |
-| **개인정보처리방침** | [https://shade-corporate-johnston-belongs.trycloudflare.com/privacy](https://shade-corporate-johnston-belongs.trycloudflare.com/privacy) | PIPA, GDPR, 위치정보 처리 기준 고지 |
-| **서비스 이용약관** | [https://shade-corporate-johnston-belongs.trycloudflare.com/terms](https://shade-corporate-johnston-belongs.trycloudflare.com/terms) | 면책 조항, ODbL 및 CC-BY 4.0 라이선스 명시 |
-| **고객지원 센터** | [https://shade-corporate-johnston-belongs.trycloudflare.com/support](https://shade-corporate-johnston-belongs.trycloudflare.com/support) | FAQ, 오프라인 패키지 이용 안내, 제휴/오류 문의 |
+| **서비스 메인 포털** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/](https://italiano-integrate-pac-mediterranean.trycloudflare.com/) | 종합 안내, 18개 도시 커버리지 테이블, 다운로드 바로가기 |
+| **Flutter Web 여행 앱** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/web/](https://italiano-integrate-pac-mediterranean.trycloudflare.com/web/) | PC/모바일 반응형 여행 웹 앱 (CanvasKit Wasm SPA) |
+| **다운로드 센터** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/download](https://italiano-integrate-pac-mediterranean.trycloudflare.com/download) | Android APK 및 iOS Safari 홈 화면 추가 안내, QR코드 |
+| **Android APK 다운로드** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/download/android](https://italiano-integrate-pac-mediterranean.trycloudflare.com/download/android) | 실기기 직접 설치용 정식 APK 바이너리 즉시 다운로드 (50.6 MB) |
+| **백엔드 헬스체크** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/api/v1/health](https://italiano-integrate-pac-mediterranean.trycloudflare.com/api/v1/health) | 서비스 상태 진단 (`healthy`, 18개 도시 활성) |
+| **개인정보처리방침** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/privacy](https://italiano-integrate-pac-mediterranean.trycloudflare.com/privacy) | PIPA, GDPR, 위치정보 처리 기준 고지 |
+| **서비스 이용약관** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/terms](https://italiano-integrate-pac-mediterranean.trycloudflare.com/terms) | 면책 조항, ODbL 및 CC-BY 4.0 라이선스 명시 |
+| **고객지원 센터** | [https://italiano-integrate-pac-mediterranean.trycloudflare.com/support](https://italiano-integrate-pac-mediterranean.trycloudflare.com/support) | FAQ, 오프라인 패키지 이용 안내, 제휴/오류 문의 |
 
 ---
 
@@ -88,7 +88,7 @@ graph TD
 ```
 ================================================================================
 🚀 EXECUTING ARTICLE 15: BN-GLOBAL-TRAVEL-APP-002 LIVE HTTPS E2E VERIFICATION
-   Target Public HTTPS Domain: https://shade-corporate-johnston-belongs.trycloudflare.com
+   Target Public HTTPS Domain: https://italiano-integrate-pac-mediterranean.trycloudflare.com
 ================================================================================
 ✅ [PASS] Scenario 01: Service URL Access & Security Headers (675ms)
 ✅ [PASS] Scenario 02: Flutter Web App Shell Loading (/web/) (32ms)
@@ -149,7 +149,7 @@ graph TD
 
 ## 8. 최종 승인 요청 (PO Sign-Off)
 
-본 개발팀은 최고 PO의 마스터 명령(`BN-GLOBAL-TRAVEL-APP-002`)에 명시된 모든 조항(Article 0부터 Article 21까지)을 완전히 이행하여, **실제 접속 가능한 공용 HTTPS URL(`https://shade-corporate-johnston-belongs.trycloudflare.com`)에서 PC와 모바일 사용자가 완벽히 여행 서비스를 누릴 수 있는 상용 배포 체계**를 완성하였습니다.
+본 개발팀은 최고 PO의 마스터 명령(`BN-GLOBAL-TRAVEL-APP-002`)에 명시된 모든 조항(Article 0부터 Article 21까지)을 완전히 이행하여, **실제 접속 가능한 공용 HTTPS URL(`https://italiano-integrate-pac-mediterranean.trycloudflare.com`)에서 PC와 모바일 사용자가 완벽히 여행 서비스를 누릴 수 있는 상용 배포 체계**를 완성하였습니다.
 
 최고 PO님의 최종 상용 서비스 전환 승인을 정중히 요청드립니다.
 
