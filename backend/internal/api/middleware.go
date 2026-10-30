@@ -21,11 +21,20 @@ func (w gzipResponseWriter) Write(b []byte) (int, error) {
 func MiddlewareChain(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
+		if strings.HasPrefix(r.URL.Path, "/api/") && r.Body != nil {
+			const maxRequestBytes = 1 << 20
+			if r.ContentLength > maxRequestBytes {
+				respondError(w, http.StatusRequestEntityTooLarge, "request body exceeds 1 MiB")
+				return
+			}
+			r.Body = http.MaxBytesReader(w, r.Body, maxRequestBytes)
+		}
 
 		// CORS headers
 		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
+		w.Header().Set("Access-Control-Expose-Headers", "X-Content-SHA256, ETag")
 
 		// Security headers
 		w.Header().Set("X-Content-Type-Options", "nosniff")
@@ -73,4 +82,3 @@ func MiddlewareChain(next http.Handler) http.Handler {
 		log.Printf("[%s] %s %s - %v", r.Method, r.URL.Path, r.RemoteAddr, time.Since(start))
 	})
 }
-

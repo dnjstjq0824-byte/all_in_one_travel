@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -9,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/bookingnetwork/global-travel-app/backend/internal/model"
+	"github.com/bookingnetwork/global-travel-app/backend/internal/routing"
 	"github.com/bookingnetwork/global-travel-app/backend/internal/service"
 )
 
@@ -53,10 +55,16 @@ func (h *APIHandler) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("GET /api/v1/trips", h.handleListTrips)
 	mux.HandleFunc("POST /api/v1/trips", h.handleCreateTrip)
 	mux.HandleFunc("GET /api/v1/trips/{id}", h.handleGetTrip)
+	mux.HandleFunc("PATCH /api/v1/trips/{id}", h.handleUpdateTrip)
+	mux.HandleFunc("DELETE /api/v1/trips/{id}", h.handleDeleteTrip)
 	mux.HandleFunc("POST /api/v1/trips/{id}/items", h.handleAddItineraryItem)
+	mux.HandleFunc("PATCH /api/v1/trips/{id}/items/{itemID}", h.handleCompleteItineraryItem)
+	mux.HandleFunc("DELETE /api/v1/trips/{id}/items/{itemID}", h.handleDeleteItineraryItem)
+	mux.HandleFunc("PUT /api/v1/trips/{id}/days/{day}/order", h.handleReorderItineraryItems)
 
 	// Offline Packages
 	mux.HandleFunc("GET /api/v1/offline/packages", h.handleGetOfflinePackages)
+	mux.HandleFunc("GET /api/v1/offline/packages/{city}", h.handleDownloadOfflinePackage)
 
 	// Article 2 Mandatory URL Routes
 	mux.HandleFunc("GET /download/android", func(w http.ResponseWriter, r *http.Request) {
@@ -219,6 +227,14 @@ func (h *APIHandler) handlePlanTransit(w http.ResponseWriter, r *http.Request) {
 		req.CityID = "seoul"
 	}
 
+	if err := routing.ValidateRequest(req); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if _, err := h.svc.GetCity(req.CityID); err != nil {
+		respondError(w, http.StatusNotFound, err.Error())
+		return
+	}
 	plan, err := h.svc.PlanTransit(req)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, err.Error())
@@ -307,7 +323,7 @@ func (h *APIHandler) handleCreateTrip(w http.ResponseWriter, r *http.Request) {
 	}
 	created, err := h.svc.CreateTrip(trip)
 	if err != nil {
-		respondError(w, http.StatusInternalServerError, err.Error())
+		respondServiceError(w, err)
 		return
 	}
 	respondJSON(w, http.StatusCreated, created)
@@ -328,7 +344,12 @@ func (h *APIHandler) handleAddItineraryItem(w http.ResponseWriter, r *http.Reque
 	dayStr := r.URL.Query().Get("day")
 	dayNum, err := strconv.Atoi(dayStr)
 	if err != nil || dayNum < 1 {
-		dayNum = 1
+		if dayStr == "" {
+			dayNum = 1
+		} else {
+			respondError(w, http.StatusBadRequest, "day must be a positive integer")
+			return
+		}
 	}
 
 	var item model.ItineraryItem
@@ -339,14 +360,51 @@ func (h *APIHandler) handleAddItineraryItem(w http.ResponseWriter, r *http.Reque
 
 	updated, err := h.svc.AddItineraryItem(tripID, dayNum, item)
 	if err != nil {
-		respondError(w, http.StatusInternalServerError, err.Error())
+		respondServiceError(w, err)
 		return
 	}
 	respondJSON(w, http.StatusOK, updated)
 }
 
+func (h *APIHandler) handleCompleteItineraryItem(w http.ResponseWriter, r *http.Request) {
+	var req service.ItemPatch
+	decoder := json.NewDecoder(r.Body)
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&req); err != nil || req == (service.ItemPatch{}) {
+		respondError(w, http.StatusBadRequest, "provide valid item fields")
+		return
+	}
+	trip, err := h.svc.UpdateItineraryItem(r.PathValue("id"), r.PathValue("itemID"), req)
+	if err != nil {
+		respondServiceError(w, err)
+		return
+	}
+	respondJSON(w, http.StatusOK, trip)
+}
+
+func respondServiceError(w http.ResponseWriter, err error) {
+	status := http.StatusInternalServerError
+	if errors.Is(err, service.ErrInvalidInput) {
+		status = http.StatusBadRequest
+	}
+	if errors.Is(err, service.ErrNotFound) {
+		status = http.StatusNotFound
+	}
+	respondError(w, status, err.Error())
+}
+
 func (h *APIHandler) handleGetOfflinePackages(w http.ResponseWriter, r *http.Request) {
-	respondJSON(w, http.StatusOK, h.svc.GetOfflinePackages())
+	respondJSON(w, http.StatusOK, h.svc.ListOfflinePackages())
+}
+
+func (h *APIHandler) handleDownloadOfflinePackage(w http.ResponseWriter, r *http.Request) {
+	body,checksum,err := h.svc.OfflineCityData(r.PathValue("city"))
+	if err != nil { respondServiceError(w,err); return }
+	w.Header().Set("Content-Type","application/json; charset=utf-8")
+	w.Header().Set("Cache-Control","no-cache")
+	w.Header().Set("X-Content-SHA256",checksum)
+	w.Header().Set("ETag",`"`+checksum+`"`)
+	_,_ = w.Write(body)
 }
 
 func respondJSON(w http.ResponseWriter, status int, data interface{}) {

@@ -30,3 +30,7 @@ backend/bin/
 
 # Cloudflare Wrangler
 .wrangler/
+
+# Local user state
+var/
+backend/var/

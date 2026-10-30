@@ -1,9 +1,13 @@
 package service
 
 import (
+	"crypto/rand"
+	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -17,6 +21,9 @@ type ServiceContainer struct {
 	Store         *data.SeedStore
 	RoutingEngine *routing.Engine
 	mu            sync.RWMutex
+	statePath     string
+	database      *sql.DB
+	stateRevision int64
 }
 
 func NewServiceContainer(store *data.SeedStore) *ServiceContainer {
@@ -146,17 +153,27 @@ func (s *ServiceContainer) AddReview(review model.Review) (*model.Review, error)
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	review.ID = fmt.Sprintf("rev_%d", time.Now().UnixNano())
+	review.ID = "rev_" + rand.Text()
 	review.CreatedAt = time.Now()
 	review.VerifiedVisit = false // Unverified until receipt/booking proof
 
-	s.Store.Reviews[review.PlaceID] = append([]model.Review{review}, s.Store.Reviews[review.PlaceID]...)
+	reviews := make(map[string][]model.Review, len(s.Store.Reviews)+1)
+	for id, existing := range s.Store.Reviews {
+		reviews[id] = existing
+	}
+	reviews[review.PlaceID] = append([]model.Review{review}, reviews[review.PlaceID]...)
+	if err := s.writeState(s.Store.Trips, reviews); err != nil {
+		return nil, err
+	}
+	s.Store.Reviews = reviews
 	return &review, nil
 }
 
 // Weather Service with Open-Meteo Fallback
 func (s *ServiceContainer) GetWeather(cityID string) (*model.WeatherReport, error) {
+	s.mu.RLock()
 	report, exists := s.Store.WeatherReports[cityID]
+	s.mu.RUnlock()
 	if exists && time.Since(report.ObservedAt) < 30*time.Minute {
 		return &report, nil
 	}
@@ -196,7 +213,10 @@ func fetchOpenMeteoWeather(lat, lng float64, cityID, cityName string) (*model.We
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("open-meteo returned code: %d", resp.StatusCode)
 	}
+	return decodeOpenMeteoWeather(resp.Body, lat, lng, cityID, cityName)
+}
 
+func decodeOpenMeteoWeather(body io.Reader, lat, lng float64, cityID, cityName string) (*model.WeatherReport, error) {
 	var raw struct {
 		Current struct {
 			Temperature2m       float64 `json:"temperature_2m"`
@@ -209,6 +229,7 @@ func fetchOpenMeteoWeather(lat, lng float64, cityID, cityName string) (*model.We
 			Time          []string  `json:"time"`
 			Temperature2m []float64 `json:"temperature_2m"`
 			PrecipProb    []int     `json:"precipitation_probability"`
+			WeatherCode   []int     `json:"weather_code"`
 		} `json:"hourly"`
 		Daily struct {
 			Time             []string  `json:"time"`
@@ -219,29 +240,33 @@ func fetchOpenMeteoWeather(lat, lng float64, cityID, cityName string) (*model.We
 		} `json:"daily"`
 	}
 
-	if err := json.NewDecoder(resp.Body).Decode(&raw); err != nil {
+	if err := json.NewDecoder(body).Decode(&raw); err != nil {
 		return nil, err
 	}
 
 	condition, conditionKo := weatherCodeToString(raw.Current.WeatherCode)
 
 	hourly := make([]model.HourlyForecast, 0)
-	for i := 0; i < len(raw.Hourly.Time) && i < 12; i++ {
+	for i := 0; i < min(len(raw.Hourly.Time), len(raw.Hourly.Temperature2m), len(raw.Hourly.PrecipProb), 12); i++ {
 		timePart := raw.Hourly.Time[i]
 		if len(timePart) >= 16 {
 			timePart = timePart[11:16]
 		}
+		hourCondition := condition
+		if i < len(raw.Hourly.WeatherCode) {
+			hourCondition, _ = weatherCodeToString(raw.Hourly.WeatherCode[i])
+		}
 		hourly = append(hourly, model.HourlyForecast{
 			Hour:       timePart,
 			TempC:      raw.Hourly.Temperature2m[i],
-			Condition:  condition,
+			Condition:  hourCondition,
 			PrecipProb: raw.Hourly.PrecipProb[i],
 			Icon:       "partly_cloudy",
 		})
 	}
 
 	daily := make([]model.DailyForecast, 0)
-	for i := 0; i < len(raw.Daily.Time) && i < 5; i++ {
+	for i := 0; i < min(len(raw.Daily.Time), len(raw.Daily.WeatherCode), len(raw.Daily.Temperature2mMax), len(raw.Daily.Temperature2mMin), len(raw.Daily.PrecipProbMax), 5); i++ {
 		cName, _ := weatherCodeToString(raw.Daily.WeatherCode[i])
 		daily = append(daily, model.DailyForecast{
 			Date:       raw.Daily.Time[i],
@@ -304,8 +329,14 @@ func (s *ServiceContainer) ListTrips() []model.Trip {
 	defer s.mu.RUnlock()
 	res := make([]model.Trip, 0, len(s.Store.Trips))
 	for _, t := range s.Store.Trips {
-		res = append(res, t)
+		res = append(res, s.enrichTrip(t))
 	}
+	sort.Slice(res, func(i, j int) bool {
+		if res[i].CreatedAt.Equal(res[j].CreatedAt) {
+			return res[i].ID < res[j].ID
+		}
+		return res[i].CreatedAt.After(res[j].CreatedAt)
+	})
 	return res
 }
 
@@ -316,25 +347,45 @@ func (s *ServiceContainer) GetTrip(tripID string) (*model.Trip, error) {
 	if !ok {
 		return nil, fmt.Errorf("trip not found: %s", tripID)
 	}
+	t = s.enrichTrip(t)
 	return &t, nil
 }
 
 func (s *ServiceContainer) CreateTrip(trip model.Trip) (*model.Trip, error) {
+	start, err := time.Parse("2006-01-02", trip.StartDate)
+	if err != nil {
+		return nil, fmt.Errorf("%w: invalid start date", ErrInvalidInput)
+	}
+	end, err := time.Parse("2006-01-02", trip.EndDate)
+	if err != nil || end.Before(start) || end.Sub(start) > 365*24*time.Hour {
+		return nil, fmt.Errorf("%w: end date must be within 365 days of start date", ErrInvalidInput)
+	}
+	if strings.TrimSpace(trip.Title) == "" || len(trip.Title) > 200 {
+		return nil, fmt.Errorf("%w: trip title is required", ErrInvalidInput)
+	}
+	city, err := s.GetCity(trip.CityID)
+	if err != nil {
+		return nil, fmt.Errorf("%w: city not found", ErrInvalidInput)
+	}
+	trip.CityName, trip.CountryCode = city.Name, city.CountryCode
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	trip.ID = fmt.Sprintf("trip_%d", time.Now().Unix())
+	trip.ID = "trip_" + rand.Text()
 	trip.CreatedAt = time.Now()
 	trip.UpdatedAt = time.Now()
 
-	if len(trip.Days) == 0 {
-		trip.Days = []model.TripDay{
-			{DayNumber: 1, DateStr: trip.StartDate, CityID: trip.CityID, CityName: trip.CityName, Items: []model.ItineraryItem{}},
-		}
+	// Days are derived from the date range; clients add activities through the item endpoint.
+	trip.Days = make([]model.TripDay, 0)
+	for date := start; !date.After(end); date = date.AddDate(0, 0, 1) {
+		trip.Days = append(trip.Days, model.TripDay{DayNumber: len(trip.Days) + 1, DateStr: date.Format("2006-01-02"), CityID: trip.CityID, CityName: trip.CityName, Items: []model.ItineraryItem{}})
 	}
 
-	s.Store.Trips[trip.ID] = trip
-	return &trip, nil
+	if err := s.commitTrip(trip); err != nil {
+		return nil, err
+	}
+	result := s.enrichTrip(trip)
+	return &result, nil
 }
 
 func (s *ServiceContainer) AddItineraryItem(tripID string, dayNumber int, item model.ItineraryItem) (*model.Trip, error) {
@@ -343,10 +394,18 @@ func (s *ServiceContainer) AddItineraryItem(tripID string, dayNumber int, item m
 
 	trip, ok := s.Store.Trips[tripID]
 	if !ok {
-		return nil, fmt.Errorf("trip not found: %s", tripID)
+		return nil, fmt.Errorf("%w: trip %s", ErrNotFound, tripID)
 	}
+	if dayNumber < 1 || dayNumber > len(trip.Days) || strings.TrimSpace(item.Title) == "" {
+		return nil, fmt.Errorf("%w: valid day and item title are required", ErrInvalidInput)
+	}
+	if err := validateItem(item); err != nil {
+		return nil, err
+	}
+	item.RouteFromPrevious = nil
+	trip = cloneTrip(trip)
 
-	item.ID = fmt.Sprintf("item_%d", time.Now().UnixNano())
+	item.ID = "item_" + rand.Text()
 	dayFound := false
 	for i := range trip.Days {
 		if trip.Days[i].DayNumber == dayNumber {
@@ -358,22 +417,18 @@ func (s *ServiceContainer) AddItineraryItem(tripID string, dayNumber int, item m
 	}
 
 	if !dayFound {
-		trip.Days = append(trip.Days, model.TripDay{
-			DayNumber: dayNumber,
-			DateStr:   time.Now().Format("2006-01-02"),
-			CityID:    trip.CityID,
-			CityName:  trip.CityName,
-			Items:     []model.ItineraryItem{item},
-		})
+		return nil, fmt.Errorf("%w: day not found", ErrInvalidInput)
 	}
 
 	trip.UpdatedAt = time.Now()
-	s.Store.Trips[tripID] = trip
-	return &trip, nil
+	if err := s.commitTrip(trip); err != nil {
+		return nil, err
+	}
+	result := s.enrichTrip(trip)
+	return &result, nil
 }
 
 // Offline Packages
 func (s *ServiceContainer) GetOfflinePackages() []model.OfflinePackage {
 	return s.Store.OfflinePackages
 }
-

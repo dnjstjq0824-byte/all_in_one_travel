@@ -25,6 +25,7 @@ func main() {
 		}
 	}
 	port := flag.Int("port", defaultPort, "HTTP server port")
+	stateFile := flag.String("data-file", "var/travel-state.json", "Persistent state file (one server process per file)")
 	flag.Parse()
 
 	log.Println("==================================================================")
@@ -43,7 +44,10 @@ func main() {
 	}
 
 	// Initialize business services
-	services := service.NewServiceContainer(store)
+	services, err := service.NewPersistentServiceContainer(store, *stateFile)
+	if err != nil {
+		log.Fatalf("[DATA] Cannot open persistent storage: %v", err)
+	}
 
 	// Set up router and API handlers
 	mux := http.NewServeMux()
@@ -85,4 +89,3 @@ func main() {
 
 	log.Println("[SHUTDOWN] Server exiting cleanly.")
 }
-

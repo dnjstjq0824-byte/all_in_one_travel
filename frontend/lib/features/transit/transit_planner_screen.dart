@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/models/travel_models.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/l10n/app_localizations.dart';
@@ -19,7 +20,9 @@ class TransitPlannerScreen extends StatefulWidget {
 }
 
 class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
-  final TextEditingController _originCtrl = TextEditingController(text: 'Current Location (City Hall)');
+  final TextEditingController _originCtrl = TextEditingController(
+    text: 'Current Location (City Hall)',
+  );
   final TextEditingController _destCtrl = TextEditingController();
 
   double _originLat = 37.5657;
@@ -57,7 +60,8 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
       _applyCityDefaults();
       _searchRoutes();
       _loadBusStops();
-    } else if (widget.targetPlace != null && widget.targetPlace != oldWidget.targetPlace) {
+    } else if (widget.targetPlace != null &&
+        widget.targetPlace != oldWidget.targetPlace) {
       _destCtrl.text = widget.targetPlace!.name;
       _destLat = widget.targetPlace!.latitude;
       _destLng = widget.targetPlace!.longitude;
@@ -157,7 +161,9 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.currentCity.name} ${AppLocale.tr('tab_transit')}'),
+        title: Text(
+          '${widget.currentCity.name} ${AppLocale.tr('tab_transit')}',
+        ),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -165,170 +171,252 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-            // Search Input Box
-            Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Row(
+                // Search Input Box
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  color: Colors.white,
+                  child: Column(
                     children: [
-                      // Origin & Dest Indicators
-                      const Column(
+                      Row(
                         children: [
-                          Icon(Icons.radio_button_checked, size: 18, color: AppTheme.accent),
-                          SizedBox(height: 24, child: VerticalDivider(color: Colors.grey)),
-                          Icon(Icons.location_on, size: 20, color: Colors.red),
+                          // Origin & Dest Indicators
+                          const Column(
+                            children: [
+                              Icon(
+                                Icons.radio_button_checked,
+                                size: 18,
+                                color: AppTheme.accent,
+                              ),
+                              SizedBox(
+                                height: 24,
+                                child: VerticalDivider(color: Colors.grey),
+                              ),
+                              Icon(
+                                Icons.location_on,
+                                size: 20,
+                                color: Colors.red,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 12),
+                          // Text Fields
+                          Expanded(
+                            child: Column(
+                              children: [
+                                TextField(
+                                  controller: _originCtrl,
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 8,
+                                    ),
+                                    hintText: 'Starting location...',
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                                const Divider(height: 12),
+                                TextField(
+                                  controller: _destCtrl,
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 8,
+                                    ),
+                                    hintText: 'Destination or landmark...',
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Swap button
+                          IconButton(
+                            icon: const Icon(
+                              Icons.swap_vert,
+                              color: AppTheme.accent,
+                            ),
+                            onPressed: _swapOriginDest,
+                          ),
                         ],
                       ),
-                      const SizedBox(width: 12),
-                      // Text Fields
-                      Expanded(
-                        child: Column(
+                      const SizedBox(height: 12),
+
+                      // Preference Filter Chips
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children: [
-                            TextField(
-                              controller: _originCtrl,
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                contentPadding: EdgeInsets.symmetric(vertical: 8),
-                                hintText: 'Starting location...',
-                                border: InputBorder.none,
-                              ),
+                            _buildPrefChip('fastest', AppLocale.tr('fastest')),
+                            const SizedBox(width: 6),
+                            _buildPrefChip(
+                              'min_transfers',
+                              AppLocale.tr('min_transfers'),
                             ),
-                            const Divider(height: 12),
-                            TextField(
-                              controller: _destCtrl,
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                contentPadding: EdgeInsets.symmetric(vertical: 8),
-                                hintText: 'Destination or landmark...',
-                                border: InputBorder.none,
-                              ),
+                            const SizedBox(width: 6),
+                            _buildPrefChip(
+                              'least_walking',
+                              AppLocale.tr('least_walking'),
+                            ),
+                            const SizedBox(width: 6),
+                            _buildPrefChip(
+                              'accessible',
+                              AppLocale.tr('accessible'),
                             ),
                           ],
                         ),
                       ),
-                      // Swap button
-                      IconButton(
-                        icon: const Icon(Icons.swap_vert, color: AppTheme.accent),
-                        onPressed: _swapOriginDest,
-                      ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                ),
+                const SizedBox(height: 8),
 
-                  // Preference Filter Chips
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                // Route Options Results
+                if (_calculating)
+                  const Padding(
+                    padding: EdgeInsets.all(32.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else if (_options.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Center(
+                      child: Text(
+                        'No transit paths available between these locations in ${widget.currentCity.name}.',
+                        style: const TextStyle(color: AppTheme.textMuted),
+                      ),
+                    ),
+                  )
+                else ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildPrefChip('fastest', AppLocale.tr('fastest')),
-                        const SizedBox(width: 6),
-                        _buildPrefChip('min_transfers', AppLocale.tr('min_transfers')),
-                        const SizedBox(width: 6),
-                        _buildPrefChip('least_walking', AppLocale.tr('least_walking')),
-                        const SizedBox(width: 6),
-                        _buildPrefChip('accessible', AppLocale.tr('accessible')),
+                        Text(
+                          'Recommended Routes (${_options.length})',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          widget.currentCity.coverageLevel,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.accent,
+                          ),
+                        ),
                       ],
                     ),
                   ),
+                  ..._options.map((opt) => _buildRouteCard(opt)),
                 ],
-              ),
-            ),
-            const SizedBox(height: 8),
 
-            // Route Options Results
-            if (_calculating)
-              const Padding(
-                padding: EdgeInsets.all(32.0),
-                child: Center(child: CircularProgressIndicator()),
-              )
-            else if (_options.isEmpty)
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Center(
-                  child: Text(
-                    'No transit paths available between these locations in ${widget.currentCity.name}.',
-                    style: const TextStyle(color: AppTheme.textMuted),
+                const SizedBox(height: 16),
+
+                // ARTICLE 6: Live Bus Arrivals Section
+                if (_busStops.isNotEmpty) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocale.tr('bus_arrivals'),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Text(
+                          'GTFS Realtime',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.textMuted,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            else ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Recommended Routes (${_options.length})', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                    Text(widget.currentCity.coverageLevel, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppTheme.accent)),
-                  ],
-                ),
-              ),
-              ..._options.map((opt) => _buildRouteCard(opt)),
-            ],
-
-            const SizedBox(height: 16),
-
-            // ARTICLE 6: Live Bus Arrivals Section
-            if (_busStops.isNotEmpty) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(AppLocale.tr('bus_arrivals'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                    const Text('GTFS Realtime', style: TextStyle(fontSize: 11, color: AppTheme.textMuted)),
-                  ],
-                ),
-              ),
-              // Stop Selector
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<BusStop>(
-                        isExpanded: true,
-                        value: _selectedBusStop,
-                        items: _busStops.map((s) => DropdownMenuItem(value: s, child: Text('${s.name} (${s.code})'))).toList(),
-                        onChanged: (s) {
-                          if (s != null) {
-                            setState(() => _selectedBusStop = s);
-                            _loadArrivals(s.id);
-                          }
-                        },
+                  // Stop Selector
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<BusStop>(
+                            isExpanded: true,
+                            value: _selectedBusStop,
+                            items: _busStops
+                                .map(
+                                  (s) => DropdownMenuItem(
+                                    value: s,
+                                    child: Text('${s.name} (${s.code})'),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (s) {
+                              if (s != null) {
+                                setState(() => _selectedBusStop = s);
+                                _loadArrivals(s.id);
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
-              // Arrivals Cards
-              if (_loadingBus)
-                const Center(child: Padding(padding: EdgeInsets.all(16), child: CircularProgressIndicator()))
-              else if (_liveArrivals.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text('No real-time buses currently en-route for this stop.', style: TextStyle(color: AppTheme.textMuted)),
-                )
-              else
-                ..._liveArrivals.map((arr) => _buildArrivalCard(arr)),
-            ],
-            const SizedBox(height: 32),
-          ],
+                  // Arrivals Cards
+                  if (_loadingBus)
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  else if (_liveArrivals.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        'No real-time buses currently en-route for this stop.',
+                        style: TextStyle(color: AppTheme.textMuted),
+                      ),
+                    )
+                  else
+                    ..._liveArrivals.map((arr) => _buildArrivalCard(arr)),
+                ],
+                const SizedBox(height: 32),
+              ],
+            ),
+          ),
         ),
       ),
-    ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildPrefChip(String key, String label) {
     final isSel = _preference == key;
     return FilterChip(
-      label: Text(label, style: TextStyle(fontSize: 11, fontWeight: isSel ? FontWeight.bold : FontWeight.normal)),
+      label: Text(
+        label,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
       selected: isSel,
       selectedColor: AppTheme.accent,
       labelStyle: TextStyle(color: isSel ? Colors.white : AppTheme.textMain),
@@ -345,28 +433,60 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: ExpansionTile(
         initiallyExpanded: opt == _options.first,
-        title: Row(
+        title: Wrap(
+          spacing: 8,
+          runSpacing: 6,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Text('${opt.totalMinutes} min', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.accent)),
-            const SizedBox(width: 12),
+            Text(
+              '${opt.totalMinutes} min',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppTheme.accent,
+              ),
+            ),
+
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(6)),
-              child: Text('${opt.walkMinutes} min walk', style: const TextStyle(fontSize: 11, color: AppTheme.textMuted)),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                '${opt.walkMinutes} min walk',
+                style: const TextStyle(fontSize: 11, color: AppTheme.textMuted),
+              ),
             ),
-            const SizedBox(width: 6),
+
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(6)),
-              child: Text('${opt.transfers} transfers', style: const TextStyle(fontSize: 11, color: AppTheme.textMuted)),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                '${opt.transfers} transfers',
+                style: const TextStyle(fontSize: 11, color: AppTheme.textMuted),
+              ),
             ),
-            const Spacer(),
-            Text(opt.estimatedFare, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppTheme.textMain)),
+
+            Text(
+              opt.estimatedFare,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                color: AppTheme.textMain,
+              ),
+            ),
           ],
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
-          child: Text(opt.summary, style: const TextStyle(fontSize: 13, color: AppTheme.textMuted)),
+          child: Text(
+            opt.summary,
+            style: const TextStyle(fontSize: 13, color: AppTheme.textMuted),
+          ),
         ),
         children: [
           Padding(
@@ -375,6 +495,17 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Divider(),
+                if (opt.accessibilityNote != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      opt.accessibilityNote!,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppTheme.textMuted,
+                      ),
+                    ),
+                  ),
                 ...opt.legs.map((leg) => _buildLegRow(leg)),
               ],
             ),
@@ -389,7 +520,9 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
     Color color;
     if (leg.type == 'METRO') {
       icon = Icons.subway;
-      color = leg.lineColorHex != null ? _parseColor(leg.lineColorHex!) : AppTheme.accent;
+      color = leg.lineColorHex != null
+          ? _parseColor(leg.lineColorHex!)
+          : AppTheme.accent;
     } else if (leg.type == 'BUS') {
       icon = Icons.directions_bus;
       color = Colors.indigo;
@@ -413,8 +546,54 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(leg.instruction, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                Text('${leg.fromStationName} ➔ ${leg.toStationName} (${leg.durationMinutes} min)', style: const TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+                Text(
+                  leg.instruction,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${leg.fromStationName} ➔ ${leg.toStationName} (${leg.durationMinutes} min)',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppTheme.textMuted,
+                  ),
+                ),
+                if (leg.fastTransferDoor != null &&
+                    leg.fastTransferDoor!.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.green.shade300),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.transfer_within_a_station,
+                          size: 13,
+                          color: Colors.green,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          leg.fastTransferDoor!,
+                          style: TextStyle(
+                            color: Colors.green.shade800,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -438,19 +617,49 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: AppTheme.accent.withValues(alpha: 0.12),
-          child: Text(arr.routeNumber, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.accent, fontSize: 13)),
+          child: Text(
+            arr.routeNumber,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppTheme.accent,
+              fontSize: 13,
+            ),
+          ),
         ),
-        title: Text('Towards ${arr.destination}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-        subtitle: Text('Crowding: ${arr.crowdingLevel} • ${arr.stopsRemaining} stops away', style: const TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+        title: Text(
+          'Towards ${arr.destination}',
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        subtitle: Text(
+          'Crowding: ${arr.crowdingLevel} • ${arr.stopsRemaining} stops away',
+          style: const TextStyle(fontSize: 12, color: AppTheme.textMuted),
+        ),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('${arr.minutesAway} min', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: statusColor)),
+            Text(
+              '${arr.minutesAway} min',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: statusColor,
+              ),
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(color: statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(4)),
-              child: Text(arr.status, style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: statusColor)),
+              decoration: BoxDecoration(
+                color: statusColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                arr.status,
+                style: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                  color: statusColor,
+                ),
+              ),
             ),
           ],
         ),
@@ -466,4 +675,3 @@ class _TransitPlannerScreenState extends State<TransitPlannerScreen> {
     return AppTheme.accent;
   }
 }
-

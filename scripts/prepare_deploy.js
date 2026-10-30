@@ -74,3 +74,4 @@ if (!fs.existsSync(headersPath)) {
 }
 
 console.log('✅ [Cloudflare Build] Assets preparation completed successfully!');
+

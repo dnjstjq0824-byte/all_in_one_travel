@@ -833,6 +833,24 @@ func (s *SeedStore) initOtherCitiesTransit() {
 	}
 }
 
+func getSamplePopularTimes() []model.HourlyPopularity {
+	return []model.HourlyPopularity{
+		{Hour: 9, Popularity: 20},
+		{Hour: 10, Popularity: 45},
+		{Hour: 11, Popularity: 70},
+		{Hour: 12, Popularity: 85},
+		{Hour: 13, Popularity: 90},
+		{Hour: 14, Popularity: 95}, // Peak Hour
+		{Hour: 15, Popularity: 85},
+		{Hour: 16, Popularity: 75},
+		{Hour: 17, Popularity: 55},
+		{Hour: 18, Popularity: 40},
+		{Hour: 19, Popularity: 30},
+		{Hour: 20, Popularity: 20},
+		{Hour: 21, Popularity: 10},
+	}
+}
+
 func (s *SeedStore) initPlacesAndReviews() {
 	now := time.Now()
 
@@ -854,6 +872,7 @@ func (s *SeedStore) initPlacesAndReviews() {
 				"https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=800&q=80",
 			},
 			Tags: []string{"Palace", "History", "Hanbok", "Architecture"},
+			PopularTimes: getSamplePopularTimes(),
 		},
 		{
 			ID: "sel_n_seoul_tower", CityID: "seoul", Category: model.CategoryNightView,
@@ -870,6 +889,7 @@ func (s *SeedStore) initPlacesAndReviews() {
 				"https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=800&q=80",
 			},
 			Tags: []string{"Landmark", "Observatory", "Sunset", "Romantic"},
+			PopularTimes: getSamplePopularTimes(),
 		},
 		{
 			ID: "sel_bukchon", CityID: "seoul", Category: model.CategoryHistoric,
@@ -886,6 +906,7 @@ func (s *SeedStore) initPlacesAndReviews() {
 				"https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80",
 			},
 			Tags: []string{"Hanok", "Culture", "Photography", "Tradition"},
+			PopularTimes: getSamplePopularTimes(),
 		},
 		{
 			ID: "sel_ddp", CityID: "seoul", Category: model.CategoryLandmark,
@@ -902,6 +923,7 @@ func (s *SeedStore) initPlacesAndReviews() {
 				"https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format&fit=crop&w=800&q=80",
 			},
 			Tags: []string{"Architecture", "Design", "NightView", "Exhibition"},
+			PopularTimes: getSamplePopularTimes(),
 		},
 	}
 
@@ -922,6 +944,7 @@ func (s *SeedStore) initPlacesAndReviews() {
 				"https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
 			},
 			Tags: []string{"Temple", "Culture", "Historic", "Lantern"},
+			PopularTimes: getSamplePopularTimes(),
 		},
 		{
 			ID: "tky_shibuya_scramble", CityID: "tokyo", Category: model.CategoryLandmark,
@@ -1101,6 +1124,14 @@ func (s *SeedStore) initInitialTrips() {
 			{
 				DayNumber: 1, DateStr: "2026-10-26", CityID: "seoul", CityName: "Seoul",
 				WeatherNote: "Clear & Crisp (10°C - 20°C)",
+				DayWeather: &model.DayWeatherInfo{
+					Condition:  "Sunny",
+					TempMaxC:   20.0,
+					TempMinC:   10.0,
+					PrecipProb: 10,
+					RainAlert:  false,
+					IndoorTip:  "Perfect autumn sunshine! Ideal for outdoor walking and palace exploration.",
+				},
 				Items: []model.ItineraryItem{
 					{
 						ID: "item_01", PlaceID: "sel_gyeongbokgung", Title: "Gyeongbokgung Palace", Subtitle: "Royal Changing of Guard",
@@ -1122,6 +1153,14 @@ func (s *SeedStore) initInitialTrips() {
 			{
 				DayNumber: 2, DateStr: "2026-10-27", CityID: "seoul", CityName: "Seoul",
 				WeatherNote: "Rain expected afternoon (11°C - 18°C)",
+				DayWeather: &model.DayWeatherInfo{
+					Condition:  "Rainy",
+					TempMaxC:   18.0,
+					TempMinC:   11.0,
+					PrecipProb: 80,
+					RainAlert:  true,
+					IndoorTip:  "Rain forecasted this afternoon! Recommended indoor visits: DDP, COEX Mall, or National Museum of Korea.",
+				},
 				Items: []model.ItineraryItem{
 					{
 						ID: "item_04", PlaceID: "sel_ddp", Title: "Dongdaemun Design Plaza", Subtitle: "Exhibitions & Zaha Hadid Architecture",

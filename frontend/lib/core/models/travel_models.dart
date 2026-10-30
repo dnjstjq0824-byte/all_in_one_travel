@@ -56,7 +56,11 @@ class City {
       longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
       timezone: json['timezone'] ?? '',
       coverageLevel: json['coverage_level'] ?? 'LEVEL_E',
-      transportModes: (json['transport_modes'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      transportModes:
+          (json['transport_modes'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
       description: json['description'] ?? '',
       heroImageUrl: json['hero_image_url'] ?? '',
     );
@@ -141,7 +145,9 @@ class StationExit {
   factory StationExit.fromJson(Map<String, dynamic> json) {
     return StationExit(
       exitNumber: json['exit_number'] ?? '',
-      destinations: (json['destinations'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      destinations:
+          (json['destinations'] as List?)?.map((e) => e.toString()).toList() ??
+          [],
       hasElevator: json['has_elevator'] ?? false,
       hasEscalator: json['has_escalator'] ?? false,
     );
@@ -202,13 +208,25 @@ class MetroStation {
       schematicX: (json['schematic_x'] as num?)?.toDouble() ?? 0.0,
       schematicY: (json['schematic_y'] as num?)?.toDouble() ?? 0.0,
       lines: (json['lines'] as List?)?.map((e) => e.toString()).toList() ?? [],
-      exits: (json['exits'] as List?)?.map((e) => StationExit.fromJson(e)).toList() ?? [],
+      exits:
+          (json['exits'] as List?)
+              ?.map((e) => StationExit.fromJson(e))
+              .toList() ??
+          [],
       elevatorAccessible: json['elevator_accessible'] ?? false,
       wheelchairBoarding: json['wheelchair_boarding'] ?? false,
       firstTrain: json['first_train'] ?? '',
       lastTrain: json['last_train'] ?? '',
-      nearbyBusStopIds: (json['nearby_bus_stop_ids'] as List?)?.map((e) => e.toString()).toList() ?? [],
-      nearbyPlaceIds: (json['nearby_place_ids'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      nearbyBusStopIds:
+          (json['nearby_bus_stop_ids'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      nearbyPlaceIds:
+          (json['nearby_place_ids'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
     );
   }
 }
@@ -247,7 +265,9 @@ class MetroLine {
       englishName: json['english_name'] ?? '',
       colorHex: json['color_hex'] ?? '#0052A4',
       textColorHex: json['text_color_hex'] ?? '#FFFFFF',
-      stationIds: (json['station_ids'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      stationIds:
+          (json['station_ids'] as List?)?.map((e) => e.toString()).toList() ??
+          [],
       isCircular: json['is_circular'] ?? false,
       operatingHours: json['operating_hours'] ?? '',
     );
@@ -332,7 +352,8 @@ class BusRoute {
       origin: json['origin'] ?? '',
       destination: json['destination'] ?? '',
       colorHex: json['color_hex'] ?? '#0052A4',
-      stopIds: (json['stop_ids'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      stopIds:
+          (json['stop_ids'] as List?)?.map((e) => e.toString()).toList() ?? [],
       lowFloor: json['low_floor'] ?? false,
       intervalMin: json['interval_min'] ?? 10,
       firstBus: json['first_bus'] ?? '',
@@ -393,6 +414,7 @@ class TransitLeg {
   final int durationMinutes;
   final int distanceMeters;
   final String instruction;
+  final String? fastTransferDoor;
 
   TransitLeg({
     required this.type,
@@ -407,6 +429,7 @@ class TransitLeg {
     required this.durationMinutes,
     required this.distanceMeters,
     required this.instruction,
+    this.fastTransferDoor,
   });
 
   factory TransitLeg.fromJson(Map<String, dynamic> json) {
@@ -419,10 +442,15 @@ class TransitLeg {
       fromStationName: json['from_station_name'] ?? '',
       toStationId: json['to_station_id'],
       toStationName: json['to_station_name'] ?? '',
-      intermediateStops: (json['intermediate_stops'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      intermediateStops:
+          (json['intermediate_stops'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
       durationMinutes: json['duration_minutes'] ?? 0,
       distanceMeters: json['distance_meters'] ?? 0,
       instruction: json['instruction'] ?? '',
+      fastTransferDoor: json['fast_transfer_door'],
     );
   }
 }
@@ -435,6 +463,7 @@ class RouteOption {
   final int transfers;
   final String estimatedFare;
   final bool accessible;
+  final String? accessibilityNote;
   final List<TransitLeg> legs;
 
   RouteOption({
@@ -445,6 +474,7 @@ class RouteOption {
     required this.transfers,
     required this.estimatedFare,
     required this.accessible,
+    this.accessibilityNote,
     required this.legs,
   });
 
@@ -457,7 +487,26 @@ class RouteOption {
       transfers: json['transfers'] ?? 0,
       estimatedFare: json['estimated_fare'] ?? '',
       accessible: json['accessible'] ?? false,
-      legs: (json['legs'] as List?)?.map((e) => TransitLeg.fromJson(e)).toList() ?? [],
+      accessibilityNote: json['accessibility_note'],
+      legs:
+          (json['legs'] as List?)
+              ?.map((e) => TransitLeg.fromJson(e))
+              .toList() ??
+          [],
+    );
+  }
+}
+
+class HourlyPopularity {
+  final int hour;
+  final int popularity;
+
+  HourlyPopularity({required this.hour, required this.popularity});
+
+  factory HourlyPopularity.fromJson(Map<String, dynamic> json) {
+    return HourlyPopularity(
+      hour: json['hour'] ?? 0,
+      popularity: json['popularity'] ?? 0,
     );
   }
 }
@@ -487,6 +536,7 @@ class Place {
   final String nearestBusStopId;
   final List<String> photoUrls;
   final List<String> tags;
+  final List<HourlyPopularity> popularTimes;
 
   Place({
     required this.id,
@@ -513,6 +563,7 @@ class Place {
     required this.nearestBusStopId,
     required this.photoUrls,
     required this.tags,
+    this.popularTimes = const [],
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
@@ -539,8 +590,15 @@ class Place {
       nearestMetroStationId: json['nearest_metro_station_id'] ?? '',
       nearestMetroStationName: json['nearest_metro_station_name'] ?? '',
       nearestBusStopId: json['nearest_bus_stop_id'] ?? '',
-      photoUrls: (json['photo_urls'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      photoUrls:
+          (json['photo_urls'] as List?)?.map((e) => e.toString()).toList() ??
+          [],
       tags: (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      popularTimes:
+          (json['popular_times'] as List?)
+              ?.map((e) => HourlyPopularity.fromJson(e))
+              .toList() ??
+          [],
     );
   }
 }
@@ -708,8 +766,16 @@ class WeatherReport {
       airQualityIndex: json['air_quality_index'] ?? 'Good',
       sunrise: json['sunrise'] ?? '06:00',
       sunset: json['sunset'] ?? '18:00',
-      hourly: (json['hourly'] as List?)?.map((e) => HourlyForecast.fromJson(e)).toList() ?? [],
-      daily: (json['daily'] as List?)?.map((e) => DailyForecast.fromJson(e)).toList() ?? [],
+      hourly:
+          (json['hourly'] as List?)
+              ?.map((e) => HourlyForecast.fromJson(e))
+              .toList() ??
+          [],
+      daily:
+          (json['daily'] as List?)
+              ?.map((e) => DailyForecast.fromJson(e))
+              .toList() ??
+          [],
       attribution: json['attribution'] ?? '',
     );
   }
@@ -728,6 +794,7 @@ class ItineraryItem {
   final int durationMin;
   final String? notes;
   final bool isCompleted;
+  final RouteOption? routeFromPrevious;
 
   ItineraryItem({
     required this.id,
@@ -742,6 +809,7 @@ class ItineraryItem {
     required this.durationMin,
     this.notes,
     required this.isCompleted,
+    this.routeFromPrevious,
   });
 
   factory ItineraryItem.fromJson(Map<String, dynamic> json) {
@@ -758,6 +826,9 @@ class ItineraryItem {
       durationMin: json['duration_min'] ?? 60,
       notes: json['notes'],
       isCompleted: json['is_completed'] ?? false,
+      routeFromPrevious: json['route_from_previous'] == null
+          ? null
+          : RouteOption.fromJson(json['route_from_previous']),
     );
   }
 
@@ -777,12 +848,42 @@ class ItineraryItem {
   };
 }
 
+class DayWeatherInfo {
+  final String condition;
+  final double tempMaxC;
+  final double tempMinC;
+  final int precipProb;
+  final bool rainAlert;
+  final String? indoorTip;
+
+  DayWeatherInfo({
+    required this.condition,
+    required this.tempMaxC,
+    required this.tempMinC,
+    required this.precipProb,
+    required this.rainAlert,
+    this.indoorTip,
+  });
+
+  factory DayWeatherInfo.fromJson(Map<String, dynamic> json) {
+    return DayWeatherInfo(
+      condition: json['condition'] ?? 'Sunny',
+      tempMaxC: (json['temp_max_c'] as num?)?.toDouble() ?? 20.0,
+      tempMinC: (json['temp_min_c'] as num?)?.toDouble() ?? 10.0,
+      precipProb: json['precip_prob'] ?? 0,
+      rainAlert: json['rain_alert'] ?? false,
+      indoorTip: json['indoor_tip'],
+    );
+  }
+}
+
 class TripDay {
   final int dayNumber;
   final String dateStr;
   final String cityId;
   final String cityName;
   final String? weatherNote;
+  final DayWeatherInfo? dayWeather;
   final List<ItineraryItem> items;
 
   TripDay({
@@ -791,6 +892,7 @@ class TripDay {
     required this.cityId,
     required this.cityName,
     this.weatherNote,
+    this.dayWeather,
     required this.items,
   });
 
@@ -801,7 +903,14 @@ class TripDay {
       cityId: json['city_id'] ?? '',
       cityName: json['city_name'] ?? '',
       weatherNote: json['weather_note'],
-      items: (json['items'] as List?)?.map((e) => ItineraryItem.fromJson(e)).toList() ?? [],
+      dayWeather: json['day_weather'] != null
+          ? DayWeatherInfo.fromJson(json['day_weather'])
+          : null,
+      items:
+          (json['items'] as List?)
+              ?.map((e) => ItineraryItem.fromJson(e))
+              .toList() ??
+          [],
     );
   }
 }
@@ -838,8 +947,12 @@ class Trip {
       cityName: json['city_name'] ?? '',
       startDate: json['start_date'] ?? '',
       endDate: json['end_date'] ?? '',
-      days: (json['days'] as List?)?.map((e) => TripDay.fromJson(e)).toList() ?? [],
-      collaborators: (json['collaborators'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      days:
+          (json['days'] as List?)?.map((e) => TripDay.fromJson(e)).toList() ??
+          [],
+      collaborators:
+          (json['collaborators'] as List?)?.map((e) => e.toString()).toList() ??
+          [],
     );
   }
 }
@@ -867,9 +980,9 @@ class OfflinePackage {
       cityName: json['city_name'] ?? '',
       version: json['version'] ?? '',
       sizeMb: (json['size_mb'] as num?)?.toDouble() ?? 0.0,
-      contents: (json['contents'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      contents:
+          (json['contents'] as List?)?.map((e) => e.toString()).toList() ?? [],
       attribution: json['attribution'] ?? '',
     );
   }
 }
-
