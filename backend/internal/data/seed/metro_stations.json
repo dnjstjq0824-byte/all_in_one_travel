@@ -1,0 +1,835 @@
+{
+  "berlin": [
+    {
+      "id": "de_ber_potsdamer",
+      "city_id": "berlin",
+      "code": "POT",
+      "name": "Potsdamer Platz",
+      "english_name": "Potsdamer Platz",
+      "local_name": "Potsdamer Platz",
+      "latitude": 52.5096,
+      "longitude": 13.3759,
+      "schematic_x": 200,
+      "schematic_y": 200,
+      "lines": [
+        "de_ber_u2"
+      ],
+      "exits": null,
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "04:45",
+      "last_train": "00:40",
+      "nearby_bus_stop_ids": null,
+      "nearby_place_ids": null
+    }
+  ],
+  "hongkong": [
+    {
+      "id": "hk_mtr_central",
+      "city_id": "hongkong",
+      "code": "CEN",
+      "name": "中環",
+      "english_name": "Central",
+      "local_name": "中環",
+      "latitude": 22.2819,
+      "longitude": 114.1582,
+      "schematic_x": 200,
+      "schematic_y": 200,
+      "lines": [
+        "hk_mtr_island"
+      ],
+      "exits": null,
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "06:00",
+      "last_train": "00:45",
+      "nearby_bus_stop_ids": null,
+      "nearby_place_ids": null
+    }
+  ],
+  "london": [
+    {
+      "id": "gb_lon_westminster",
+      "city_id": "london",
+      "code": "WMS",
+      "name": "Westminster",
+      "english_name": "Westminster",
+      "local_name": "Westminster",
+      "latitude": 51.5014,
+      "longitude": -0.125,
+      "schematic_x": 250,
+      "schematic_y": 300,
+      "lines": [
+        "gb_lon_jubilee"
+      ],
+      "exits": [
+        {
+          "exit_number": "Bridge Street",
+          "destinations": [
+            "Big Ben",
+            "Houses of Parliament",
+            "Westminster Abbey"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:35",
+      "last_train": "00:20",
+      "nearby_bus_stop_ids": [
+        "gb_lon_bus_westminster"
+      ],
+      "nearby_place_ids": [
+        "lon_big_ben",
+        "lon_london_eye"
+      ]
+    },
+    {
+      "id": "gb_lon_kingscross",
+      "city_id": "london",
+      "code": "KGX",
+      "name": "King's Cross St. Pancras",
+      "english_name": "King's Cross St. Pancras",
+      "local_name": "King's Cross",
+      "latitude": 51.5308,
+      "longitude": -0.1238,
+      "schematic_x": 280,
+      "schematic_y": 150,
+      "lines": [
+        "gb_lon_piccadilly"
+      ],
+      "exits": [
+        {
+          "exit_number": "Eurostar / St Pancras",
+          "destinations": [
+            "Platform 9 3/4",
+            "British Library"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:25",
+      "last_train": "00:35",
+      "nearby_bus_stop_ids": [
+        "gb_lon_bus_kingscross"
+      ],
+      "nearby_place_ids": [
+        "lon_british_museum"
+      ]
+    },
+    {
+      "id": "gb_lon_piccadillycircus",
+      "city_id": "london",
+      "code": "PIC",
+      "name": "Piccadilly Circus",
+      "english_name": "Piccadilly Circus",
+      "local_name": "Piccadilly Circus",
+      "latitude": 51.51,
+      "longitude": -0.1347,
+      "schematic_x": 220,
+      "schematic_y": 230,
+      "lines": [
+        "gb_lon_piccadilly"
+      ],
+      "exits": [
+        {
+          "exit_number": "Shaftesbury Ave",
+          "destinations": [
+            "West End Theatres",
+            "Chinatown",
+            "Soho"
+          ],
+          "has_elevator": false,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": false,
+      "wheelchair_boarding": false,
+      "first_train": "05:40",
+      "last_train": "00:25",
+      "nearby_bus_stop_ids": [
+        "gb_lon_bus_piccadilly"
+      ],
+      "nearby_place_ids": [
+        "lon_tower_bridge"
+      ]
+    }
+  ],
+  "newyork": [
+    {
+      "id": "us_nyc_times_sq",
+      "city_id": "newyork",
+      "code": "127",
+      "name": "Times Sq - 42 St",
+      "english_name": "Times Square - 42nd St",
+      "local_name": "Times Square",
+      "latitude": 40.7553,
+      "longitude": -73.987,
+      "schematic_x": 250,
+      "schematic_y": 200,
+      "lines": [
+        "us_nyc_subway_1",
+        "us_nyc_subway_nqrw"
+      ],
+      "exits": [
+        {
+          "exit_number": "Broadway \u0026 42nd",
+          "destinations": [
+            "Times Square",
+            "Broadway Theatres"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "00:00",
+      "last_train": "23:59",
+      "nearby_bus_stop_ids": [
+        "us_nyc_bus_times_sq"
+      ],
+      "nearby_place_ids": [
+        "nyc_times_square",
+        "nyc_empire_state"
+      ]
+    },
+    {
+      "id": "us_nyc_south_ferry",
+      "city_id": "newyork",
+      "code": "142",
+      "name": "South Ferry",
+      "english_name": "South Ferry",
+      "local_name": "South Ferry",
+      "latitude": 40.7021,
+      "longitude": -74.0135,
+      "schematic_x": 250,
+      "schematic_y": 420,
+      "lines": [
+        "us_nyc_subway_1"
+      ],
+      "exits": [
+        {
+          "exit_number": "Battery Park",
+          "destinations": [
+            "Statue of Liberty Ferry",
+            "Staten Island Ferry"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "00:00",
+      "last_train": "23:59",
+      "nearby_bus_stop_ids": [
+        "us_nyc_bus_battery"
+      ],
+      "nearby_place_ids": [
+        "nyc_statue_liberty"
+      ]
+    }
+  ],
+  "osaka": [
+    {
+      "id": "jp_osa_namba",
+      "city_id": "osaka",
+      "code": "M20",
+      "name": "難波 (なんば)",
+      "english_name": "Namba",
+      "local_name": "なんば",
+      "latitude": 34.6669,
+      "longitude": 135.5015,
+      "schematic_x": 200,
+      "schematic_y": 300,
+      "lines": [
+        "jp_osa_midosuji"
+      ],
+      "exits": null,
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:15",
+      "last_train": "23:55",
+      "nearby_bus_stop_ids": null,
+      "nearby_place_ids": null
+    }
+  ],
+  "paris": [
+    {
+      "id": "fr_par_bir_hakeim",
+      "city_id": "paris",
+      "code": "BIH",
+      "name": "Bir-Hakeim (Tour Eiffel)",
+      "english_name": "Bir-Hakeim",
+      "local_name": "Bir-Hakeim",
+      "latitude": 48.8539,
+      "longitude": 2.2893,
+      "schematic_x": 150,
+      "schematic_y": 300,
+      "lines": [
+        "fr_par_m6"
+      ],
+      "exits": [
+        {
+          "exit_number": "Sortie 1",
+          "destinations": [
+            "Tour Eiffel (Eiffel Tower)",
+            "Pont de Bir-Hakeim"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:35",
+      "last_train": "01:05",
+      "nearby_bus_stop_ids": [
+        "fr_par_bus_eiffel"
+      ],
+      "nearby_place_ids": [
+        "par_eiffel_tower"
+      ]
+    },
+    {
+      "id": "fr_par_louvre_rivoli",
+      "city_id": "paris",
+      "code": "LOU",
+      "name": "Louvre - Rivoli",
+      "english_name": "Louvre - Rivoli",
+      "local_name": "Louvre - Rivoli",
+      "latitude": 48.8607,
+      "longitude": 2.3406,
+      "schematic_x": 280,
+      "schematic_y": 220,
+      "lines": [
+        "fr_par_m1"
+      ],
+      "exits": [
+        {
+          "exit_number": "Sortie 1",
+          "destinations": [
+            "Musée du Louvre",
+            "Rue de Rivoli"
+          ],
+          "has_elevator": false,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": false,
+      "wheelchair_boarding": false,
+      "first_train": "05:32",
+      "last_train": "01:18",
+      "nearby_bus_stop_ids": [
+        "fr_par_bus_louvre"
+      ],
+      "nearby_place_ids": [
+        "par_louvre_museum"
+      ]
+    }
+  ],
+  "seoul": [
+    {
+      "id": "kr_sel_seoul_stn",
+      "city_id": "seoul",
+      "code": "133",
+      "name": "서울역",
+      "english_name": "Seoul Station",
+      "local_name": "서울역",
+      "latitude": 37.5559,
+      "longitude": 126.9723,
+      "schematic_x": 200,
+      "schematic_y": 300,
+      "lines": [
+        "kr_seoul_l1",
+        "kr_seoul_l4"
+      ],
+      "exits": [
+        {
+          "exit_number": "1",
+          "destinations": [
+            "Seoul Station Square",
+            "Lotte Mart"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        },
+        {
+          "exit_number": "9",
+          "destinations": [
+            "Seoullo 7017",
+            "Namdaemun Police Station"
+          ],
+          "has_elevator": true,
+          "has_escalator": false
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:12",
+      "last_train": "23:58",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_seoul_stn"
+      ],
+      "nearby_place_ids": [
+        "sel_n_seoul_tower"
+      ]
+    },
+    {
+      "id": "kr_sel_cityhall",
+      "city_id": "seoul",
+      "code": "132",
+      "name": "시청",
+      "english_name": "City Hall",
+      "local_name": "시청",
+      "latitude": 37.5657,
+      "longitude": 126.9769,
+      "schematic_x": 250,
+      "schematic_y": 250,
+      "lines": [
+        "kr_seoul_l1",
+        "kr_seoul_l2"
+      ],
+      "exits": [
+        {
+          "exit_number": "1",
+          "destinations": [
+            "Deoksugung Palace",
+            "Seoul Plaza"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:32",
+      "last_train": "00:15",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_cityhall"
+      ],
+      "nearby_place_ids": [
+        "sel_gyeongbokgung"
+      ]
+    },
+    {
+      "id": "kr_sel_jonggak",
+      "city_id": "seoul",
+      "code": "131",
+      "name": "종각",
+      "english_name": "Jonggak",
+      "local_name": "종각",
+      "latitude": 37.5702,
+      "longitude": 126.983,
+      "schematic_x": 300,
+      "schematic_y": 220,
+      "lines": [
+        "kr_seoul_l1"
+      ],
+      "exits": [
+        {
+          "exit_number": "3",
+          "destinations": [
+            "Insadong Street",
+            "Bosingak Bell"
+          ],
+          "has_elevator": false,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:35",
+      "last_train": "23:55",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_jonggak"
+      ],
+      "nearby_place_ids": [
+        "sel_insadong"
+      ]
+    },
+    {
+      "id": "kr_sel_gyeongbokgung",
+      "city_id": "seoul",
+      "code": "327",
+      "name": "경복궁",
+      "english_name": "Gyeongbokgung",
+      "local_name": "경복궁 (정부서울청사)",
+      "latitude": 37.5759,
+      "longitude": 126.9735,
+      "schematic_x": 250,
+      "schematic_y": 150,
+      "lines": [
+        "kr_seoul_l3"
+      ],
+      "exits": [
+        {
+          "exit_number": "5",
+          "destinations": [
+            "Gyeongbokgung Palace Entrance",
+            "National Palace Museum"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:30",
+      "last_train": "23:45",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_gyeongbokgung"
+      ],
+      "nearby_place_ids": [
+        "sel_gyeongbokgung",
+        "sel_bukchon"
+      ]
+    },
+    {
+      "id": "kr_sel_myeongdong",
+      "city_id": "seoul",
+      "code": "424",
+      "name": "명동",
+      "english_name": "Myeong-dong",
+      "local_name": "명동",
+      "latitude": 37.5609,
+      "longitude": 126.9863,
+      "schematic_x": 320,
+      "schematic_y": 280,
+      "lines": [
+        "kr_seoul_l4"
+      ],
+      "exits": [
+        {
+          "exit_number": "6",
+          "destinations": [
+            "Myeongdong Shopping Street",
+            "Myeongdong Cathedral"
+          ],
+          "has_elevator": false,
+          "has_escalator": true
+        },
+        {
+          "exit_number": "3",
+          "destinations": [
+            "Namsan Cable Car / N Seoul Tower"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:38",
+      "last_train": "23:52",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_myeongdong"
+      ],
+      "nearby_place_ids": [
+        "sel_myeongdong_cath",
+        "sel_n_seoul_tower"
+      ]
+    },
+    {
+      "id": "kr_sel_ddp",
+      "city_id": "seoul",
+      "code": "205",
+      "name": "동대문역사문화공원",
+      "english_name": "Dongdaemun History \u0026 Culture Park",
+      "local_name": "동대문역사문화공원",
+      "latitude": 37.5651,
+      "longitude": 127.0079,
+      "schematic_x": 420,
+      "schematic_y": 250,
+      "lines": [
+        "kr_seoul_l2",
+        "kr_seoul_l4"
+      ],
+      "exits": [
+        {
+          "exit_number": "1",
+          "destinations": [
+            "Dongdaemun Design Plaza (DDP)"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:30",
+      "last_train": "00:10",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_ddp"
+      ],
+      "nearby_place_ids": [
+        "sel_ddp"
+      ]
+    },
+    {
+      "id": "kr_sel_gangnam",
+      "city_id": "seoul",
+      "code": "222",
+      "name": "강남",
+      "english_name": "Gangnam",
+      "local_name": "강남",
+      "latitude": 37.4979,
+      "longitude": 127.0276,
+      "schematic_x": 420,
+      "schematic_y": 450,
+      "lines": [
+        "kr_seoul_l2"
+      ],
+      "exits": [
+        {
+          "exit_number": "10",
+          "destinations": [
+            "Gangnam Boulevard",
+            "Kakao Friends Flagship"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:30",
+      "last_train": "00:30",
+      "nearby_bus_stop_ids": [
+        "kr_sel_bus_stop_gangnam"
+      ],
+      "nearby_place_ids": [
+        "sel_lotte_tower"
+      ]
+    }
+  ],
+  "singapore": [
+    {
+      "id": "sg_mrt_bayfront",
+      "city_id": "singapore",
+      "code": "DT16 / CE1",
+      "name": "海湾舫 (Bayfront)",
+      "english_name": "Bayfront",
+      "local_name": "Bayfront",
+      "latitude": 1.2828,
+      "longitude": 103.859,
+      "schematic_x": 300,
+      "schematic_y": 280,
+      "lines": [
+        "sg_mrt_dtl",
+        "sg_mrt_ccl"
+      ],
+      "exits": [
+        {
+          "exit_number": "Exit B",
+          "destinations": [
+            "Gardens by the Bay",
+            "Marina Bay Sands"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "06:02",
+      "last_train": "23:50",
+      "nearby_bus_stop_ids": [
+        "sg_bus_mbs"
+      ],
+      "nearby_place_ids": [
+        "sg_gardens_by_bay",
+        "sg_marina_bay_sands"
+      ]
+    }
+  ],
+  "taipei": [
+    {
+      "id": "tw_tpe_taipei101",
+      "city_id": "taipei",
+      "code": "R03",
+      "name": "台北101/世貿",
+      "english_name": "Taipei 101 / World Trade Center",
+      "local_name": "台北101/世貿",
+      "latitude": 25.033,
+      "longitude": 121.5645,
+      "schematic_x": 300,
+      "schematic_y": 300,
+      "lines": [
+        "tw_tpe_red"
+      ],
+      "exits": null,
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "06:00",
+      "last_train": "00:15",
+      "nearby_bus_stop_ids": null,
+      "nearby_place_ids": null
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "jp_tky_tokyo",
+      "city_id": "tokyo",
+      "code": "TYO",
+      "name": "東京",
+      "english_name": "Tokyo Station",
+      "local_name": "東京駅",
+      "latitude": 35.6812,
+      "longitude": 139.7671,
+      "schematic_x": 300,
+      "schematic_y": 280,
+      "lines": [
+        "jp_tky_yamanote"
+      ],
+      "exits": [
+        {
+          "exit_number": "Marunouchi North",
+          "destinations": [
+            "Imperial Palace",
+            "Otemachi"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        },
+        {
+          "exit_number": "Yaesu Central",
+          "destinations": [
+            "Shinkansen Gates",
+            "Daimaru"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "04:45",
+      "last_train": "00:40",
+      "nearby_bus_stop_ids": [
+        "jp_tky_bus_tokyo_stn"
+      ],
+      "nearby_place_ids": [
+        "tky_imperial_palace"
+      ]
+    },
+    {
+      "id": "jp_tky_asakusa",
+      "city_id": "tokyo",
+      "code": "G19",
+      "name": "浅草",
+      "english_name": "Asakusa Station",
+      "local_name": "浅草駅",
+      "latitude": 35.7119,
+      "longitude": 139.7983,
+      "schematic_x": 420,
+      "schematic_y": 150,
+      "lines": [
+        "jp_tky_ginza",
+        "jp_tky_asakusa_line"
+      ],
+      "exits": [
+        {
+          "exit_number": "Exit 1",
+          "destinations": [
+            "Senso-ji Temple",
+            "Kaminarimon Gate"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "05:01",
+      "last_train": "00:15",
+      "nearby_bus_stop_ids": [
+        "jp_tky_bus_asakusa"
+      ],
+      "nearby_place_ids": [
+        "tky_sensoji",
+        "tky_skytree"
+      ]
+    },
+    {
+      "id": "jp_tky_shibuya",
+      "city_id": "tokyo",
+      "code": "G01",
+      "name": "渋谷",
+      "english_name": "Shibuya Station",
+      "local_name": "渋谷駅",
+      "latitude": 35.658,
+      "longitude": 139.7016,
+      "schematic_x": 180,
+      "schematic_y": 380,
+      "lines": [
+        "jp_tky_yamanote",
+        "jp_tky_ginza"
+      ],
+      "exits": [
+        {
+          "exit_number": "Hachiko Exit",
+          "destinations": [
+            "Shibuya Scramble Crossing",
+            "Hachiko Statue"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "04:52",
+      "last_train": "00:52",
+      "nearby_bus_stop_ids": [
+        "jp_tky_bus_shibuya"
+      ],
+      "nearby_place_ids": [
+        "tky_shibuya_scramble"
+      ]
+    },
+    {
+      "id": "jp_tky_ueno",
+      "city_id": "tokyo",
+      "code": "G16",
+      "name": "上野",
+      "english_name": "Ueno Station",
+      "local_name": "上野駅",
+      "latitude": 35.7141,
+      "longitude": 139.7774,
+      "schematic_x": 360,
+      "schematic_y": 180,
+      "lines": [
+        "jp_tky_yamanote",
+        "jp_tky_ginza"
+      ],
+      "exits": [
+        {
+          "exit_number": "Park Exit",
+          "destinations": [
+            "Ueno Park",
+            "Tokyo National Museum"
+          ],
+          "has_elevator": true,
+          "has_escalator": true
+        }
+      ],
+      "elevator_accessible": true,
+      "wheelchair_boarding": true,
+      "first_train": "04:40",
+      "last_train": "00:45",
+      "nearby_bus_stop_ids": [
+        "jp_tky_bus_ueno"
+      ],
+      "nearby_place_ids": [
+        "tky_ueno_park"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "city_id": "seoul",
+    "city_name": "Seoul",
+    "version": "2026.10.1",
+    "size_bytes": 15420000,
+    "size_mb": 14.7,
+    "contents": [
+      "Metro Lines 1-9 \u0026 AREX",
+      "Major Bus Routes",
+      "120 Attractions",
+      "Offline Schematic Map"
+    ],
+    "last_updated": "2026-10-31T01:51:56.907467+09:00",
+    "attribution": "Seoul TOPIS / Korail",
+    "sha256": "",
+    "download_url": ""
+  },
+  {
+    "city_id": "tokyo",
+    "city_name": "Tokyo",
+    "version": "2026.10.1",
+    "size_bytes": 18200000,
+    "size_mb": 17.3,
+    "contents": [
+      "Tokyo Metro \u0026 Toei Subways",
+      "JR Yamanote Line",
+      "140 Attractions",
+      "Offline Schematic Map"
+    ],
+    "last_updated": "2026-10-31T01:51:56.907467+09:00",
+    "attribution": "ODPT / Toei / JR",
+    "sha256": "",
+    "download_url": ""
+  },
+  {
+    "city_id": "london",
+    "city_name": "London",
+    "version": "2026.10.1",
+    "size_bytes": 16100000,
+    "size_mb": 15.3,
+    "contents": [
+      "London Underground (All lines)",
+      "Central Bus Corridors",
+      "110 Landmarks",
+      "Tube Map"
+    ],
+    "last_updated": "2026-10-31T01:51:56.907467+09:00",
+    "attribution": "TfL Open Data",
+    "sha256": "",
+    "download_url": ""
+  },
+  {
+    "city_id": "paris",
+    "city_name": "Paris",
+    "version": "2026.10.1",
+    "size_bytes": 14800000,
+    "size_mb": 14.1,
+    "contents": [
+      "RATP Métro Lines 1-14",
+      "RER A/B",
+      "95 Monuments",
+      "Offline Métro Map"
+    ],
+    "last_updated": "2026-10-31T01:51:56.907467+09:00",
+    "attribution": "Île-de-France Mobilités",
+    "sha256": "",
+    "download_url": ""
+  },
+  {
+    "city_id": "newyork",
+    "city_name": "New York",
+    "version": "2026.10.1",
+    "size_bytes": 19500000,
+    "size_mb": 18.6,
+    "contents": [
+      "MTA Subway (Full System)",
+      "Manhattan Bus Network",
+      "130 Landmarks",
+      "Subway Map"
+    ],
+    "last_updated": "2026-10-31T01:51:56.907467+09:00",
+    "attribution": "MTA Open Data",
+    "sha256": "",
+    "download_url": ""
+  }
+]

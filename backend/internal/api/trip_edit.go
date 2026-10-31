@@ -13,7 +13,7 @@ func (h *APIHandler) handleUpdateTrip(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(&patch); err != nil || patch == (service.TripPatch{}) {
-		respondError(w, http.StatusBadRequest, "provide valid trip fields")
+		respondError(w, http.StatusBadRequest, "invalid_input", "provide valid trip fields")
 		return
 	}
 	trip, err := h.svc.UpdateTrip(r.PathValue("id"), patch)
@@ -44,14 +44,14 @@ func (h *APIHandler) handleDeleteItineraryItem(w http.ResponseWriter, r *http.Re
 func (h *APIHandler) handleReorderItineraryItems(w http.ResponseWriter, r *http.Request) {
 	day, err := strconv.Atoi(r.PathValue("day"))
 	if err != nil || day < 1 {
-		respondError(w, http.StatusBadRequest, "invalid day")
+		respondError(w, http.StatusBadRequest, "invalid_day", "invalid day")
 		return
 	}
 	var req struct {
 		ItemIDs []string `json:"item_ids"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.ItemIDs == nil {
-		respondError(w, http.StatusBadRequest, "item_ids must be an array")
+		respondError(w, http.StatusBadRequest, "invalid_input", "item_ids must be an array")
 		return
 	}
 	trip, err := h.svc.ReorderItineraryItems(r.PathValue("id"), day, req.ItemIDs)

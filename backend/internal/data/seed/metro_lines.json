@@ -1,0 +1,350 @@
+{
+  "berlin": [
+    {
+      "id": "de_ber_u2",
+      "city_id": "berlin",
+      "line_number": "U2",
+      "name": "U-Bahn Linie 2",
+      "english_name": "U2",
+      "color_hex": "#FF0000",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "de_ber_alexanderplatz",
+        "de_ber_potsdamer"
+      ],
+      "is_circular": false,
+      "operating_hours": "04:30 - 00:30"
+    }
+  ],
+  "hongkong": [
+    {
+      "id": "hk_mtr_island",
+      "city_id": "hongkong",
+      "line_number": "ISL",
+      "name": "港島綫",
+      "english_name": "Island Line",
+      "color_hex": "#0071CE",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "hk_mtr_central",
+        "hk_mtr_causeway"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:55 - 00:50"
+    }
+  ],
+  "london": [
+    {
+      "id": "gb_lon_central",
+      "city_id": "london",
+      "line_number": "Central",
+      "name": "Central Line",
+      "english_name": "Central Line",
+      "color_hex": "#E32017",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "gb_lon_nottinghill",
+        "gb_lon_oxfordcircus",
+        "gb_lon_holborn",
+        "gb_lon_liverpoolst"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:15 - 00:30 (24h Fri/Sat)"
+    },
+    {
+      "id": "gb_lon_jubilee",
+      "city_id": "london",
+      "line_number": "Jubilee",
+      "name": "Jubilee Line",
+      "english_name": "Jubilee Line",
+      "color_hex": "#A0A5A9",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "gb_lon_bakerst",
+        "gb_lon_westminster",
+        "gb_lon_waterloo",
+        "gb_lon_londonbridge"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:20 - 00:30 (24h Fri/Sat)"
+    },
+    {
+      "id": "gb_lon_piccadilly",
+      "city_id": "london",
+      "line_number": "Piccadilly",
+      "name": "Piccadilly Line",
+      "english_name": "Piccadilly Line",
+      "color_hex": "#003688",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "gb_lon_kingscross",
+        "gb_lon_holborn",
+        "gb_lon_piccadillycircus",
+        "gb_lon_southkensington"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 00:30 (24h Fri/Sat)"
+    }
+  ],
+  "newyork": [
+    {
+      "id": "us_nyc_subway_1",
+      "city_id": "newyork",
+      "line_number": "1",
+      "name": "Broadway - 7 Avenue Local",
+      "english_name": "1 Train",
+      "color_hex": "#EE352E",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "us_nyc_times_sq",
+        "us_nyc_columbus_circle",
+        "us_nyc_south_ferry"
+      ],
+      "is_circular": false,
+      "operating_hours": "24 Hours / 7 Days"
+    },
+    {
+      "id": "us_nyc_subway_nqrw",
+      "city_id": "newyork",
+      "line_number": "N",
+      "name": "Broadway Express",
+      "english_name": "N Train",
+      "color_hex": "#FCCC0A",
+      "text_color_hex": "#000000",
+      "station_ids": [
+        "us_nyc_times_sq",
+        "us_nyc_union_sq",
+        "us_nyc_canal_st"
+      ],
+      "is_circular": false,
+      "operating_hours": "24 Hours / 7 Days"
+    }
+  ],
+  "osaka": [
+    {
+      "id": "jp_osa_midosuji",
+      "city_id": "osaka",
+      "line_number": "M",
+      "name": "御堂筋線",
+      "english_name": "Midosuji Line",
+      "color_hex": "#E5171F",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "jp_osa_umeda",
+        "jp_osa_namba"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:00 - 24:00"
+    }
+  ],
+  "paris": [
+    {
+      "id": "fr_par_m1",
+      "city_id": "paris",
+      "line_number": "1",
+      "name": "Ligne 1",
+      "english_name": "Line 1",
+      "color_hex": "#FFCD00",
+      "text_color_hex": "#000000",
+      "station_ids": [
+        "fr_par_champs_elysees",
+        "fr_par_louvre_rivoli",
+        "fr_par_chatelet",
+        "fr_par_bastille"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 01:15"
+    },
+    {
+      "id": "fr_par_m6",
+      "city_id": "paris",
+      "line_number": "6",
+      "name": "Ligne 6",
+      "english_name": "Line 6",
+      "color_hex": "#7eceb1",
+      "text_color_hex": "#000000",
+      "station_ids": [
+        "fr_par_bir_hakeim",
+        "fr_par_montparnasse",
+        "fr_par_nation"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 01:15"
+    }
+  ],
+  "seoul": [
+    {
+      "id": "kr_seoul_l1",
+      "city_id": "seoul",
+      "line_number": "1",
+      "name": "1호선",
+      "english_name": "Line 1",
+      "color_hex": "#0052A4",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "kr_sel_seoul_stn",
+        "kr_sel_cityhall",
+        "kr_sel_jonggak",
+        "kr_sel_dongdaemun"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:10 - 24:00"
+    },
+    {
+      "id": "kr_seoul_l2",
+      "city_id": "seoul",
+      "line_number": "2",
+      "name": "2호선",
+      "english_name": "Line 2 (Circle)",
+      "color_hex": "#00A84D",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "kr_sel_cityhall",
+        "kr_sel_euljiro1",
+        "kr_sel_ddp",
+        "kr_sel_gangnam",
+        "kr_sel_hongik"
+      ],
+      "is_circular": true,
+      "operating_hours": "05:30 - 24:30"
+    },
+    {
+      "id": "kr_seoul_l3",
+      "city_id": "seoul",
+      "line_number": "3",
+      "name": "3호선",
+      "english_name": "Line 3",
+      "color_hex": "#EF7C1C",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "kr_sel_gyeongbokgung",
+        "kr_sel_jongno3",
+        "kr_sel_anguk",
+        "kr_sel_express_bus"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 24:00"
+    },
+    {
+      "id": "kr_seoul_l4",
+      "city_id": "seoul",
+      "line_number": "4",
+      "name": "4호선",
+      "english_name": "Line 4",
+      "color_hex": "#00A5DE",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "kr_sel_dongdaemun",
+        "kr_sel_ddp",
+        "kr_sel_myeongdong",
+        "kr_sel_seoul_stn"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 24:00"
+    }
+  ],
+  "singapore": [
+    {
+      "id": "sg_mrt_dtl",
+      "city_id": "singapore",
+      "line_number": "DT",
+      "name": "Downtown Line",
+      "english_name": "Downtown Line",
+      "color_hex": "#005EC4",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "sg_mrt_bayfront",
+        "sg_mrt_chinatown",
+        "sg_mrt_bugis"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 00:00"
+    },
+    {
+      "id": "sg_mrt_ccl",
+      "city_id": "singapore",
+      "line_number": "CC",
+      "name": "Circle Line",
+      "english_name": "Circle Line",
+      "color_hex": "#FA9E0D",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "sg_mrt_bayfront",
+        "sg_mrt_marina_bay",
+        "sg_mrt_harbourfront"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:30 - 23:50"
+    }
+  ],
+  "taipei": [
+    {
+      "id": "tw_tpe_red",
+      "city_id": "taipei",
+      "line_number": "R",
+      "name": "淡水信義線",
+      "english_name": "Tamsui-Xinyi Line",
+      "color_hex": "#E3002C",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "tw_tpe_taipei101",
+        "tw_tpe_main"
+      ],
+      "is_circular": false,
+      "operating_hours": "06:00 - 24:00"
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "jp_tky_yamanote",
+      "city_id": "tokyo",
+      "line_number": "JY",
+      "name": "山手線",
+      "english_name": "JR Yamanote Line",
+      "color_hex": "#9ACD32",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "jp_tky_tokyo",
+        "jp_tky_akihabara",
+        "jp_tky_ueno",
+        "jp_tky_shinjuku",
+        "jp_tky_shibuya"
+      ],
+      "is_circular": true,
+      "operating_hours": "04:30 - 01:00"
+    },
+    {
+      "id": "jp_tky_ginza",
+      "city_id": "tokyo",
+      "line_number": "G",
+      "name": "銀座線",
+      "english_name": "Tokyo Metro Ginza Line",
+      "color_hex": "#FF9500",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "jp_tky_asakusa",
+        "jp_tky_ueno",
+        "jp_tky_ginza",
+        "jp_tky_shibuya"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:00 - 00:30"
+    },
+    {
+      "id": "jp_tky_asakusa_line",
+      "city_id": "tokyo",
+      "line_number": "A",
+      "name": "浅草線",
+      "english_name": "Toei Asakusa Line",
+      "color_hex": "#E85298",
+      "text_color_hex": "#FFFFFF",
+      "station_ids": [
+        "jp_tky_asakusa",
+        "jp_tky_ginza",
+        "jp_tky_shimbashi"
+      ],
+      "is_circular": false,
+      "operating_hours": "05:05 - 00:20"
+    }
+  ]
+}

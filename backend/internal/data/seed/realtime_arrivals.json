@@ -1,0 +1,112 @@
+{
+  "fr_par_bus_eiffel": [
+    {
+      "stop_id": "fr_par_bus_eiffel",
+      "route_id": "fr_par_bus_72",
+      "route_number": "72",
+      "destination": "Gare de Lyon",
+      "minutes_away": 3,
+      "stops_remaining": 2,
+      "status": "LIVE",
+      "vehicle_plate": "FL-892-XT",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ],
+  "gb_lon_bus_westminster": [
+    {
+      "stop_id": "gb_lon_bus_westminster",
+      "route_id": "gb_lon_bus_11",
+      "route_number": "11",
+      "destination": "Waterloo",
+      "minutes_away": 2,
+      "stops_remaining": 1,
+      "status": "LIVE",
+      "vehicle_plate": "LTZ 1148",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ],
+  "jp_tky_bus_asakusa": [
+    {
+      "stop_id": "jp_tky_bus_asakusa",
+      "route_id": "jp_tky_bus_to06",
+      "route_number": "S-1",
+      "destination": "Tokyo Skytree",
+      "minutes_away": 4,
+      "stops_remaining": 2,
+      "status": "LIVE",
+      "vehicle_plate": "足立200 か 31-29",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ],
+  "kr_sel_bus_stop_cityhall": [
+    {
+      "stop_id": "kr_sel_bus_stop_cityhall",
+      "route_id": "kr_sel_bus_100",
+      "route_number": "100",
+      "destination": "Seoul Station",
+      "minutes_away": 3,
+      "stops_remaining": 2,
+      "status": "LIVE",
+      "vehicle_plate": "서울74사 1284",
+      "crowding_level": "Moderate",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    },
+    {
+      "stop_id": "kr_sel_bus_stop_cityhall",
+      "route_id": "kr_sel_bus_401",
+      "route_number": "401",
+      "destination": "Gwanghwamun",
+      "minutes_away": 7,
+      "stops_remaining": 4,
+      "status": "LIVE",
+      "vehicle_plate": "서울74사 5521",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ],
+  "kr_sel_bus_stop_seoul_stn": [
+    {
+      "stop_id": "kr_sel_bus_stop_seoul_stn",
+      "route_id": "kr_sel_bus_100",
+      "route_number": "100",
+      "destination": "Terminal",
+      "minutes_away": 1,
+      "stops_remaining": 1,
+      "status": "LIVE",
+      "vehicle_plate": "서울74사 1284",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ],
+  "sg_bus_mbs": [
+    {
+      "stop_id": "sg_bus_mbs",
+      "route_id": "sg_bus_97",
+      "route_number": "97",
+      "destination": "Marina Centre",
+      "minutes_away": 3,
+      "stops_remaining": 2,
+      "status": "LIVE",
+      "vehicle_plate": "SG5821A",
+      "crowding_level": "Low",
+      "updated_at": "2026-11-01T01:51:56.907467+09:00"
+    }
+  ],
+  "us_nyc_bus_times_sq": [
+    {
+      "stop_id": "us_nyc_bus_times_sq",
+      "route_id": "us_nyc_bus_m7",
+      "route_number": "M7",
+      "destination": "14th Street",
+      "minutes_away": 5,
+      "stops_remaining": 3,
+      "status": "LIVE",
+      "vehicle_plate": "MTA-5912",
+      "crowding_level": "High",
+      "updated_at": "2026-11-01T01:51:56.9069602+09:00"
+    }
+  ]
+}

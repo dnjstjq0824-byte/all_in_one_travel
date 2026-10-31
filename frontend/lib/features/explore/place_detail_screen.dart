@@ -3,6 +3,10 @@ import '../../core/models/travel_models.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/l10n/app_localizations.dart';
 import '../../core/api/travel_api_client.dart';
+import 'widgets/add_review_dialog.dart';
+import 'widgets/place_info_section.dart';
+import 'widgets/place_review_card.dart';
+import 'widgets/popular_times_chart.dart';
 
 class PlaceDetailScreen extends StatefulWidget {
   final Place place;
@@ -42,121 +46,14 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
     }
   }
 
-  void _showAddReviewDialog() {
-    int rating = 5;
-    final titleCtrl = TextEditingController();
-    final contentCtrl = TextEditingController();
-    final tipCtrl = TextEditingController();
-    String travelType = 'Solo';
-
-    showDialog(
-      context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (context, setDlgState) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: Text(AppLocale.tr('write_review'), style: const TextStyle(fontWeight: FontWeight.bold)),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Star Rating Picker
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(5, (index) {
-                    final star = index + 1;
-                    return IconButton(
-                      icon: Icon(
-                        star <= rating ? Icons.star : Icons.star_border,
-                        color: Colors.amber,
-                        size: 28,
-                      ),
-                      onPressed: () {
-                        setDlgState(() => rating = star);
-                      },
-                    );
-                  }),
-                ),
-                const SizedBox(height: 8),
-                TextField(
-                  controller: titleCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'Review Title',
-                    hintText: 'e.g. Unbelievable morning view!',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: contentCtrl,
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    labelText: 'Detailed Experience',
-                    hintText: 'Share transit tips, photo spots, and highlights...',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: tipCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'Insider Tip (Optional)',
-                    hintText: 'e.g. Arrive before 10 AM',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                DropdownButtonFormField<String>(
-                  initialValue: travelType,
-                  decoration: const InputDecoration(labelText: 'Travel Type', border: OutlineInputBorder()),
-                  items: ['Solo', 'Couple', 'Family', 'Friends'].map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
-                  onChanged: (v) => setDlgState(() => travelType = v ?? 'Solo'),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppTheme.accent),
-              onPressed: () async {
-                if (contentCtrl.text.trim().isEmpty) return;
-                final messenger = ScaffoldMessenger.of(context);
-                Navigator.pop(ctx);
-                final newRev = Review(
-                  id: '',
-                  placeId: widget.place.id,
-                  authorName: 'Traveler',
-                  rating: rating,
-                  title: titleCtrl.text.trim().isEmpty ? 'Great Experience' : titleCtrl.text.trim(),
-                  content: contentCtrl.text.trim(),
-                  visitPeriod: 'October 2026',
-                  travelType: travelType,
-                  visitTip: tipCtrl.text.trim(),
-                  helpfulCount: 0,
-                  verifiedVisit: false,
-                  language: 'en',
-                );
-                final created = await TravelApiClient.submitReview(widget.place.id, newRev);
-                if (!mounted) return;
-                if (created != null) {
-                  setState(() {
-                    _reviews.insert(0, created);
-                  });
-                  messenger.showSnackBar(
-                    const SnackBar(content: Text('Review submitted! Thank you for sharing.')),
-                  );
-                }
-              },
-              child: const Text('Submit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-          ],
-        ),
-      ),
-    );
+  void _showAddReviewDialog() async {
+    final created = await AddReviewDialog.show(context, widget.place);
+    if (created != null && mounted) {
+      setState(() => _reviews.insert(0, created));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Review submitted! Thank you for sharing.')),
+      );
+    }
   }
 
   @override
@@ -243,82 +140,13 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                   Text(p.description, style: const TextStyle(fontSize: 15, height: 1.5, color: AppTheme.textMain)),
                   const SizedBox(height: 16),
 
-                  // ARTICLE 12: Complete Transit Connection Card
-                  Card(
-                    color: Colors.blue.shade50.withValues(alpha: 0.5),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Icon(Icons.directions_subway, color: AppTheme.accent, size: 20),
-                              SizedBox(width: 6),
-                              Text('Transit Access (Verified)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.accent)),
-                            ],
-                          ),
-                          const Divider(height: 16),
-                          Row(
-                            children: [
-                              const Icon(Icons.subway_outlined, size: 16, color: AppTheme.textMuted),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: Text('Nearest Station: ${p.nearestMetroStationName}', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            children: [
-                              const Icon(Icons.directions_bus_outlined, size: 16, color: AppTheme.textMuted),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: Text('Nearest Bus Stop: ${p.nearestBusStopId.isNotEmpty ? p.nearestBusStopId : "Connected Bus Network"}', style: const TextStyle(fontSize: 13, color: AppTheme.textMuted)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Weather Card
-                  if (widget.weather != null)
-                    Card(
-                      child: ListTile(
-                        leading: const Icon(Icons.wb_sunny, color: Colors.orange, size: 28),
-                        title: Text('Destination Weather: ${widget.weather!.currentTempC.toStringAsFixed(1)}°C (${widget.weather!.condition})'),
-                        subtitle: Text('Feels like ${widget.weather!.feelsLikeC.toStringAsFixed(1)}°C • Humidity ${widget.weather!.humidity}% • Rain ${widget.weather!.precipProb}%'),
-                      ),
-                    ),
-                  const SizedBox(height: 12),
-
-                  // Practical Info Card
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: Column(
-                        children: [
-                          _buildDetailRow(Icons.access_time, 'Hours', p.openingHours),
-                          const Divider(height: 16),
-                          _buildDetailRow(Icons.confirmation_number_outlined, 'Admission', p.admissionFee),
-                          const Divider(height: 16),
-                          _buildDetailRow(Icons.location_on_outlined, 'Address', p.address),
-                          const Divider(height: 16),
-                          _buildDetailRow(Icons.accessible, 'Accessibility', p.accessibilityInfo),
-                          const Divider(height: 16),
-                          _buildDetailRow(Icons.tips_and_updates_outlined, 'Best Time', p.bestTimeToVisit),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Transit & Practical Info Section
+                  PlaceInfoSection(place: p, weather: widget.weather),
                   const SizedBox(height: 12),
 
                   // ARTICLE 1 & P1: Popular Times (Peak Hours Bar Chart)
                   if (p.popularTimes.isNotEmpty)
-                    _buildPopularTimesCard(p),
+                    PopularTimesChart(place: p),
                   const SizedBox(height: 20),
 
                   // Reviews Header & Write Review Button
@@ -341,7 +169,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                   else if (_reviews.isEmpty)
                     const Text('No reviews yet. Be the first to share your experience!', style: TextStyle(color: AppTheme.textMuted))
                   else
-                    ..._reviews.map((r) => _buildReviewCard(r)),
+                    ..._reviews.map((r) => PlaceReviewCard(review: r)),
 
                   const SizedBox(height: 80), // bottom space for fixed action bar
                 ],
@@ -383,205 +211,6 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDetailRow(IconData icon, String title, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, size: 18, color: AppTheme.accent),
-        const SizedBox(width: 10),
-        SizedBox(width: 80, child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppTheme.textMuted))),
-        Expanded(child: Text(value, style: const TextStyle(fontSize: 13, color: AppTheme.textMain))),
-      ],
-    );
-  }
-
-  Widget _buildReviewCard(Review r) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 14,
-                      backgroundColor: Colors.blue.shade100,
-                      child: Text(r.authorName[0], style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.accent)),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(r.authorName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                  ],
-                ),
-                if (r.verifiedVisit)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: Colors.green.shade50, borderRadius: BorderRadius.circular(6)),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.verified, size: 12, color: Colors.green),
-                        SizedBox(width: 4),
-                        Text('VERIFIED', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green)),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Row(
-                  children: List.generate(5, (i) => Icon(
-                    i < r.rating ? Icons.star : Icons.star_border,
-                    size: 14,
-                    color: Colors.amber,
-                  )),
-                ),
-                const SizedBox(width: 8),
-                Text('${r.travelType} • ${r.visitPeriod}', style: const TextStyle(fontSize: 11, color: AppTheme.textMuted)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(r.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-            const SizedBox(height: 4),
-            Text(r.content, style: const TextStyle(fontSize: 13, height: 1.4)),
-            if (r.visitTip != null && r.visitTip!.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(color: Colors.amber.shade50, borderRadius: BorderRadius.circular(8)),
-                child: Row(
-                  children: [
-                    const Icon(Icons.lightbulb_outline, size: 14, color: Colors.orange),
-                    const SizedBox(width: 6),
-                    Expanded(child: Text('Tip: ${r.visitTip}', style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic))),
-                  ],
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPopularTimesCard(Place p) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Row(
-                  children: [
-                    Icon(Icons.insights, color: AppTheme.accent, size: 20),
-                    SizedBox(width: 8),
-                    Text(
-                      'Popular Times & Visitor Density',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppTheme.primary),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: Colors.red.shade200),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleAvatar(radius: 3, backgroundColor: Colors.red),
-                      SizedBox(width: 4),
-                      Text('14:00 Peak', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 11)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Bar Chart Area
-            SizedBox(
-              height: 70,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: p.popularTimes.map((pt) {
-                  final isCurrentPeak = pt.hour == 14;
-                  final heightRatio = (pt.popularity / 100.0).clamp(0.1, 1.0);
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Tooltip(
-                            message: '${pt.hour}:00 - ${pt.popularity}% busy',
-                            child: Container(
-                              height: 50 * heightRatio,
-                              decoration: BoxDecoration(
-                                color: isCurrentPeak
-                                    ? Colors.orange.shade600
-                                    : (pt.popularity > 70 ? AppTheme.accent : Colors.blue.shade100),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            pt.hour % 3 == 0 ? '${pt.hour}' : '·',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: pt.hour % 3 == 0 ? FontWeight.bold : FontWeight.normal,
-                              color: isCurrentPeak ? Colors.orange.shade800 : AppTheme.textMuted,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 12),
-
-            // Tip Banner
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.blue.shade50.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.tips_and_updates, size: 16, color: AppTheme.accent),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Best time to visit: Before 11:00 AM or after 17:00 for minimal crowd.',
-                      style: TextStyle(fontSize: 12, color: AppTheme.primary),
-                    ),
-                  ),
-                ],
               ),
             ),
           ],

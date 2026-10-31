@@ -1,0 +1,578 @@
+{
+  "london": [
+    {
+      "id": "lon_big_ben",
+      "city_id": "london",
+      "category": "Landmark",
+      "name": "Big Ben \u0026 Palace of Westminster",
+      "english_name": "Big Ben",
+      "local_name": "Big Ben",
+      "description": "The iconic Gothic clock tower and seat of the UK Parliament on the banks of the River Thames.",
+      "latitude": 51.5007,
+      "longitude": -0.1246,
+      "rating": 4.8,
+      "review_count": 5200,
+      "address": "Westminster, London SW1A 0AA",
+      "opening_hours": "Exterior 24 Hours; Tours require advance booking",
+      "admission_fee": "Free exterior viewing",
+      "official_website": "https://www.parliament.uk",
+      "phone_number": "+44-20-7219-4272",
+      "accessibility_info": "Fully paved public walkways along Westminster Bridge with step-free dropped curbs.",
+      "best_time_to_visit": "17:00 when the clock face glows amber in the twilight",
+      "estimated_duration_min": 60,
+      "nearest_metro_station_id": "gb_lon_westminster",
+      "nearest_metro_station_name": "Westminster Station",
+      "nearest_bus_stop_id": "gb_lon_bus_westminster",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Landmark",
+        "Heritage",
+        "Thames",
+        "History"
+      ]
+    }
+  ],
+  "paris": [
+    {
+      "id": "par_eiffel_tower",
+      "city_id": "paris",
+      "category": "Landmark",
+      "name": "Tour Eiffel",
+      "english_name": "Eiffel Tower",
+      "local_name": "La Tour Eiffel",
+      "description": "Gustave Eiffel's 330m wrought-iron marvel erected in 1889, defining the Paris skyline.",
+      "latitude": 48.8584,
+      "longitude": 2.2945,
+      "rating": 4.8,
+      "review_count": 6100,
+      "address": "Champ de Mars, 5 Av. Anatole France, 75007 Paris",
+      "opening_hours": "09:30 - 23:45 daily",
+      "admission_fee": "€29.40 (Lift to top)",
+      "official_website": "https://www.toureiffel.paris",
+      "phone_number": "+33-8-92-70-12-39",
+      "accessibility_info": "Floors 1 \u0026 2 fully accessible via designated elevators with priority security lanes.",
+      "best_time_to_visit": "Every hour on the hour after dusk for the 5-minute sparkle show",
+      "estimated_duration_min": 120,
+      "nearest_metro_station_id": "fr_par_bir_hakeim",
+      "nearest_metro_station_name": "Bir-Hakeim Station",
+      "nearest_bus_stop_id": "fr_par_bus_eiffel",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Landmark",
+        "Romantic",
+        "Views",
+        "Iconic"
+      ]
+    },
+    {
+      "id": "par_louvre_museum",
+      "city_id": "paris",
+      "category": "Museum \u0026 Art",
+      "name": "Musée du Louvre",
+      "english_name": "Louvre Museum",
+      "local_name": "Musée du Louvre",
+      "description": "The world's most visited art museum, preserving the Mona Lisa, Venus de Milo, and over 35,000 historic works.",
+      "latitude": 48.8606,
+      "longitude": 2.3376,
+      "rating": 4.8,
+      "review_count": 5800,
+      "address": "Rue de Rivoli, 75001 Paris",
+      "opening_hours": "09:00 - 18:00 (Closed Tuesdays, open until 21:45 Fridays)",
+      "admission_fee": "€22.00 (Timed reservation required)",
+      "official_website": "https://www.louvre.fr",
+      "phone_number": "+33-1-40-20-53-17",
+      "accessibility_info": "Step-free glass pyramid elevator; dedicated PRM guides available at info desk.",
+      "best_time_to_visit": "Wednesday or Friday evening for quieter gallery atmosphere",
+      "estimated_duration_min": 180,
+      "nearest_metro_station_id": "fr_par_louvre_rivoli",
+      "nearest_metro_station_name": "Louvre - Rivoli Station",
+      "nearest_bus_stop_id": "fr_par_bus_louvre",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Art",
+        "Museum",
+        "MonaLisa",
+        "Historic"
+      ]
+    }
+  ],
+  "seoul": [
+    {
+      "id": "sel_gyeongbokgung",
+      "city_id": "seoul",
+      "category": "Historic \u0026 Culture",
+      "name": "경복궁",
+      "english_name": "Gyeongbokgung Palace",
+      "local_name": "경복궁 (景福宮)",
+      "description": "The grandest of Joseon dynasty's Five Grand Palaces, built in 1395. Visitors wearing traditional Hanbok enjoy free admission.",
+      "latitude": 37.5796,
+      "longitude": 126.977,
+      "rating": 4.8,
+      "review_count": 3420,
+      "address": "161 Sajik-ro, Jongno-gu, Seoul",
+      "opening_hours": "09:00 - 18:00 (Closed Tuesdays)",
+      "admission_fee": "₩3,000 (Free with Hanbok)",
+      "official_website": "https://royal.cha.go.kr",
+      "phone_number": "+82-2-3700-3900",
+      "accessibility_info": "Wheelchair ramps available throughout courtyards; free wheelchair rentals at ticket office.",
+      "best_time_to_visit": "10:00 AM (Changing of the Royal Guard Ceremony)",
+      "estimated_duration_min": 120,
+      "nearest_metro_station_id": "kr_sel_gyeongbokgung",
+      "nearest_metro_station_name": "Gyeongbokgung Station (Exit 5)",
+      "nearest_bus_stop_id": "kr_sel_bus_stop_gyeongbokgung",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Palace",
+        "History",
+        "Hanbok",
+        "Architecture"
+      ],
+      "popular_times": [
+        {
+          "hour": 9,
+          "popularity": 20
+        },
+        {
+          "hour": 10,
+          "popularity": 45
+        },
+        {
+          "hour": 11,
+          "popularity": 70
+        },
+        {
+          "hour": 12,
+          "popularity": 85
+        },
+        {
+          "hour": 13,
+          "popularity": 90
+        },
+        {
+          "hour": 14,
+          "popularity": 95
+        },
+        {
+          "hour": 15,
+          "popularity": 85
+        },
+        {
+          "hour": 16,
+          "popularity": 75
+        },
+        {
+          "hour": 17,
+          "popularity": 55
+        },
+        {
+          "hour": 18,
+          "popularity": 40
+        },
+        {
+          "hour": 19,
+          "popularity": 30
+        },
+        {
+          "hour": 20,
+          "popularity": 20
+        },
+        {
+          "hour": 21,
+          "popularity": 10
+        }
+      ]
+    },
+    {
+      "id": "sel_n_seoul_tower",
+      "city_id": "seoul",
+      "category": "Night View",
+      "name": "N서울타워",
+      "english_name": "N Seoul Tower",
+      "local_name": "N서울타워",
+      "description": "Seoul's iconic landmark on Namsan Mountain, featuring 360-degree panoramic skyline views and famous love locks.",
+      "latitude": 37.5512,
+      "longitude": 126.9882,
+      "rating": 4.6,
+      "review_count": 2890,
+      "address": "105 Namsangongwon-gil, Yongsan-gu, Seoul",
+      "opening_hours": "10:30 - 22:30 daily",
+      "admission_fee": "₩21,000 (Observatory Deck)",
+      "official_website": "https://www.nseoultower.co.kr",
+      "phone_number": "+82-2-3455-9277",
+      "accessibility_info": "Namsan Cable Car and shuttle buses provide wheelchair accessibility to the plaza.",
+      "best_time_to_visit": "18:30 (Sunset into illuminated night view)",
+      "estimated_duration_min": 90,
+      "nearest_metro_station_id": "kr_sel_myeongdong",
+      "nearest_metro_station_name": "Myeong-dong Station (Exit 3)",
+      "nearest_bus_stop_id": "kr_sel_bus_stop_myeongdong",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Landmark",
+        "Observatory",
+        "Sunset",
+        "Romantic"
+      ],
+      "popular_times": [
+        {
+          "hour": 9,
+          "popularity": 20
+        },
+        {
+          "hour": 10,
+          "popularity": 45
+        },
+        {
+          "hour": 11,
+          "popularity": 70
+        },
+        {
+          "hour": 12,
+          "popularity": 85
+        },
+        {
+          "hour": 13,
+          "popularity": 90
+        },
+        {
+          "hour": 14,
+          "popularity": 95
+        },
+        {
+          "hour": 15,
+          "popularity": 85
+        },
+        {
+          "hour": 16,
+          "popularity": 75
+        },
+        {
+          "hour": 17,
+          "popularity": 55
+        },
+        {
+          "hour": 18,
+          "popularity": 40
+        },
+        {
+          "hour": 19,
+          "popularity": 30
+        },
+        {
+          "hour": 20,
+          "popularity": 20
+        },
+        {
+          "hour": 21,
+          "popularity": 10
+        }
+      ]
+    },
+    {
+      "id": "sel_bukchon",
+      "city_id": "seoul",
+      "category": "Historic \u0026 Culture",
+      "name": "북촌한옥마을",
+      "english_name": "Bukchon Hanok Village",
+      "local_name": "북촌한옥마을",
+      "description": "A preserved neighborhood of hundreds of traditional Korean wooden houses (hanok) dating back to the Joseon dynasty.",
+      "latitude": 37.5826,
+      "longitude": 126.9837,
+      "rating": 4.7,
+      "review_count": 2150,
+      "address": "Gahoe-dong, Jongno-gu, Seoul",
+      "opening_hours": "10:00 - 17:00 (Residential quiet hours strictly enforced)",
+      "admission_fee": "Free",
+      "official_website": "https://hanok.seoul.go.kr",
+      "phone_number": "+82-2-2148-4161",
+      "accessibility_info": "Hilly terrain with cobblestone inclines; limited wheelchair access on narrow alleys.",
+      "best_time_to_visit": "Morning before 11:00 AM for quiet photo opportunities",
+      "estimated_duration_min": 90,
+      "nearest_metro_station_id": "kr_sel_gyeongbokgung",
+      "nearest_metro_station_name": "Anguk Station / Gyeongbokgung Station",
+      "nearest_bus_stop_id": "kr_sel_bus_stop_gyeongbokgung",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Hanok",
+        "Culture",
+        "Photography",
+        "Tradition"
+      ],
+      "popular_times": [
+        {
+          "hour": 9,
+          "popularity": 20
+        },
+        {
+          "hour": 10,
+          "popularity": 45
+        },
+        {
+          "hour": 11,
+          "popularity": 70
+        },
+        {
+          "hour": 12,
+          "popularity": 85
+        },
+        {
+          "hour": 13,
+          "popularity": 90
+        },
+        {
+          "hour": 14,
+          "popularity": 95
+        },
+        {
+          "hour": 15,
+          "popularity": 85
+        },
+        {
+          "hour": 16,
+          "popularity": 75
+        },
+        {
+          "hour": 17,
+          "popularity": 55
+        },
+        {
+          "hour": 18,
+          "popularity": 40
+        },
+        {
+          "hour": 19,
+          "popularity": 30
+        },
+        {
+          "hour": 20,
+          "popularity": 20
+        },
+        {
+          "hour": 21,
+          "popularity": 10
+        }
+      ]
+    },
+    {
+      "id": "sel_ddp",
+      "city_id": "seoul",
+      "category": "Landmark",
+      "name": "동대문디자인플라자 (DDP)",
+      "english_name": "Dongdaemun Design Plaza",
+      "local_name": "DDP",
+      "description": "Zaha Hadid's futuristic architectural masterpiece featuring exhibitions, rooftop park, and night LED rose garden.",
+      "latitude": 37.5665,
+      "longitude": 127.0092,
+      "rating": 4.7,
+      "review_count": 1980,
+      "address": "281 Eulji-ro, Jung-gu, Seoul",
+      "opening_hours": "10:00 - 20:00 daily (Outdoor grounds open 24/7)",
+      "admission_fee": "Free for grounds; Special exhibitions ticketed",
+      "official_website": "https://ddp.or.kr",
+      "phone_number": "+82-2-2153-0000",
+      "accessibility_info": "Fully barrier-free design with smooth ramps and elevators throughout.",
+      "best_time_to_visit": "Evening when the undulating aluminum facade lights up",
+      "estimated_duration_min": 75,
+      "nearest_metro_station_id": "kr_sel_ddp",
+      "nearest_metro_station_name": "Dongdaemun History \u0026 Culture Park Station (Exit 1)",
+      "nearest_bus_stop_id": "kr_sel_bus_stop_ddp",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Architecture",
+        "Design",
+        "NightView",
+        "Exhibition"
+      ],
+      "popular_times": [
+        {
+          "hour": 9,
+          "popularity": 20
+        },
+        {
+          "hour": 10,
+          "popularity": 45
+        },
+        {
+          "hour": 11,
+          "popularity": 70
+        },
+        {
+          "hour": 12,
+          "popularity": 85
+        },
+        {
+          "hour": 13,
+          "popularity": 90
+        },
+        {
+          "hour": 14,
+          "popularity": 95
+        },
+        {
+          "hour": 15,
+          "popularity": 85
+        },
+        {
+          "hour": 16,
+          "popularity": 75
+        },
+        {
+          "hour": 17,
+          "popularity": 55
+        },
+        {
+          "hour": 18,
+          "popularity": 40
+        },
+        {
+          "hour": 19,
+          "popularity": 30
+        },
+        {
+          "hour": 20,
+          "popularity": 20
+        },
+        {
+          "hour": 21,
+          "popularity": 10
+        }
+      ]
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "tky_sensoji",
+      "city_id": "tokyo",
+      "category": "Historic \u0026 Culture",
+      "name": "浅草寺",
+      "english_name": "Senso-ji Temple",
+      "local_name": "金龍山 浅草寺",
+      "description": "Tokyo's oldest and most significant Buddhist temple, founded in 645 AD, approached through Nakamise-dori shopping street.",
+      "latitude": 35.7148,
+      "longitude": 139.7967,
+      "rating": 4.8,
+      "review_count": 4120,
+      "address": "2-3-1 Asakusa, Taito City, Tokyo",
+      "opening_hours": "06:00 - 17:00 (Grounds open 24h)",
+      "admission_fee": "Free",
+      "official_website": "https://www.senso-ji.jp",
+      "phone_number": "+81-3-3842-0181",
+      "accessibility_info": "Elevator installed in the Main Hall; wide stone pathways accessible for wheelchairs.",
+      "best_time_to_visit": "08:30 AM before midday crowds arrive",
+      "estimated_duration_min": 90,
+      "nearest_metro_station_id": "jp_tky_asakusa",
+      "nearest_metro_station_name": "Asakusa Station (Exit 1)",
+      "nearest_bus_stop_id": "jp_tky_bus_asakusa",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Temple",
+        "Culture",
+        "Historic",
+        "Lantern"
+      ],
+      "popular_times": [
+        {
+          "hour": 9,
+          "popularity": 20
+        },
+        {
+          "hour": 10,
+          "popularity": 45
+        },
+        {
+          "hour": 11,
+          "popularity": 70
+        },
+        {
+          "hour": 12,
+          "popularity": 85
+        },
+        {
+          "hour": 13,
+          "popularity": 90
+        },
+        {
+          "hour": 14,
+          "popularity": 95
+        },
+        {
+          "hour": 15,
+          "popularity": 85
+        },
+        {
+          "hour": 16,
+          "popularity": 75
+        },
+        {
+          "hour": 17,
+          "popularity": 55
+        },
+        {
+          "hour": 18,
+          "popularity": 40
+        },
+        {
+          "hour": 19,
+          "popularity": 30
+        },
+        {
+          "hour": 20,
+          "popularity": 20
+        },
+        {
+          "hour": 21,
+          "popularity": 10
+        }
+      ]
+    },
+    {
+      "id": "tky_shibuya_scramble",
+      "city_id": "tokyo",
+      "category": "Landmark",
+      "name": "渋谷スクランブル交差点",
+      "english_name": "Shibuya Scramble Crossing",
+      "local_name": "渋谷交差点",
+      "description": "The world's busiest pedestrian intersection where up to 3,000 people cross at each green light beneath dazzling electronic billboards.",
+      "latitude": 35.6595,
+      "longitude": 139.7005,
+      "rating": 4.7,
+      "review_count": 3870,
+      "address": "2 Chome Dogenzaka, Shibuya City, Tokyo",
+      "opening_hours": "Open 24 Hours",
+      "admission_fee": "Free",
+      "official_website": "https://www.gotokyo.org",
+      "phone_number": "N/A",
+      "accessibility_info": "Flat paved surface with curb ramps and tactile paving.",
+      "best_time_to_visit": "19:00 - 21:00 for peak neon atmosphere",
+      "estimated_duration_min": 45,
+      "nearest_metro_station_id": "jp_tky_shibuya",
+      "nearest_metro_station_name": "Shibuya Station (Hachiko Exit)",
+      "nearest_bus_stop_id": "jp_tky_bus_shibuya",
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "tags": [
+        "Iconic",
+        "Cityscape",
+        "Neon",
+        "Photography"
+      ]
+    }
+  ]
+}

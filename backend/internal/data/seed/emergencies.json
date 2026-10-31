@@ -1,0 +1,165 @@
+{
+  "seoul": {
+    "city_id": "seoul",
+    "country_code": "KR",
+    "police": "112",
+    "ambulance": "119",
+    "fire": "119",
+    "general_emergency": "119",
+    "embassies": [
+      {
+        "country": "US",
+        "name": "Embassy of the United States, Seoul",
+        "phone_number": "+82-2-397-4114",
+        "address": "188 Sejong-daero, Jongno-gu, Seoul"
+      },
+      {
+        "country": "UK",
+        "name": "British Embassy Seoul",
+        "phone_number": "+82-2-3210-5500",
+        "address": "24 Sejong-daero 19-gil, Jung-gu, Seoul"
+      },
+      {
+        "country": "JP",
+        "name": "Embassy of Japan in Korea",
+        "phone_number": "+82-2-2170-5200",
+        "address": "6 Yulgok-ro, Jongno-gu, Seoul"
+      }
+    ],
+    "hospitals": [
+      {
+        "name": "Severance International Health Care Center",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+82-2-2228-5800",
+        "address": "50-1 Yonsei-ro, Seodaemun-gu, Seoul"
+      },
+      {
+        "name": "Seoul National University Hospital International Clinic",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+82-2-2072-0505",
+        "address": "101 Daehak-ro, Jongno-gu, Seoul"
+      }
+    ]
+  },
+  "tokyo": {
+    "city_id": "tokyo",
+    "country_code": "JP",
+    "police": "110",
+    "ambulance": "119",
+    "fire": "119",
+    "general_emergency": "119",
+    "embassies": [
+      {
+        "country": "US",
+        "name": "U.S. Embassy Tokyo",
+        "phone_number": "+81-3-3224-5000",
+        "address": "1-10-5 Akasaka, Minato-ku, Tokyo"
+      },
+      {
+        "country": "KR",
+        "name": "Embassy of the Republic of Korea in Japan",
+        "phone_number": "+81-3-3452-7611",
+        "address": "1-2-5 Minami-Azabu, Minato-ku, Tokyo"
+      }
+    ],
+    "hospitals": [
+      {
+        "name": "St. Luke's International Hospital",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+81-3-3541-5151",
+        "address": "9-1 Akashi-cho, Chuo-ku, Tokyo"
+      }
+    ]
+  },
+  "london": {
+    "city_id": "london",
+    "country_code": "GB",
+    "police": "999",
+    "ambulance": "999",
+    "fire": "999",
+    "general_emergency": "112",
+    "embassies": [
+      {
+        "country": "US",
+        "name": "U.S. Embassy London",
+        "phone_number": "+44-20-7499-9000",
+        "address": "33 Nine Elms Ln, Nine Elms, London SW11 7US"
+      },
+      {
+        "country": "KR",
+        "name": "Embassy of the Republic of Korea in the UK",
+        "phone_number": "+44-20-7227-5500",
+        "address": "60 Buckingham Gate, London SW1E 6AJ"
+      }
+    ],
+    "hospitals": [
+      {
+        "name": "St Thomas' Hospital Accident & Emergency",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+44-20-7188-7188",
+        "address": "Westminster Bridge Rd, London SE1 7EH"
+      }
+    ]
+  },
+  "paris": {
+    "city_id": "paris",
+    "country_code": "FR",
+    "police": "17",
+    "ambulance": "15",
+    "fire": "18",
+    "general_emergency": "112",
+    "embassies": [
+      {
+        "country": "US",
+        "name": "U.S. Embassy Paris",
+        "phone_number": "+33-1-43-12-22-22",
+        "address": "2 Avenue Gabriel, 75008 Paris"
+      },
+      {
+        "country": "KR",
+        "name": "Embassy of the Republic of Korea in France",
+        "phone_number": "+33-1-47-53-01-01",
+        "address": "125 Rue de Grenelle, 75007 Paris"
+      }
+    ],
+    "hospitals": [
+      {
+        "name": "The American Hospital of Paris",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+33-1-46-41-25-25",
+        "address": "63 Boulevard Victor Hugo, 92200 Neuilly-sur-Seine"
+      }
+    ]
+  },
+  "newyork": {
+    "city_id": "newyork",
+    "country_code": "US",
+    "police": "911",
+    "ambulance": "911",
+    "fire": "911",
+    "general_emergency": "911",
+    "embassies": [
+      {
+        "country": "KR",
+        "name": "Consulate General of the Republic of Korea in New York",
+        "phone_number": "+1-646-674-6000",
+        "address": "460 Park Ave, New York, NY 10022"
+      }
+    ],
+    "hospitals": [
+      {
+        "name": "NewYork-Presbyterian / Weill Cornell Medical Center",
+        "english_speaking": true,
+        "emergency_24h": true,
+        "phone_number": "+1-212-746-5454",
+        "address": "525 E 68th St, New York, NY 10065"
+      }
+    ]
+  }
+}
+

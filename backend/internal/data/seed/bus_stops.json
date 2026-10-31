@@ -1,0 +1,124 @@
+{
+  "london": [
+    {
+      "id": "gb_lon_bus_westminster",
+      "city_id": "london",
+      "code": "BP4001",
+      "name": "Westminster Station / Parliament Sq",
+      "english_name": "Westminster Station",
+      "latitude": 51.5011,
+      "longitude": -0.1258,
+      "nearby_metro_station_id": "gb_lon_westminster"
+    }
+  ],
+  "newyork": [
+    {
+      "id": "us_nyc_bus_times_sq",
+      "city_id": "newyork",
+      "code": "MTA-4022",
+      "name": "7 Av / W 41 St",
+      "english_name": "7th Ave \u0026 41st St",
+      "latitude": 40.7558,
+      "longitude": -73.9875,
+      "nearby_metro_station_id": "us_nyc_times_sq"
+    }
+  ],
+  "paris": [
+    {
+      "id": "fr_par_bus_eiffel",
+      "city_id": "paris",
+      "code": "PAR-B-72",
+      "name": "Tour Eiffel",
+      "english_name": "Eiffel Tower Stop",
+      "latitude": 48.8575,
+      "longitude": 2.2933,
+      "nearby_metro_station_id": "fr_par_bir_hakeim"
+    }
+  ],
+  "seoul": [
+    {
+      "id": "kr_sel_bus_stop_seoul_stn",
+      "city_id": "seoul",
+      "code": "02006",
+      "name": "서울역버스환승센터",
+      "english_name": "Seoul Station Transit Center",
+      "latitude": 37.5562,
+      "longitude": 126.9729,
+      "nearby_metro_station_id": "kr_sel_seoul_stn"
+    },
+    {
+      "id": "kr_sel_bus_stop_cityhall",
+      "city_id": "seoul",
+      "code": "02128",
+      "name": "시청앞.덕수궁",
+      "english_name": "City Hall \u0026 Deoksugung",
+      "latitude": 37.5654,
+      "longitude": 126.9765,
+      "nearby_metro_station_id": "kr_sel_cityhall"
+    },
+    {
+      "id": "kr_sel_bus_stop_gyeongbokgung",
+      "city_id": "seoul",
+      "code": "01116",
+      "name": "경복궁역",
+      "english_name": "Gyeongbokgung Station Stop",
+      "latitude": 37.5762,
+      "longitude": 126.9731,
+      "nearby_metro_station_id": "kr_sel_gyeongbokgung"
+    },
+    {
+      "id": "kr_sel_bus_stop_myeongdong",
+      "city_id": "seoul",
+      "code": "02149",
+      "name": "명동입구",
+      "english_name": "Myeongdong Entrance",
+      "latitude": 37.5615,
+      "longitude": 126.9858,
+      "nearby_metro_station_id": "kr_sel_myeongdong"
+    },
+    {
+      "id": "kr_sel_bus_stop_ddp",
+      "city_id": "seoul",
+      "code": "02235",
+      "name": "동대문역사문화공원",
+      "english_name": "DDP Plaza Stop",
+      "latitude": 37.566,
+      "longitude": 127.009,
+      "nearby_metro_station_id": "kr_sel_ddp"
+    }
+  ],
+  "singapore": [
+    {
+      "id": "sg_bus_mbs",
+      "city_id": "singapore",
+      "code": "03511",
+      "name": "Marina Bay Sands Hotel",
+      "english_name": "MBS Hotel Stop",
+      "latitude": 1.2835,
+      "longitude": 103.8601,
+      "nearby_metro_station_id": "sg_mrt_bayfront"
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "jp_tky_bus_asakusa",
+      "city_id": "tokyo",
+      "code": "TKY-B-01",
+      "name": "浅草雷門",
+      "english_name": "Asakusa Kaminarimon",
+      "latitude": 35.7112,
+      "longitude": 139.7968,
+      "nearby_metro_station_id": "jp_tky_asakusa"
+    },
+    {
+      "id": "jp_tky_bus_tokyo_stn",
+      "city_id": "tokyo",
+      "code": "TKY-B-02",
+      "name": "東京駅丸の内南口",
+      "english_name": "Tokyo Stn Marunouchi South",
+      "latitude": 35.6805,
+      "longitude": 139.7658,
+      "nearby_metro_station_id": "jp_tky_tokyo"
+    }
+  ]
+}

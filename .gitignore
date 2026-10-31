@@ -28,8 +28,15 @@ backend/bin/
 !release/apk/*.aab
 !release/portal/*
 
-# Cloudflare Wrangler
+# Cloudflare Wrangler & Generated Assets
 .wrangler/
+public/web/canvaskit/
+public/web/assets/
+public/web/*.js
+public/web/*.wasm
+public/web/.last_build_id
+public/web/version.json
+!release/web/*
 
 # Local user state
 var/

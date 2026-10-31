@@ -1,0 +1,108 @@
+{
+  "trip_sample_seoul": {
+    "id": "trip_sample_seoul",
+    "title": "Autumn in Seoul 4-Day Journey",
+    "country_code": "KR",
+    "city_id": "seoul",
+    "city_name": "Seoul",
+    "start_date": "2026-10-26",
+    "end_date": "2026-10-29",
+    "days": [
+      {
+        "day_number": 1,
+        "date_str": "2026-10-26",
+        "city_id": "seoul",
+        "city_name": "Seoul",
+        "weather_note": "Clear \u0026 Crisp (10°C - 20°C)",
+        "day_weather": {
+          "condition": "Sunny",
+          "temp_max_c": 20,
+          "temp_min_c": 10,
+          "precip_prob": 10,
+          "rain_alert": false,
+          "indoor_tip": "Perfect autumn sunshine! Ideal for outdoor walking and palace exploration."
+        },
+        "items": [
+          {
+            "id": "item_01",
+            "place_id": "sel_gyeongbokgung",
+            "title": "Gyeongbokgung Palace",
+            "subtitle": "Royal Changing of Guard",
+            "category": "Historic \u0026 Culture",
+            "order": 1,
+            "time_scheduled": "10:00",
+            "latitude": 37.5796,
+            "longitude": 126.977,
+            "duration_min": 120,
+            "notes": "Hanbok rental booked across exit 5",
+            "is_completed": false
+          },
+          {
+            "id": "item_02",
+            "place_id": "sel_bukchon",
+            "title": "Bukchon Hanok Village",
+            "subtitle": "Stroll along traditional alleys",
+            "category": "Historic \u0026 Culture",
+            "order": 2,
+            "time_scheduled": "13:30",
+            "latitude": 37.5826,
+            "longitude": 126.9837,
+            "duration_min": 90,
+            "notes": "Respect quiet hours",
+            "is_completed": false
+          },
+          {
+            "id": "item_03",
+            "place_id": "sel_n_seoul_tower",
+            "title": "N Seoul Tower",
+            "subtitle": "Sunset over Seoul Skyline",
+            "category": "Night View",
+            "order": 3,
+            "time_scheduled": "17:30",
+            "latitude": 37.5512,
+            "longitude": 126.9882,
+            "duration_min": 90,
+            "notes": "Take Namsan Cable Car from Myeongdong",
+            "is_completed": false
+          }
+        ]
+      },
+      {
+        "day_number": 2,
+        "date_str": "2026-10-27",
+        "city_id": "seoul",
+        "city_name": "Seoul",
+        "weather_note": "Rain expected afternoon (11°C - 18°C)",
+        "day_weather": {
+          "condition": "Rainy",
+          "temp_max_c": 18,
+          "temp_min_c": 11,
+          "precip_prob": 80,
+          "rain_alert": true,
+          "indoor_tip": "Rain forecasted this afternoon! Recommended indoor visits: DDP, COEX Mall, or National Museum of Korea."
+        },
+        "items": [
+          {
+            "id": "item_04",
+            "place_id": "sel_ddp",
+            "title": "Dongdaemun Design Plaza",
+            "subtitle": "Exhibitions \u0026 Zaha Hadid Architecture",
+            "category": "Landmark",
+            "order": 1,
+            "time_scheduled": "14:00",
+            "latitude": 37.5665,
+            "longitude": 127.0092,
+            "duration_min": 100,
+            "notes": "Indoor venue safe from rain",
+            "is_completed": false
+          }
+        ]
+      }
+    ],
+    "collaborators": [
+      "dev@bookingnetwork.internal"
+    ],
+    "created_at": "2026-10-30T01:51:56.907467+09:00",
+    "updated_at": "2026-10-31T23:51:56.907467+09:00"
+  }
+}

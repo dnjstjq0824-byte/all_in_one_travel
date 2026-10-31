@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
@@ -14,9 +15,15 @@ import (
 type VerificationResult struct {
 	ScenarioID  int    `json:"scenario_id"`
 	Description string `json:"description"`
-	Status      string `json:"status"` // PASS / FAIL / BLOCKED
+	Status      string `json:"status"`
 	Details     string `json:"details"`
 	DurationMs  int64  `json:"duration_ms"`
+}
+
+type Scenario struct {
+	id   int
+	desc string
+	fn   func() error
 }
 
 func main() {
@@ -31,358 +38,209 @@ func main() {
 	fmt.Println("================================================================================")
 
 	client := &http.Client{
-		Timeout: 15 * time.Second,
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
-		},
+		Timeout:   15 * time.Second,
+		Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: false}},
+	}
+
+	scenarios := []Scenario{
+		{1, "Service URL Access & Security Headers", func() error { return checkHSTS(client, baseURL+"/") }},
+		{2, "Flutter Web App Shell Loading (/web/)", func() error { return checkBodyContains(client, baseURL+"/web/", "<base href=\"/web/\">") }},
+		{3, "Search Seoul City & Coverage Level A", func() error { return checkCoverage(client, baseURL+"/api/v1/cities/seoul/coverage", "LEVEL_A") }},
+		{4, "Seoul Metro Stations & Topology Integrity", func() error { return checkMinLen(client, baseURL+"/api/v1/transit/stations?city_id=seoul", 5) }},
+		{5, "Route Seoul: Myeongdong -> Gyeongbokgung", func() error { return testRoute(client, baseURL, "seoul", "명동역", 37.5609, 126.9863, "경복궁", 37.5796, 126.9770) }},
+		{6, "Route Tokyo: Shinjuku -> Senso-ji Temple", func() error { return testRoute(client, baseURL, "tokyo", "新宿駅", 35.6896, 139.7006, "浅草寺", 35.7148, 139.7967) }},
+		{7, "Route London: King's Cross -> Big Ben", func() error { return testRoute(client, baseURL, "london", "King's Cross St. Pancras", 51.5308, -0.1238, "Big Ben", 51.5007, -0.1246) }},
+		{8, "Route Paris: Gare du Nord -> Eiffel Tower", func() error { return testRoute(client, baseURL, "paris", "Gare du Nord", 48.8809, 2.3553, "Tour Eiffel", 48.8584, 2.2945) }},
+		{9, "Route New York: Times Square-42 St -> Central Park", func() error { return testRoute(client, baseURL, "newyork", "Times Sq-42 St", 40.7553, -73.9874, "Central Park", 40.7829, -73.9654) }},
+		{10, "Attraction Details & Nearest Metro Station/Exit (Article 12)", func() error { return checkPlace(client, baseURL+"/api/v1/places/sel_gyeongbokgung") }},
+		{11, "Trip Itinerary Creation & Sync Endpoint", func() error { return checkTripCreate(client, baseURL+"/api/v1/trips") }},
+		{12, "Live Weather Retrieval for Selected City", func() error { return checkWeather(client, baseURL+"/api/v1/weather?city_id=seoul", "seoul") }},
+		{13, "Map Transit Layers (Bus Stops & Real-time Arrivals)", func() error { return checkMinLen(client, baseURL+"/api/v1/transit/bus/stops?city_id=seoul", 1) }},
+		{14, "Real-time Arrival Query & State Badges", func() error { return checkMinLen(client, baseURL+"/api/v1/transit/arrivals?city_id=seoul&stop_id=kr_sel_bus_stop_cityhall", 1) }},
+		{15, "Browser Refresh & SPA Deep Link (/web/transit)", func() error { return checkStatus(client, baseURL+"/web/transit", 200) }},
+		{16, "Privacy Policy Legal Page (/privacy)", func() error { return checkStatus(client, baseURL+"/privacy", 200) }},
+		{17, "Terms of Service & Customer Support (/terms, /support)", func() error { return checkMultiStatus(client, baseURL, []string{"/terms", "/support"}, 200) }},
+		{18, "Unsupported City Non-Falsification Contract (404 Not Found)", func() error { return checkStatus(client, baseURL+"/api/v1/cities/atlantis/coverage", 404) }},
+		{19, "Android APK Direct Download (/download/android)", func() error { return checkAPK(client, baseURL+"/download/android") }},
+		{20, "Backend API Health & Readiness (/api/v1/health)", func() error { return checkHealth(client, baseURL+"/api/v1/health") }},
 	}
 
 	var results []VerificationResult
-
-	runTest := func(id int, desc string, fn func() error) {
+	passCount := 0
+	for _, sc := range scenarios {
 		start := time.Now()
-		err := fn()
+		err := sc.fn()
 		dur := time.Since(start).Milliseconds()
+		status, details := "PASS", "Verified OK on Live HTTPS"
 		if err != nil {
-			fmt.Printf("❌ [FAIL] Scenario %02d: %s (%v)\n", id, desc, err)
-			results = append(results, VerificationResult{
-				ScenarioID:  id,
-				Description: desc,
-				Status:      "FAIL",
-				Details:     err.Error(),
-				DurationMs:  dur,
-			})
+			status, details = "FAIL", err.Error()
+			fmt.Printf("❌ [FAIL] Scenario %02d: %s (%v)\n", sc.id, sc.desc, err)
 		} else {
-			fmt.Printf("✅ [PASS] Scenario %02d: %s (%dms)\n", id, desc, dur)
-			results = append(results, VerificationResult{
-				ScenarioID:  id,
-				Description: desc,
-				Status:      "PASS",
-				Details:     "Verified OK on Live HTTPS",
-				DurationMs:  dur,
-			})
+			passCount++
+			fmt.Printf("✅ [PASS] Scenario %02d: %s (%dms)\n", sc.id, sc.desc, dur)
 		}
+		results = append(results, VerificationResult{sc.id, sc.desc, status, details, dur})
 	}
-
-	// 1. Service Root URL
-	runTest(1, "Service URL Access & Security Headers", func() error {
-		resp, err := client.Get(baseURL + "/")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 200 {
-			return fmt.Errorf("unexpected status %d", resp.StatusCode)
-		}
-		hsts := resp.Header.Get("Strict-Transport-Security")
-		if hsts == "" {
-			return fmt.Errorf("missing Strict-Transport-Security header")
-		}
-		return nil
-	})
-
-	// 2. Home Web App Entry
-	runTest(2, "Flutter Web App Shell Loading (/web/)", func() error {
-		resp, err := client.Get(baseURL + "/web/")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		body, _ := io.ReadAll(resp.Body)
-		if !strings.Contains(string(body), "<base href=\"/web/\">") {
-			return fmt.Errorf("missing base href /web/ in body")
-		}
-		return nil
-	})
-
-	// 3. Seoul City & Coverage
-	runTest(3, "Search Seoul City & Coverage Level A", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/cities/seoul/coverage")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var cov map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&cov)
-		if cov["coverage_level"] != "LEVEL_A" {
-			return fmt.Errorf("expected LEVEL_A, got %v", cov["coverage_level"])
-		}
-		return nil
-	})
-
-	// 4. Seoul Metro Network
-	runTest(4, "Seoul Metro Stations & Topology Integrity", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/transit/stations?city_id=seoul")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var stations []map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&stations)
-		if len(stations) < 5 {
-			return fmt.Errorf("expected >= 5 stations, got %d", len(stations))
-		}
-		return nil
-	})
-
-	// 5. Seoul Route: Myeongdong -> Gyeongbokgung
-	runTest(5, "Route Seoul: Myeongdong -> Gyeongbokgung", func() error {
-		reqBody := `{"city_id":"seoul","origin_name":"명동역","origin_lat":37.5609,"origin_lng":126.9863,"dest_name":"경복궁","dest_lat":37.5796,"dest_lng":126.9770,"preference":"fastest"}`
-		resp, err := client.Post(baseURL+"/api/v1/transit/plan", "application/json", strings.NewReader(reqBody))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var planResp map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&planResp)
-		opts, ok := planResp["options"].([]interface{})
-		if !ok || len(opts) == 0 {
-			return fmt.Errorf("zero routes returned in options")
-		}
-		return nil
-	})
-
-	// 6. Tokyo Route: Shinjuku -> Senso-ji
-	runTest(6, "Route Tokyo: Shinjuku -> Senso-ji Temple", func() error {
-		reqBody := `{"city_id":"tokyo","origin_name":"新宿駅","origin_lat":35.6896,"origin_lng":139.7006,"dest_name":"浅草寺","dest_lat":35.7148,"dest_lng":139.7967,"preference":"fastest"}`
-		resp, err := client.Post(baseURL+"/api/v1/transit/plan", "application/json", strings.NewReader(reqBody))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var planResp map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&planResp)
-		opts, ok := planResp["options"].([]interface{})
-		if !ok || len(opts) == 0 {
-			return fmt.Errorf("zero routes returned in options")
-		}
-		return nil
-	})
-
-	// 7. London Route: King's Cross -> Big Ben
-	runTest(7, "Route London: King's Cross -> Big Ben", func() error {
-		reqBody := `{"city_id":"london","origin_name":"King's Cross St. Pancras","origin_lat":51.5308,"origin_lng":-0.1238,"dest_name":"Big Ben","dest_lat":51.5007,"dest_lng":-0.1246,"preference":"fastest"}`
-		resp, err := client.Post(baseURL+"/api/v1/transit/plan", "application/json", strings.NewReader(reqBody))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var planResp map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&planResp)
-		opts, ok := planResp["options"].([]interface{})
-		if !ok || len(opts) == 0 {
-			return fmt.Errorf("zero routes returned in options")
-		}
-		return nil
-	})
-
-	// 8. Paris Route: Gare du Nord -> Eiffel Tower
-	runTest(8, "Route Paris: Gare du Nord -> Eiffel Tower", func() error {
-		reqBody := `{"city_id":"paris","origin_name":"Gare du Nord","origin_lat":48.8809,"origin_lng":2.3553,"dest_name":"Tour Eiffel","dest_lat":48.8584,"dest_lng":2.2945,"preference":"fastest"}`
-		resp, err := client.Post(baseURL+"/api/v1/transit/plan", "application/json", strings.NewReader(reqBody))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var planResp map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&planResp)
-		opts, ok := planResp["options"].([]interface{})
-		if !ok || len(opts) == 0 {
-			return fmt.Errorf("zero routes returned in options")
-		}
-		return nil
-	})
-
-	// 9. New York Route: Times Square -> Central Park
-	runTest(9, "Route New York: Times Square-42 St -> Central Park", func() error {
-		reqBody := `{"city_id":"newyork","origin_name":"Times Sq-42 St","origin_lat":40.7553,"origin_lng":-73.9874,"dest_name":"Central Park","dest_lat":40.7829,"dest_lng":-73.9654,"preference":"fastest"}`
-		resp, err := client.Post(baseURL+"/api/v1/transit/plan", "application/json", strings.NewReader(reqBody))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var planResp map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&planResp)
-		opts, ok := planResp["options"].([]interface{})
-		if !ok || len(opts) == 0 {
-			return fmt.Errorf("zero routes returned in options")
-		}
-		return nil
-	})
-
-	// 10. Place Detail Query
-	runTest(10, "Attraction Details & Nearest Metro Station/Exit (Article 12)", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/places/sel_gyeongbokgung")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var place map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&place)
-		if place["id"] != "sel_gyeongbokgung" {
-			return fmt.Errorf("mismatched place id: %v", place["id"])
-		}
-		if place["nearest_metro_station_name"] == "" {
-			return fmt.Errorf("missing nearest metro station info")
-		}
-		return nil
-	})
-
-	// 11. Trip Itinerary Creation
-	runTest(11, "Trip Itinerary Creation & Sync Endpoint", func() error {
-		tripJSON := `{"title":"Live HTTPS Autumn Vacation","city_id":"seoul","start_date":"2026-11-01","end_date":"2026-11-05","days":[]}`
-		resp, err := client.Post(baseURL+"/api/v1/trips", "application/json", strings.NewReader(tripJSON))
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 201 && resp.StatusCode != 200 {
-			return fmt.Errorf("unexpected status %d", resp.StatusCode)
-		}
-		return nil
-	})
-
-	// 12. Mobile Tab Endpoint & Weather Query
-	runTest(12, "Live Weather Retrieval for Selected City", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/weather?city_id=seoul")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var w map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&w)
-		if w["city_id"] != "seoul" {
-			return fmt.Errorf("invalid weather city")
-		}
-		return nil
-	})
-
-	// 13. Map Layer Bus Stops Endpoint
-	runTest(13, "Map Transit Layers (Bus Stops & Real-time Arrivals)", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/transit/bus/stops?city_id=seoul")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var stops []map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&stops)
-		if len(stops) == 0 {
-			return fmt.Errorf("expected bus stops")
-		}
-		return nil
-	})
-
-	// 14. Real-time Arrival Badges
-	runTest(14, "Real-time Arrival Query & State Badges", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/transit/arrivals?city_id=seoul&stop_id=kr_sel_bus_stop_cityhall")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var arrivals []map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&arrivals)
-		if len(arrivals) == 0 {
-			return fmt.Errorf("expected arrivals")
-		}
-		return nil
-	})
-
-	// 15. SPA Deep Link Routing
-	runTest(15, "Browser Refresh & SPA Deep Link (/web/transit)", func() error {
-		resp, err := client.Get(baseURL + "/web/transit")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 200 {
-			return fmt.Errorf("expected 200 on SPA refresh, got %d", resp.StatusCode)
-		}
-		return nil
-	})
-
-	// 16. Privacy Policy Page
-	runTest(16, "Privacy Policy Legal Page (/privacy)", func() error {
-		resp, err := client.Get(baseURL + "/privacy")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 200 {
-			return fmt.Errorf("expected 200, got %d", resp.StatusCode)
-		}
-		return nil
-	})
-
-	// 17. Terms & Support Pages
-	runTest(17, "Terms of Service & Customer Support (/terms, /support)", func() error {
-		resp, err := client.Get(baseURL + "/terms")
-		if err != nil || resp.StatusCode != 200 {
-			return fmt.Errorf("terms page failed")
-		}
-		resp.Body.Close()
-		resp2, err := client.Get(baseURL + "/support")
-		if err != nil || resp2.StatusCode != 200 {
-			return fmt.Errorf("support page failed")
-		}
-		resp2.Body.Close()
-		return nil
-	})
-
-	// 18. Unsupported City Handling
-	runTest(18, "Unsupported City Non-Falsification Contract (404 Not Found)", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/cities/atlantis/coverage")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 404 {
-			return fmt.Errorf("expected 404, got %d", resp.StatusCode)
-		}
-		return nil
-	})
-
-	// 19. Android APK Download Endpoint
-	runTest(19, "Android APK Direct Download (/download/android)", func() error {
-		resp, err := client.Get(baseURL + "/download/android")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		if resp.StatusCode != 200 {
-			return fmt.Errorf("expected 200, got %d", resp.StatusCode)
-		}
-		cd := resp.Header.Get("Content-Disposition")
-		if !strings.Contains(cd, "app-release.apk") {
-			return fmt.Errorf("missing filename in Content-Disposition: %s", cd)
-		}
-		if resp.ContentLength < 45*1024*1024 {
-			return fmt.Errorf("APK size too small: %d", resp.ContentLength)
-		}
-		return nil
-	})
-
-	// 20. Backend Health & Readiness
-	runTest(20, "Backend API Health & Readiness (/api/v1/health)", func() error {
-		resp, err := client.Get(baseURL + "/api/v1/health")
-		if err != nil {
-			return err
-		}
-		defer resp.Body.Close()
-		var h map[string]interface{}
-		json.NewDecoder(resp.Body).Decode(&h)
-		if h["status"] != "healthy" || h["cities"].(float64) < 18 {
-			return fmt.Errorf("unhealthy API status: %v", h)
-		}
-		return nil
-	})
 
 	fmt.Println("================================================================================")
-	passCount := 0
-	for _, r := range results {
-		if r.Status == "PASS" {
-			passCount++
-		}
-	}
 	fmt.Printf("🎉 VERIFICATION SUMMARY: %d / %d SCENARIOS PASSED (100%%)\n", passCount, len(results))
 	fmt.Println("================================================================================")
+}
+
+func checkHSTS(c *http.Client, url string) error {
+	resp, err := c.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 || resp.Header.Get("Strict-Transport-Security") == "" {
+		return fmt.Errorf("status %d or missing HSTS", resp.StatusCode)
+	}
+	return nil
+}
+
+func checkBodyContains(c *http.Client, url, sub string) error {
+	resp, err := c.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	b, _ := io.ReadAll(resp.Body)
+	if !strings.Contains(string(b), sub) {
+		return fmt.Errorf("body missing %q", sub)
+	}
+	return nil
+}
+
+func checkStatus(c *http.Client, url string, expected int) error {
+	resp, err := c.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != expected {
+		return fmt.Errorf("expected %d, got %d", expected, resp.StatusCode)
+	}
+	return nil
+}
+
+func checkMultiStatus(c *http.Client, base string, paths []string, expected int) error {
+	for _, p := range paths {
+		if err := checkStatus(c, base+p, expected); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func checkCoverage(c *http.Client, url, expectedLevel string) error {
+	var cov map[string]interface{}
+	if err := fetchJSON(c, url, &cov); err != nil {
+		return err
+	}
+	if cov["coverage_level"] != expectedLevel {
+		return fmt.Errorf("expected %s, got %v", expectedLevel, cov["coverage_level"])
+	}
+	return nil
+}
+
+func checkMinLen(c *http.Client, url string, min int) error {
+	var items []map[string]interface{}
+	if err := fetchJSON(c, url, &items); err != nil {
+		return err
+	}
+	if len(items) < min {
+		return fmt.Errorf("expected >= %d items, got %d", min, len(items))
+	}
+	return nil
+}
+
+func checkPlace(c *http.Client, url string) error {
+	var p map[string]interface{}
+	if err := fetchJSON(c, url, &p); err != nil {
+		return err
+	}
+	if p["id"] != "sel_gyeongbokgung" || p["nearest_metro_station_name"] == "" {
+		return fmt.Errorf("mismatched place or missing nearest station")
+	}
+	return nil
+}
+
+func checkTripCreate(c *http.Client, url string) error {
+	b := `{"title":"Live HTTPS Autumn Vacation","city_id":"seoul","start_date":"2026-11-01","end_date":"2026-11-05","days":[]}`
+	resp, err := c.Post(url, "application/json", strings.NewReader(b))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 201 && resp.StatusCode != 200 {
+		return fmt.Errorf("unexpected status %d", resp.StatusCode)
+	}
+	return nil
+}
+
+func checkWeather(c *http.Client, url, cityId string) error {
+	var w map[string]interface{}
+	if err := fetchJSON(c, url, &w); err != nil {
+		return err
+	}
+	if w["city_id"] != cityId {
+		return fmt.Errorf("invalid weather city %v", w["city_id"])
+	}
+	return nil
+}
+
+func checkAPK(c *http.Client, url string) error {
+	resp, err := c.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	cd := resp.Header.Get("Content-Disposition")
+	if resp.StatusCode != 200 || !strings.Contains(cd, "app-release.apk") || resp.ContentLength < 45*1024*1024 {
+		return fmt.Errorf("invalid APK headers or size: cd=%s, len=%d", cd, resp.ContentLength)
+	}
+	return nil
+}
+
+func checkHealth(c *http.Client, url string) error {
+	var h map[string]interface{}
+	if err := fetchJSON(c, url, &h); err != nil {
+		return err
+	}
+	if h["status"] != "healthy" || h["cities"].(float64) < 18 {
+		return fmt.Errorf("unhealthy API status: %v", h)
+	}
+	return nil
+}
+
+func testRoute(c *http.Client, base, cityId, oName string, oLat, oLng float64, dName string, dLat, dLng float64) error {
+	reqBody, _ := json.Marshal(map[string]interface{}{
+		"city_id": cityId, "origin_name": oName, "origin_lat": oLat, "origin_lng": oLng,
+		"dest_name": dName, "dest_lat": dLat, "dest_lng": dLng, "preference": "fastest",
+	})
+	resp, err := c.Post(base+"/api/v1/transit/plan", "application/json", bytes.NewReader(reqBody))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	var planResp map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&planResp)
+	opts, ok := planResp["options"].([]interface{})
+	if !ok || len(opts) == 0 {
+		return fmt.Errorf("zero routes returned in options")
+	}
+	return nil
+}
+
+func fetchJSON(c *http.Client, url string, target interface{}) error {
+	resp, err := c.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("GET %s returned %d", url, resp.StatusCode)
+	}
+	return json.NewDecoder(resp.Body).Decode(target)
 }

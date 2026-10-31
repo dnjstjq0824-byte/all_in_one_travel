@@ -1,0 +1,51 @@
+{
+  "sel_gyeongbokgung": [
+    {
+      "id": "rev_sel_01",
+      "place_id": "sel_gyeongbokgung",
+      "author_name": "Min-Ji K.",
+      "rating": 5,
+      "title": "한복 착용시 무료 입장과 수문장 교대의식 팁",
+      "content": "경복궁역 5번 출구로 나오면 국립고궁박물관을 통해 궁궐 안마당으로 바로 진입할 수 있어 편리합니다. 오전 10시 수문장 교대의식은 놓치지 마세요. 인근 한복 대여점에서 한복을 빌려 입으면 별도 티켓 발권 없이 바로 무료 입장이 가능합니다.",
+      "visit_period": "October 2026",
+      "travel_type": "Solo",
+      "visit_tip": "오전 9시 30분에 도착해 근정전 사진을 먼저 찍고 10시 교대의식을 관람하세요.",
+      "helpful_count": 42,
+      "verified_visit": true,
+      "language": "ko",
+      "created_at": "2026-10-29T01:51:56.907467+09:00"
+    },
+    {
+      "id": "rev_sel_02",
+      "place_id": "sel_gyeongbokgung",
+      "author_name": "Marcus Vance",
+      "rating": 5,
+      "title": "Flawless transit access and jaw-dropping history",
+      "content": "Coming directly from Incheon Airport on the AREX to Seoul Station, then just a quick subway hop to Gyeongbokgung Station Exit 5. The palace courtyard with the mountain backdrop is unforgettable.",
+      "visit_period": "October 2026",
+      "travel_type": "Couple",
+      "visit_tip": "Download offline maps in advance; although subway English signage is fantastic!",
+      "helpful_count": 29,
+      "verified_visit": true,
+      "language": "en",
+      "created_at": "2026-10-27T01:51:56.907467+09:00"
+    }
+  ],
+  "tky_sensoji": [
+    {
+      "id": "rev_tky_01",
+      "place_id": "tky_sensoji",
+      "author_name": "Kenichi Sato",
+      "rating": 5,
+      "title": "銀座線浅草駅1番出口からの最短ルート",
+      "content": "銀座線の浅草駅1番出口を出ると目の前に雷門が見えます。仲見世通りは昼過ぎになると大変混雑するので、朝8時半頃の参拝が一番落ち着いていておすすめです。",
+      "visit_period": "October 2026",
+      "travel_type": "Solo",
+      "visit_tip": "おみくじを引く際は小銭を用意しておくとスムーズです。",
+      "helpful_count": 35,
+      "verified_visit": true,
+      "language": "ja",
+      "created_at": "2026-10-30T01:51:56.907467+09:00"
+    }
+  ]
+}

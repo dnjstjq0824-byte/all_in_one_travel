@@ -1,0 +1,145 @@
+{
+  "london": [
+    {
+      "id": "gb_lon_bus_11",
+      "city_id": "london",
+      "route_number": "11",
+      "name": "Route 11 (Heritage route)",
+      "operator": "London General",
+      "origin": "Fulham Town Hall",
+      "destination": "Waterloo Station",
+      "color_hex": "#CC0000",
+      "stop_ids": [
+        "gb_lon_bus_westminster"
+      ],
+      "low_floor": true,
+      "interval_min": 10,
+      "first_bus": "05:00",
+      "last_bus": "23:50",
+      "fare": "£1.75"
+    }
+  ],
+  "newyork": [
+    {
+      "id": "us_nyc_bus_m7",
+      "city_id": "newyork",
+      "route_number": "M7",
+      "name": "M7 (Broadway / Columbus)",
+      "operator": "MTA New York City Transit",
+      "origin": "Harlem",
+      "destination": "14th Street",
+      "color_hex": "#0039A6",
+      "stop_ids": [
+        "us_nyc_bus_times_sq"
+      ],
+      "low_floor": true,
+      "interval_min": 12,
+      "first_bus": "24h",
+      "last_bus": "24h",
+      "fare": "$2.90"
+    }
+  ],
+  "paris": [
+    {
+      "id": "fr_par_bus_72",
+      "city_id": "paris",
+      "route_number": "72",
+      "name": "Bus 72 (Seine Riverbank)",
+      "operator": "RATP",
+      "origin": "Parc de Saint-Cloud",
+      "destination": "Gare de Lyon",
+      "color_hex": "#00643C",
+      "stop_ids": [
+        "fr_par_bus_eiffel"
+      ],
+      "low_floor": true,
+      "interval_min": 8,
+      "first_bus": "06:00",
+      "last_bus": "00:30",
+      "fare": "€2.15"
+    }
+  ],
+  "seoul": [
+    {
+      "id": "kr_sel_bus_100",
+      "city_id": "seoul",
+      "route_number": "100",
+      "name": "간선 100번",
+      "operator": "Hansung Bus",
+      "origin": "Hwagye Station",
+      "destination": "Seoul Station",
+      "color_hex": "#0052A4",
+      "stop_ids": [
+        "kr_sel_bus_stop_gyeongbokgung",
+        "kr_sel_bus_stop_cityhall",
+        "kr_sel_bus_stop_seoul_stn"
+      ],
+      "low_floor": true,
+      "interval_min": 8,
+      "first_bus": "04:00",
+      "last_bus": "22:45",
+      "fare": "₩1,500"
+    },
+    {
+      "id": "kr_sel_bus_401",
+      "city_id": "seoul",
+      "route_number": "401",
+      "name": "간선 401번",
+      "operator": "Seoul Bus Co.",
+      "origin": "Gangnam Station",
+      "destination": "Gwanghwamun",
+      "color_hex": "#0052A4",
+      "stop_ids": [
+        "kr_sel_bus_stop_seoul_stn",
+        "kr_sel_bus_stop_myeongdong",
+        "kr_sel_bus_stop_cityhall"
+      ],
+      "low_floor": true,
+      "interval_min": 9,
+      "first_bus": "04:15",
+      "last_bus": "23:00",
+      "fare": "₩1,500"
+    }
+  ],
+  "singapore": [
+    {
+      "id": "sg_bus_97",
+      "city_id": "singapore",
+      "route_number": "97",
+      "name": "Service 97",
+      "operator": "Tower Transit",
+      "origin": "Jurong East",
+      "destination": "Marina Centre",
+      "color_hex": "#1BB251",
+      "stop_ids": [
+        "sg_bus_mbs"
+      ],
+      "low_floor": true,
+      "interval_min": 9,
+      "first_bus": "05:45",
+      "last_bus": "23:30",
+      "fare": "S$1.65"
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "jp_tky_bus_to06",
+      "city_id": "tokyo",
+      "route_number": "都06",
+      "name": "都営バス 都06",
+      "operator": "Toei Bus",
+      "origin": "Shibuya Stn",
+      "destination": "Shimbashi Stn",
+      "color_hex": "#009944",
+      "stop_ids": [
+        "jp_tky_bus_shibuya",
+        "jp_tky_bus_tokyo_stn"
+      ],
+      "low_floor": true,
+      "interval_min": 10,
+      "first_bus": "05:30",
+      "last_bus": "22:30",
+      "fare": "¥210"
+    }
+  ]
+}

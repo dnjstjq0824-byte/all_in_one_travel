@@ -46,15 +46,8 @@ if (!fs.existsSync(publicWebDir)) {
 }
 
 if (fs.existsSync(webReleaseDir)) {
-  const webFiles = ['index.html', 'main.dart.js', 'flutter_bootstrap.js', 'flutter.js', 'manifest.json'];
-  for (const f of webFiles) {
-    const src = path.join(webReleaseDir, f);
-    const dest = path.join(publicWebDir, f);
-    if (fs.existsSync(src) && !fs.existsSync(dest)) {
-      fs.copyFileSync(src, dest);
-      console.log(`📦 Synced web core asset: ${f}`);
-    }
-  }
+  fs.cpSync(webReleaseDir, publicWebDir, { recursive: true, force: true });
+  console.log('📦 Synchronized release/web assets to public/web');
 }
 
 // 5. Ensure _headers exists

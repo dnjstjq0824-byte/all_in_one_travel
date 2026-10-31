@@ -24,7 +24,7 @@ func MiddlewareChain(next http.Handler) http.Handler {
 		if strings.HasPrefix(r.URL.Path, "/api/") && r.Body != nil {
 			const maxRequestBytes = 1 << 20
 			if r.ContentLength > maxRequestBytes {
-				respondError(w, http.StatusRequestEntityTooLarge, "request body exceeds 1 MiB")
+				respondError(w, http.StatusRequestEntityTooLarge, "payload_too_large", "request body exceeds 1 MiB")
 				return
 			}
 			r.Body = http.MaxBytesReader(w, r.Body, maxRequestBytes)
@@ -58,7 +58,7 @@ func MiddlewareChain(next http.Handler) http.Handler {
 		defer func() {
 			if rec := recover(); rec != nil {
 				log.Printf("[PANIC RECOVERED] %v", rec)
-				respondError(w, http.StatusInternalServerError, "Internal Server Error")
+				respondError(w, http.StatusInternalServerError, "internal_server_error", "Internal Server Error")
 			}
 		}()
 

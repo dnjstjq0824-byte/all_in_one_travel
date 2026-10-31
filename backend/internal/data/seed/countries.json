@@ -1,0 +1,82 @@
+[
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "continent": "Asia"
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "continent": "Asia"
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "continent": "Asia"
+  },
+  {
+    "code": "TW",
+    "name": "Taiwan",
+    "continent": "Asia"
+  },
+  {
+    "code": "HK",
+    "name": "Hong Kong",
+    "continent": "Asia"
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "continent": "Asia"
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "continent": "Asia"
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "continent": "Europe"
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "continent": "Europe"
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "continent": "Europe"
+  },
+  {
+    "code": "TR",
+    "name": "Turkey",
+    "continent": "Europe"
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "continent": "North America"
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "continent": "North America"
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "continent": "North America"
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "continent": "Oceania"
+  },
+  {
+    "code": "BR",
+    "name": "Brazil",
+    "continent": "South America"
+  }
+]

@@ -65,8 +65,8 @@ export default {
       return addSecurityHeaders(res);
     }
 
-    // 3. API Proxy to Go Backend with Edge Fallback
-    if (url.pathname.startsWith("/api/v1/")) {
+    // 3. API Proxy to Go Backend with Fail-Closed Uniform JSON
+    if (url.pathname.startsWith("/api/")) {
       const backendUrl = env.BACKEND_URL || DEFAULT_BACKEND;
       const targetUrl = new URL(url.pathname + url.search, backendUrl);
 
@@ -80,24 +80,14 @@ export default {
         const backendRes = await fetch(backendReq);
         return addSecurityHeaders(backendRes);
       } catch (err) {
-        // Fallback for health check if backend tunnel is offline
-        if (url.pathname === "/api/v1/health") {
-          return new Response(
-            JSON.stringify({
-              cities: 18,
-              service: "Global Travel Essential API (Edge Worker Fallback)",
-              status: "healthy",
-              version: "1.0.0",
-            }),
-            {
-              status: 200,
-              headers: { "Content-Type": "application/json", ...SECURITY_HEADERS },
-            }
-          );
-        }
         return new Response(
-          JSON.stringify({ error: "Backend proxy unreachable", details: String(err) }),
-          { status: 502, headers: { "Content-Type": "application/json", ...SECURITY_HEADERS } }
+          JSON.stringify({
+            error: {
+              code: "backend_unavailable",
+              message: "Backend service unreachable: " + (err.message || String(err)),
+            },
+          }),
+          { status: 503, headers: { "Content-Type": "application/json", ...SECURITY_HEADERS } }
         );
       }
     }
