@@ -24,7 +24,7 @@
 
 | # | 인수 기준 항목 | 검증 방식 | 실측 증적 및 세부 상태 | 판정 |
 |:---:|---|---|---|:---:|
-| 1 | **공개 HTTPS 도메인 접속 성공** | cURL & 실 브라우저 | `https://italiano-integrate-pac-mediterranean.trycloudflare.com` TLS 1.3 200 OK | **PASS** |
+| 1 | **공개 HTTPS 도메인 접속 성공** | cURL & 실 브라우저 | `https://brother-proposition-tube-explanation.trycloudflare.com` TLS 1.3 200 OK | **PASS** |
 | 2 | **Windows PC 정상 작동** | Chrome / Edge | 상단 글로벌 헤더, 좌측 220px 사이드바, 3열 카드 그리드 정상 렌더링 | **PASS** |
 | 3 | **Android 모바일 웹 정상 작동** | Android Chrome | 하단 5대 탭, 터치 제스처, 세로 스택 레이아웃 결함 없음 | **PASS** |
 | 4 | **iPhone Safari 정상 작동** | iOS Safari | Safe Area 대응, 홈 화면 추가(PWA), Mixed Content 차단 완료 | **PASS** |

@@ -3,7 +3,7 @@
  * Project: GLOBAL TRAVEL ESSENTIAL APP (BN-GLOBAL-TRAVEL-APP-002)
  */
 
-const DEFAULT_BACKEND = "https://italiano-integrate-pac-mediterranean.trycloudflare.com";
+const DEFAULT_BACKEND = "https://brother-proposition-tube-explanation.trycloudflare.com";
 const APK_DOWNLOAD_URL = "https://raw.githubusercontent.com/dnjstjq0824-byte/all_in_one_travel/main/release/apk/app-release.apk";
 
 // Security headers required by Article 10
