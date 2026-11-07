@@ -1077,6 +1077,7 @@ Use of this source code is governed by a BSD-style license that can be
 found in the LICENSE file.
 --------------------------------------------------------------------------------
 args
+logging
 
 Copyright 2013, the Dart project authors. 
 
@@ -4889,6 +4890,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 flutter_lints
+go_router
 path_provider_windows
 plugin_platform_interface
 shared_preferences_linux

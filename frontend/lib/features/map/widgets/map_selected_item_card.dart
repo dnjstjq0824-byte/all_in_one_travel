@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../app/routes.dart';
 import '../../../core/models/travel_models.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../explore/place_detail_screen.dart';
 
 class MapSelectedItemCard extends StatelessWidget {
   final dynamic item;
@@ -69,16 +70,9 @@ class MapSelectedItemCard extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (ctx) => PlaceDetailScreen(
-                              place: place,
-                              weather: weather,
-                              onPlanRoute: onPlanRoute,
-                              onAddToTrip: onAddToTrip,
-                            ),
-                          ),
+                        context.go(
+                          Routes.placeDetail(place.id, place.cityId),
+                          extra: place,
                         );
                       },
                       style: ElevatedButton.styleFrom(backgroundColor: AppTheme.accent),

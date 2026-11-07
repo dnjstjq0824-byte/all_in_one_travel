@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../app/routes.dart';
 import '../../../core/models/travel_models.dart';
 import '../../../core/theme/app_theme.dart';
-import '../place_detail_screen.dart';
 
 class ExplorePlaceCard extends StatelessWidget {
   final Place place;
@@ -24,16 +25,9 @@ class ExplorePlaceCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (ctx) => PlaceDetailScreen(
-                place: place,
-                weather: weather,
-                onPlanRoute: onPlanRoute,
-                onAddToTrip: onAddToTrip,
-              ),
-            ),
+          context.go(
+            Routes.placeDetail(place.id, place.cityId),
+            extra: place,
           );
         },
         child: Column(

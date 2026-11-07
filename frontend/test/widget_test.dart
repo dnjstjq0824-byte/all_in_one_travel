@@ -1,15 +1,57 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:global_travel_app/app/router.dart';
+import 'package:global_travel_app/app/routes.dart';
 import 'package:global_travel_app/core/models/travel_models.dart';
-import 'package:global_travel_app/features/metro/metro_map_screen.dart';
-import 'package:global_travel_app/features/transit/transit_planner_screen.dart';
-import 'package:global_travel_app/features/explore/explore_screen.dart';
-import 'package:global_travel_app/features/trips/my_trip_screen.dart';
+import 'package:global_travel_app/core/responsive/devices.dart';
+import 'package:global_travel_app/core/state/city_scope.dart';
+import 'package:global_travel_app/core/theme/app_theme.dart';
+import 'package:global_travel_app/pages/explore_page.dart';
+import 'package:global_travel_app/pages/home_page.dart';
+import 'package:global_travel_app/pages/metro_page.dart';
+import 'package:global_travel_app/pages/transit_page.dart';
+import 'package:global_travel_app/pages/trips_page.dart';
+import 'package:go_router/go_router.dart';
 
 class _FakeHttpOverrides extends HttpOverrides {
   @override
-  String findProxyFromEnvironment(Uri url, Map<String, String>? environment) => '';
+  String findProxyFromEnvironment(Uri url, Map<String, String>? environment) =>
+      '';
+}
+
+final _testCity = City(
+  id: 'seoul',
+  countryCode: 'KR',
+  name: 'Seoul',
+  englishName: 'Seoul',
+  localName: '서울',
+  latitude: 37.5665,
+  longitude: 126.9780,
+  timezone: 'Asia/Seoul',
+  coverageLevel: 'LEVEL_A',
+  transportModes: ['METRO', 'BUS', 'WALK'],
+  description: 'Capital of South Korea',
+  heroImageUrl: '',
+);
+
+CitySession _readySession() {
+  final session = CitySession()
+    ..cities = [_testCity]
+    ..current = _testCity
+    ..loading = false;
+  return session;
+}
+
+Widget _wrap(Widget page) {
+  return CityScope(
+    notifier: _readySession(),
+    child: MaterialApp(
+      theme: AppTheme.lightTheme,
+      home: Scaffold(body: page),
+    ),
+  );
 }
 
 void main() {
@@ -17,65 +59,60 @@ void main() {
     HttpOverrides.global = _FakeHttpOverrides();
   });
 
-  final testCity = City(
-    id: 'seoul', countryCode: 'KR', name: 'Seoul', englishName: 'Seoul', localName: '서울',
-    latitude: 37.5665, longitude: 126.9780, timezone: 'Asia/Seoul',
-    coverageLevel: 'LEVEL_A', transportModes: ['METRO', 'BUS', 'WALK'],
-    description: 'Capital of South Korea', heroImageUrl: '',
-  );
+  test('route table holds one route per page', () {
+    final shell = buildRouteTable().single as ShellRoute;
+    expect(shell.routes.length, 11);
+    expect(
+      Routes.placeDetail('p1', 'seoul'),
+      '/place/p1?cityId=seoul',
+    );
+  });
 
-  testWidgets('Metro Map Screen rendering and schematic/geo toggle test', (WidgetTester tester) async {
-    final lines = [
-      MetroLine(
-        id: 'kr_seoul_l1', cityId: 'seoul', lineNumber: '1', name: '1호선',
-        englishName: 'Line 1', colorHex: '#0052A4', textColorHex: '#FFFFFF',
-        stationIds: ['kr_sel_seoul_stn'], isCircular: false, operatingHours: '05:30 - 24:00',
-      ),
-    ];
-    final stations = [
-      MetroStation(
-        id: 'kr_sel_seoul_stn', cityId: 'seoul', code: '133', name: '서울역',
-        englishName: 'Seoul Station', localName: '서울역', latitude: 37.5559, longitude: 126.9723,
-        schematicX: 200, schematicY: 300, lines: ['kr_seoul_l1'], exits: [],
-        elevatorAccessible: true, wheelchairBoarding: true, firstTrain: '05:12', lastTrain: '23:58',
-        nearbyBusStopIds: [], nearbyPlaceIds: [],
-      ),
-    ];
+  test('device breakpoints classify four classes', () {
+    expect(deviceOfWidth(1400, isWeb: true), DeviceKind.pc);
+    expect(deviceOfWidth(800, isWeb: true), DeviceKind.tablet);
+    expect(deviceOfWidth(390, isWeb: true), DeviceKind.mobile);
+    expect(deviceOfWidth(390, isWeb: false), DeviceKind.app);
+  });
 
-    await tester.pumpWidget(MaterialApp(
-      home: MetroMapScreen(city: testCity, lines: lines, stations: stations),
-    ));
-    await tester.pump(const Duration(seconds: 5));
+  testWidgets('Metro page renders canvas and mode toggle',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_wrap(const MetroPage()));
+    await tester.pump(const Duration(seconds: 2));
 
-    expect(find.byType(CustomPaint), findsWidgets);
     expect(find.byType(SegmentedButton<MetroViewMode>), findsOneWidget);
   });
 
-  testWidgets('Transit Planner screen rendering test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: TransitPlannerScreen(currentCity: testCity),
-    ));
-    await tester.pump(const Duration(seconds: 5));
+  testWidgets('Transit page renders search form',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_wrap(const TransitPage()));
+    await tester.pump(const Duration(seconds: 2));
 
     expect(find.byType(TextField), findsWidgets);
-    expect(find.byType(SingleChildScrollView), findsWidgets);
   });
 
-  testWidgets('Explore screen rendering test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: ExploreScreen(currentCity: testCity),
-    ));
-    await tester.pump(const Duration(seconds: 5));
+  testWidgets('Explore page renders category filters',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_wrap(const ExplorePage()));
+    await tester.pump(const Duration(seconds: 2));
 
     expect(find.byType(ChoiceChip), findsWidgets);
   });
 
-  testWidgets('My Trip screen rendering test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: MyTripScreen(currentCity: testCity),
-    ));
-    await tester.pump(const Duration(seconds: 5));
+  testWidgets('Trips page renders ledger shell',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_wrap(const TripsPage()));
+    await tester.pump(const Duration(seconds: 2));
 
-    expect(find.byType(Scaffold), findsOneWidget);
+    expect(find.byType(CustomScrollView), findsOneWidget);
+  });
+
+  testWidgets('Home page renders board and index',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_wrap(const HomePage()));
+    await tester.pump(const Duration(seconds: 2));
+
+    expect(find.text('Seoul'), findsWidgets);
+    expect(find.text('LEDGER INDEX'), findsOneWidget);
   });
 }

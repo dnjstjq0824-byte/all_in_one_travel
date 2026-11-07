@@ -6,7 +6,19 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:global_travel_app/core/api/travel_api_client.dart';
 import 'package:global_travel_app/core/models/travel_models.dart';
-import 'package:global_travel_app/features/trips/my_trip_screen.dart';
+import 'package:global_travel_app/core/state/city_scope.dart';
+import 'package:global_travel_app/pages/trips_page.dart';
+
+Widget _tripsHarness(City city) {
+  final session = CitySession()
+    ..cities = [city]
+    ..current = city
+    ..loading = false;
+  return CityScope(
+    notifier: session,
+    child: const MaterialApp(home: Scaffold(body: TripsPage())),
+  );
+}
 
 void main() {
   tearDown(() {
@@ -63,9 +75,7 @@ void main() {
         return http.Response('[]', 200);
       });
       await tester.pumpWidget(
-        MaterialApp(
-          home: MyTripScreen(currentCity: City.fromJson({'id': 'seoul'})),
-        ),
+        _tripsHarness(City.fromJson({'id': 'seoul'})),
       );
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.byTooltip('Activity actions').first);
@@ -160,7 +170,7 @@ void main() {
       return http.Response('[]', 200);
     });
     final city = City.fromJson({'id': 'seoul', 'name': 'Seoul'});
-    await tester.pumpWidget(MaterialApp(home: MyTripScreen(currentCity: city)));
+    await tester.pumpWidget(_tripsHarness(city));
     await tester.pumpAndSettle();
     expect(find.text('Consider a museum.'), findsOneWidget);
     expect(find.textContaining('Rain 80%'), findsOneWidget);
@@ -201,9 +211,7 @@ void main() {
       return http.Response('[]', 200);
     });
     await tester.pumpWidget(
-      MaterialApp(
-        home: MyTripScreen(currentCity: City.fromJson({'id': 'seoul'})),
-      ),
+      _tripsHarness(City.fromJson({'id': 'seoul'})),
     );
     await tester.pumpAndSettle();
     expect(find.text('Forecast unavailable for this date'), findsOneWidget);
